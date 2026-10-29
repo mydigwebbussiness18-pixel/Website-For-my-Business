@@ -1,0 +1,6 @@
+{
+  "name": "DigWeb Expert",
+  "description": "Professional business website for DigWeb Expert offering website development, Meta ads, graphic design, and Google Business Profile setup.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,1222 @@
+PROJECT: DIGWEB EXPERT — PROFESSIONAL BUSINESS WEBSITE
+
+1. YOUR ROLE
+
+Act as a Senior Full-Stack Web Developer, Professional UI/UX Designer, Frontend Engineer, Backend Engineer, and SEO Specialist.
+
+Build a complete, modern, premium-quality, responsive business website for my digital services brand, DigWeb Expert.
+
+Do not create only a static mockup or a basic landing page.
+
+Build a well-structured, functional website with reusable components, maintainable code, editable business information, functional navigation, working contact links, proper form validation, and a clear integration strategy for backend services.
+
+First, understand all the requirements below. Then build the complete website and test its functionality.
+
+Do not omit any section.
+
+If a feature requires external credentials, a database, or a third-party service, implement the appropriate integration structure and clearly explain what must be configured before production launch.
+
+Do not claim that an integration is functional until it has been configured and tested.
+
+---
+
+2. BUSINESS INFORMATION
+
+Business Name: DigWeb Expert
+
+Founder Name: Mr. Harshadsinh Solanki
+
+Founder Designation: Founder — DigWeb Expert
+
+Business Instagram Username: @digweb__expert__18
+
+Business Instagram URL:
+https://www.instagram.com/digweb__expert__18/
+
+Business Email:
+mydigwebbussiness.18@gmail.com
+
+Business WhatsApp Number:
++91 9875274952
+
+Business Logo:
+[UPLOAD OR ADD THE OFFICIAL DIGWEB EXPERT LOGO]
+
+Founder Photograph:
+[UPLOAD THE REAL PHOTOGRAPH OF MR. HARSHADSINH SOLANKI]
+
+Primary Services:
+
+1. Website Development
+2. Meta Ads
+3. Graphic Design
+4. Google Business Profile Setup
+
+Business Description:
+
+DigWeb Expert provides digital solutions to help businesses establish and improve their online presence through professional website development, online advertising, graphic design, and Google Business Profile services.
+
+Important:
+
+- Do not invent a WhatsApp number.
+- Do not invent a physical office address.
+- Do not invent customer details.
+- Do not invent business registrations, awards, certifications, or achievements.
+- Do not invent client counts or performance statistics.
+- Do not invent prices, discounts, or special offers.
+- Use editable placeholders for information that has not been provided.
+- Keep all business details easy to update from a single configuration file.
+
+---
+
+3. TECHNOLOGY AND PROJECT ARCHITECTURE
+
+Choose a modern, maintainable technology stack supported by the Google AI Studio development environment.
+
+Preferred frontend:
+
+- React
+- TypeScript
+- Modern CSS or Tailwind CSS, if supported
+- Reusable and well-organized components
+- Responsive layouts
+- Accessible HTML elements
+
+Use a suitable backend architecture when required.
+
+For backend functionality, choose an appropriate solution such as Firebase or another compatible backend service.
+
+Potential backend features:
+
+- Contact enquiry storage and delivery
+- Customer review submissions
+- Review approval workflow
+- Secure administration
+- Offer management
+- Portfolio management
+
+Do not add unnecessary dependencies or complicated architecture.
+
+Keep the project compatible with Git-based version control and suitable for deployment on Netlify or another compatible hosting platform.
+
+If the chosen stack requires server-side functionality that Netlify static hosting cannot provide directly, explain the required serverless functions or external backend deployment.
+
+Keep frontend components, styles, business configuration, assets, and backend integration logic organized separately.
+
+Suggested project organization:
+
+src/
+components/
+sections/
+pages/
+config/
+services/
+hooks/
+types/
+styles/
+assets/
+
+public/
+images/
+icons/
+
+Use an appropriate structure for the selected framework.
+
+Do not expose API keys, service account credentials, private configuration, or administrative secrets in frontend code.
+
+---
+
+4. CENTRAL BUSINESS CONFIGURATION
+
+Create a central editable business configuration file.
+
+For example:
+
+src/config/businessConfig.ts
+
+Store the following information in this file:
+
+- Business name
+- Business tagline
+- Business description
+- Logo path
+- Founder name
+- Founder designation
+- Founder photograph path
+- Founder introduction
+- WhatsApp number
+- Instagram URL
+- Email address
+- Service details
+- Portfolio projects
+- Current offers
+- Contact information
+- Social media links
+- Copyright text
+
+Example configuration:
+
+export const businessConfig = {
+businessName: "DigWeb Expert",
+
+tagline: "Grow Your Business with Powerful Digital Solutions",
+
+founder: {
+name: "Mr. Harshadsinh Solanki",
+designation: "Founder — DigWeb Expert",
+image: "/images/founder.jpg"
+},
+
+contact: {
+whatsappNumber: "+91 9875274952",
+email: "mydigwebbussiness.18@gmail.com",
+instagram: "https://www.instagram.com/digweb__expert__18/"
+}
+};
+
+This is an illustrative configuration. Adapt the code to the final project.
+
+IMPORTANT:
+
+1. Do not invent the WhatsApp number.
+2. Clearly identify empty values that require manual configuration.
+3. Provide a simple explanation showing exactly which values the owner must edit.
+4. Use this configuration throughout the website instead of duplicating business details in multiple components.
+5. Changing a value in the configuration should update the corresponding website content automatically.
+
+Create additional configuration files for services, portfolio projects, and offers if that improves maintainability.
+
+---
+
+5. WEBSITE DESIGN SYSTEM
+
+Create a premium, professional, modern, and trustworthy visual identity.
+
+Color palette:
+
+- Dark Navy Blue: #0B1220
+- Electric Blue: #2563EB
+- White: #FFFFFF
+- Light Gray: #F3F4F6
+- Secondary Text: #64748B
+
+Use these colors consistently throughout the website.
+
+Design direction:
+
+- Modern digital agency aesthetic
+- Clean layouts
+- Professional typography
+- Clear visual hierarchy
+- Attractive service cards
+- Generous spacing
+- Rounded corners used consistently
+- Subtle shadows
+- Smooth, restrained animations
+- Professional icons
+- High-quality, relevant visuals
+- Strong calls to action
+- Clear contrast between text and background
+
+Avoid:
+
+- Excessive animations
+- Unnecessary gradients
+- Too many different colors
+- Cluttered layouts
+- Oversized text that breaks on mobile
+- Randomly placed elements
+- Generic template-like sections
+- Excessive decorative effects
+
+Use a consistent typography system and spacing scale.
+
+Add subtle hover effects to buttons and cards.
+
+Respect reduced-motion accessibility preferences.
+
+Use a modern, readable font with appropriate fallbacks.
+
+The final website should look like a professionally designed digital agency website rather than an unfinished AI-generated template.
+
+---
+
+6. WEBSITE NAVIGATION
+
+Create a responsive navigation bar containing:
+
+- Home
+- Services
+- Portfolio
+- Current Offers
+- Reviews
+- About Us
+- Contact Us
+
+Requirements:
+
+- Display the official DigWeb Expert logo.
+- Make the logo clickable and link it to the homepage.
+- Highlight the active navigation section when appropriate.
+- Use smooth scrolling for same-page navigation.
+- Use a mobile hamburger menu on smaller screens.
+- Ensure that the mobile menu opens and closes correctly.
+- Close the mobile menu after selecting a navigation item.
+- Ensure every navigation link points to the correct section.
+- Keep the navigation accessible using a keyboard.
+
+On desktop, create a clean professional navigation layout.
+
+On mobile, prevent horizontal overflow and ensure that the navigation remains easy to use.
+
+---
+
+7. SECTION ONE: HOMEPAGE
+
+Create a premium hero section.
+
+Main headline:
+
+"Grow Your Business with Powerful Digital Solutions"
+
+Supporting description:
+
+"Build a stronger online presence with professional website development, Meta Ads, graphic design, and Google Business Profile services from DigWeb Expert."
+
+Primary button:
+"Explore Our Services"
+
+Action:
+Scroll to the Services section.
+
+Secondary button:
+"Contact Us"
+
+Action:
+Scroll to the Contact section.
+
+Visual requirements:
+
+- Display the official DigWeb Expert logo.
+- Use a professional digital business visual.
+- Use relevant imagery or carefully designed graphics.
+- Maintain a balanced text-and-visual layout.
+- Ensure the headline is readable on mobile.
+- Avoid fake client logos and unsupported business claims.
+
+Add a floating WhatsApp contact button.
+
+The WhatsApp button must use the configured business number.
+
+Construct the WhatsApp URL using the standard wa.me format and an appropriately formatted international phone number.
+
+Do not include a plus sign, spaces, or punctuation in the phone number used in the wa.me URL.
+
+If the WhatsApp number is empty or invalid, do not generate a misleading link. Display an appropriate configuration notice during development and hide or disable the public contact action until it is configured.
+
+Add a configurable default WhatsApp enquiry message.
+
+Example:
+"Hello DigWeb Expert, I would like to know more about your services."
+
+Encode the message correctly in the WhatsApp URL.
+
+---
+
+8. SECTION TWO: OUR SERVICES
+
+Section heading:
+
+"Our Services"
+
+Supporting text:
+
+"Digital solutions designed to help your business build a stronger online presence."
+
+Create four professional service cards.
+
+Each card must contain:
+
+- Relevant high-quality image or visual
+- Service title
+- Short description
+- Key service features
+- "Know More" button
+- "Get This Service" button
+
+SERVICE 1: WEBSITE DEVELOPMENT
+
+Title:
+"Website Development"
+
+Description:
+"Professional, responsive websites designed to present your business online and help potential customers discover your services."
+
+Features:
+
+- Professional Business Websites
+- Landing Pages
+- Modern Responsive Website Design
+- Business Website Redesign
+- E-commerce Website
+
+Buttons:
+
+- Know More
+- Get This Service
+
+The buttons should lead to the relevant service details or open WhatsApp with a prefilled enquiry message.
+
+SERVICE 2: META ADS
+
+Title:
+"Meta Ads"
+
+Description:
+"Advertising campaign setup for businesses that want to reach relevant audiences through Facebook and Instagram."
+
+Features:
+
+- Facebook Advertising Setup
+- Instagram Advertising Setup
+- Campaign Configuration
+- Advertising Creative Integration
+
+Buttons:
+
+- Know More
+- Get This Service
+
+Do not promise guaranteed leads, sales, or advertising results.
+
+SERVICE 3: GRAPHIC DESIGN
+
+Title:
+"Graphic Design"
+
+Description:
+"Professional visual content to help businesses communicate their services, promotions, and brand identity."
+
+Features:
+
+- Social Media Post Design
+- Promotional Creatives
+- Business Graphics
+- Marketing Visuals
+
+Buttons:
+
+- Know More
+- Get This Service
+
+SERVICE 4: GOOGLE BUSINESS PROFILE
+
+Title:
+"Google Business Profile Setup"
+
+Description:
+"Assistance with setting up and optimizing a business profile to improve the accuracy and presentation of business information on Google Search and Maps."
+
+Features:
+
+- Google Business Profile Setup
+- Business Information Optimization
+- Relevant Business Categories
+- Search and Maps Visibility Improvements
+
+Buttons:
+
+- Know More
+- Get This Service
+
+Do not guarantee specific Google rankings or visibility outcomes.
+
+SERVICE BUTTON FUNCTIONALITY
+
+Every service card must have working buttons.
+
+"Know More" should open a service detail page, expandable details area, or appropriate modal.
+
+"Get This Service" should open WhatsApp with a prefilled message identifying the selected service.
+
+Example:
+"Hello DigWeb Expert, I am interested in Website Development. Please share more details."
+
+Each service must have its own message.
+
+Do not send messages automatically. Open WhatsApp and allow the visitor to review and send the message.
+
+---
+
+9. SECTION THREE: PORTFOLIO / OUR WORK
+
+Section heading:
+
+"Our Work"
+
+Supporting text:
+
+"Explore selected website concepts, design samples, and digital project demonstrations."
+
+Create a visually attractive portfolio grid.
+
+Portfolio categories:
+
+1. Hotel Website Demo
+2. Restaurant Website Demo
+3. Furniture Business Website Demo
+4. Real Estate Website Demo
+5. Graphic Design Samples
+6. Landing Page Demo
+
+Each project card must include:
+
+- Project screenshot or image
+- Project title
+- Short description
+- Project category
+- "View Project" button
+- Project status label
+
+Clearly mark demonstration projects as:
+
+"Demo Project"
+
+or
+
+"Concept Project"
+
+Do not present demonstration projects as completed client projects.
+
+Do not invent client names, testimonials, business results, or project statistics.
+
+Allow the owner to edit the portfolio project information from a central data file.
+
+Example portfolio object:
+
+{
+id: "hotel-demo",
+title: "Hotel Website Demo",
+category: "Website Development",
+description: "A demonstration of a modern hotel website concept.",
+image: "/images/portfolio/hotel-demo.jpg",
+projectUrl: "",
+status: "Demo Project"
+}
+
+Adapt this example to the selected TypeScript or JavaScript structure.
+
+If a project URL is not configured, do not show a broken link.
+
+For projects with a live demo URL, open the project safely and clearly indicate when visitors are leaving the DigWeb Expert website.
+
+For screenshot-only projects, open a larger preview or gallery modal.
+
+Include category filters if practical.
+
+Ensure that all portfolio images have descriptive alternative text.
+
+If actual project images are unavailable, use appropriate temporary placeholders and explain how to replace them.
+
+Do not claim that placeholder visuals represent completed client work.
+
+---
+
+10. SECTION FOUR: CURRENT OFFERS
+
+Section heading:
+
+"Current Offers"
+
+Supporting text:
+
+"Explore available service offers from DigWeb Expert."
+
+Create attractive offer cards.
+
+Each offer card must support:
+
+- Offer name
+- Banner or relevant image
+- Offer description
+- Price, if provided
+- Discount, if provided
+- Expiry date, if provided
+- Offer availability status
+- "Claim This Offer" button
+
+Potential offer categories:
+
+1. Website Development Special Offer
+2. Graphic Design Package Offer
+3. Meta Ads Setup Offer
+4. Google Business Profile Setup Offer
+
+Do not invent prices, discounts, deadlines, or offer availability.
+
+If no genuine offer has been configured, display a neutral message such as:
+
+"Special offers will be announced here. Contact us to discuss your requirements."
+
+Do not display empty offer cards.
+
+Allow offers to be added, edited, activated, or deactivated through the project's configuration system.
+
+Expired offers must not appear as active offers.
+
+Where appropriate, show a clearly formatted expiry date.
+
+The "Claim This Offer" button should open WhatsApp with a message containing the selected offer name.
+
+Example:
+"Hello DigWeb Expert, I would like to enquire about the Website Development offer."
+
+Do not claim that an offer has been booked or confirmed merely because the button was clicked.
+
+FUTURE OFFER MANAGEMENT
+
+Keep the offer data structure ready for a future admin panel or content management system.
+
+For the initial version, use an editable configuration file if a backend is not available.
+
+Clearly explain that changing the configuration file is different from editing offers through a live admin dashboard.
+
+Do not claim that an admin dashboard exists unless it has actually been implemented.
+
+---
+
+11. SECTION FIVE: CUSTOMER REVIEWS
+
+Section heading:
+
+"What Our Clients Say"
+
+Build two separate areas:
+
+A. Approved Customer Reviews
+
+B. Submit Your Review
+
+A. APPROVED CUSTOMER REVIEWS
+
+Each approved review should contain:
+
+- Customer name
+- Star rating
+- Review text
+- Review date, if available
+
+Use a clean, readable review-card design.
+
+Important:
+
+- Do not create fake reviews.
+- Do not invent customer names.
+- Do not invent ratings.
+- Do not create fabricated testimonials.
+- Do not display placeholder reviews as genuine customer feedback.
+
+If no approved reviews exist, display:
+
+"Customer reviews will appear here after they have been submitted and approved."
+
+B. SUBMIT YOUR REVIEW FORM
+
+Form fields:
+
+1. Full Name
+2. Star Rating: 1–5 stars
+3. Write Your Review
+4. Submit Review button
+
+Requirements:
+
+- Validate required fields.
+- Require a valid rating between 1 and 5.
+- Enforce reasonable input length limits.
+- Show clear validation messages.
+- Display a success message only after successful submission.
+- Display an error message if submission fails.
+- Prevent accidental duplicate submissions while a request is processing.
+- Protect against spam and abusive submissions where practical.
+
+Review submission workflow:
+
+1. Visitor completes the form.
+2. The website validates the data.
+3. The review is submitted to the configured backend.
+4. The review is stored with a pending approval status.
+5. The owner reviews the submission.
+6. The owner approves or rejects it.
+7. Only approved reviews appear publicly.
+
+Never allow a public review submission to automatically become an approved review.
+
+BACKEND REQUIREMENTS
+
+Use a suitable database or review service.
+
+If Firebase is selected, use an appropriate Firestore collection and secure access rules.
+
+A review record may contain:
+
+- Review ID
+- Customer name
+- Rating
+- Review text
+- Submission timestamp
+- Approval status
+
+Do not expose private administrative credentials in frontend code.
+
+Restrict public read access to approved reviews where appropriate.
+
+Restrict review creation to valid submissions and prevent public visitors from changing approval status.
+
+Do not rely only on frontend checks for security.
+
+If the backend has not been configured, show a clearly labelled development prototype and explain that the form will not permanently store reviews until the integration is complete.
+
+---
+
+12. SECTION SIX: ABOUT US / FOUNDER
+
+Section heading:
+
+"Meet Our Founder"
+
+Founder name:
+
+"Mr. Harshadsinh Solanki"
+
+Founder designation:
+
+"Founder — DigWeb Expert"
+
+Founder introduction:
+
+"Hello! I'm Harshadsinh Solanki, founder of DigWeb Expert. I help businesses build their online presence through website development, Meta Ads, graphic design, and Google Business Profile services."
+
+Create a premium founder profile layout.
+
+Desktop layout:
+
+- Founder photograph on one side.
+- Founder introduction on the other side.
+
+Mobile layout:
+
+- Founder photograph first.
+- Founder information below it.
+
+FOUNDER IMAGE REQUIREMENTS
+
+Use the real photograph supplied by the website owner.
+
+Do not generate a different person.
+
+Do not substitute an AI-generated face for the founder's real photograph.
+
+Do not use an unrelated stock photograph as the founder.
+
+Use this configurable image path:
+
+/images/founder.jpg
+
+Allow the owner to replace the image easily.
+
+If the photograph has not been provided, use a neutral placeholder clearly intended for replacement.
+
+Do not pretend the placeholder is the actual founder.
+
+Ensure the photograph is properly cropped without distorting the face.
+
+Use appropriate image sizing and responsive styling.
+
+Include meaningful alternative text.
+
+Keep the founder's name, designation, photograph, and biography editable through the central configuration.
+
+Do not invent qualifications, experience, awards, or personal achievements.
+
+---
+
+13. SECTION SEVEN: CONTACT US
+
+Section heading:
+
+"Let's Grow Your Business Together"
+
+Supporting text:
+
+"Tell us about your business and the digital services you need. We will help you explore a suitable solution."
+
+Create a professional contact section with two columns on desktop and a clean stacked layout on mobile.
+
+CONTACT OPTION 1: WHATSAPP
+
+Button label:
+"Chat on WhatsApp"
+
+Use the configured business WhatsApp number.
+
+Prefilled message:
+"Hello DigWeb Expert, I would like to discuss your digital services."
+
+If the number has not been configured, do not create a fake or broken contact link.
+
+CONTACT OPTION 2: INSTAGRAM
+
+Button label:
+"Follow Us on Instagram"
+
+Use the configured official Instagram URL:
+
+https://www.instagram.com/digweb__expert__18/
+
+Open external social links safely.
+
+CONTACT OPTION 3: EMAIL
+
+Button label:
+"Email Us"
+
+Use:
+
+mydigwebbussiness.18@gmail.com
+
+Implement the email action using a properly encoded mailto link.
+
+Do not claim that an email was sent simply because the email application was opened.
+
+CONTACT FORM
+
+Create a professional form with these fields:
+
+1. Full Name
+2. Business Name
+3. WhatsApp / Phone Number
+4. Interested Service
+5. Message
+6. Submit Enquiry button
+
+The Interested Service dropdown should contain:
+
+- Website Development
+- Meta Ads
+- Graphic Design
+- Google Business Profile Setup
+- Other
+
+FORM FUNCTIONALITY
+
+Requirements:
+
+- Required-field validation.
+- Appropriate phone-number validation.
+- Email field only if needed for the chosen design.
+- Clear success and failure states.
+- Accessible form labels.
+- Loading state while submitting.
+- Protection against accidental repeated submissions.
+- Reasonable input length limits.
+- Server-side validation when using a backend.
+- Secure handling of submitted information.
+
+CONTACT BACKEND
+
+The form must be connected to a suitable backend or form service before it is described as fully functional.
+
+Possible solutions include:
+
+- A compatible form-handling service.
+- A secure serverless function.
+- A suitable backend such as Firebase, with an appropriate implementation.
+
+Select the simplest secure approach compatible with the project.
+
+Do not expose secret API keys in client-side JavaScript.
+
+Do not store enquiries only in browser local storage and claim that they have been delivered to the business owner.
+
+If the backend is not configured, clearly label the form as a prototype and explain what is required before launch.
+
+After a successful submission, display:
+
+"Thank you for contacting DigWeb Expert. Your enquiry has been submitted successfully."
+
+Display this message only after the configured backend or form service confirms successful submission.
+
+If submission fails, show an appropriate error message and allow the visitor to retry.
+
+Do not claim that the owner received an enquiry unless the configured delivery process confirms it.
+
+---
+
+14. SECTION EIGHT: FOOTER
+
+Create a professional footer consistent with the website's design.
+
+Include:
+
+- DigWeb Expert logo
+- Short business description
+- Quick navigation links
+- Service links
+- WhatsApp contact
+- Instagram link
+- Email address
+- Copyright information
+- Privacy Policy link
+
+Example description:
+
+"DigWeb Expert provides website development, Meta Ads, graphic design, and Google Business Profile services to help businesses strengthen their online presence."
+
+Copyright text:
+
+"© [CURRENT YEAR] DigWeb Expert. All rights reserved."
+
+Generate the current year dynamically.
+
+Do not invent a physical address.
+
+Do not include fake social media links.
+
+If a Privacy Policy page is included, create a meaningful policy suitable for the actual data collection and third-party services used.
+
+Do not claim legal compliance without appropriate verification.
+
+Make all footer links functional.
+
+---
+
+15. WHATSAPP INTEGRATION
+
+Implement a reusable WhatsApp utility function.
+
+The function should:
+
+1. Read the configured WhatsApp number.
+2. Validate that a number has been configured.
+3. Normalize the number to the required international digits-only format.
+4. Encode the message correctly.
+5. Construct the appropriate wa.me URL.
+6. Open WhatsApp when the visitor clicks the relevant button.
+
+Use service-specific enquiry messages.
+
+Examples:
+
+Website Development:
+"Hello DigWeb Expert, I am interested in Website Development."
+
+Meta Ads:
+"Hello DigWeb Expert, I am interested in Meta Ads services."
+
+Graphic Design:
+"Hello DigWeb Expert, I am interested in Graphic Design services."
+
+Google Business Profile:
+"Hello DigWeb Expert, I am interested in Google Business Profile Setup."
+
+Do not send messages automatically.
+
+Do not hardcode the same message for every service.
+
+Keep the WhatsApp number in the central business configuration.
+
+Do not invent the number or silently substitute another number.
+
+---
+
+16. RESPONSIVE DESIGN
+
+The website must work correctly on:
+
+- Android mobile phones
+- iPhones
+- Tablets
+- Laptops
+- Desktop computers
+
+Use responsive layouts and appropriate breakpoints.
+
+Requirements:
+
+- No unintended horizontal scrolling.
+- No overlapping text.
+- No cut-off buttons.
+- No broken navigation.
+- Correctly sized images.
+- Readable typography on small screens.
+- Adequate spacing between interactive elements.
+- Touch-friendly buttons.
+- Responsive forms.
+- Proper mobile menu behavior.
+- Consistent card layouts.
+- Correct footer stacking.
+
+Test at representative viewport sizes, including:
+
+- 360px mobile width
+- 390px mobile width
+- 768px tablet width
+- 1024px laptop width
+- 1440px desktop width
+
+These are testing targets, not the only supported screen sizes.
+
+---
+
+17. SEO REQUIREMENTS
+
+Implement basic on-page SEO.
+
+Include:
+
+- Appropriate page title
+- Meta description
+- Canonical URL configuration where appropriate
+- Semantic heading structure
+- Descriptive image alt text
+- Clean section IDs
+- Open Graph metadata
+- Appropriate social sharing metadata
+- Favicon support
+- Search-engine-friendly content
+- Sitemap and robots.txt where appropriate for the deployment
+
+Suggested page title:
+
+"DigWeb Expert | Website Development & Digital Marketing Services"
+
+Suggested meta description:
+
+"Explore DigWeb Expert services including website development, Meta Ads, graphic design, and Google Business Profile setup."
+
+Do not promise first-page rankings or guaranteed SEO results.
+
+Use the correct production domain if supplied. Otherwise, leave the canonical domain configurable rather than inventing one.
+
+---
+
+18. PERFORMANCE AND ACCESSIBILITY
+
+Optimize the website for speed and usability.
+
+Requirements:
+
+- Optimize image sizes.
+- Use modern image formats where appropriate.
+- Lazy-load images below the fold.
+- Avoid unnecessary JavaScript.
+- Avoid excessive dependencies.
+- Minimize layout shifts.
+- Use semantic HTML.
+- Maintain readable color contrast.
+- Provide keyboard-accessible controls.
+- Include visible focus indicators.
+- Add proper form labels.
+- Provide accessible validation messages.
+- Respect reduced-motion preferences.
+- Ensure buttons have meaningful accessible names.
+
+Avoid loading large assets unnecessarily.
+
+Use suitable loading states for forms and asynchronous content.
+
+---
+
+19. SECURITY REQUIREMENTS
+
+Follow secure development practices.
+
+Requirements:
+
+- Never expose private credentials in frontend code.
+- Validate and sanitize submitted data.
+- Apply appropriate server-side validation.
+- Configure backend access rules securely.
+- Prevent public users from approving reviews.
+- Protect administrative operations.
+- Avoid unsafe rendering of user-submitted HTML.
+- Add suitable spam protection where practical.
+- Use HTTPS in production.
+- Avoid collecting unnecessary personal information.
+- Explain which environment variables must be configured.
+- Do not commit secrets to source control.
+
+If Firebase is used, provide appropriate security rules and instructions for configuring authentication and database access.
+
+Do not use unrestricted database access in production.
+
+Do not claim that the application is fully secure merely because these measures have been included in the source code.
+
+---
+
+20. ADMIN AND FUTURE EDITING
+
+For the initial version, prioritize an editable configuration-based website.
+
+The owner should be able to update these items without redesigning the entire website:
+
+- Business WhatsApp number
+- Email address
+- Instagram URL
+- Founder photograph
+- Founder biography
+- Logo
+- Service descriptions
+- Service images
+- Portfolio projects
+- Portfolio screenshots
+- Portfolio URLs
+- Current offers
+- Offer prices
+- Offer expiry dates
+- Offer availability
+- Contact details
+
+Provide clear comments and examples in the relevant configuration files.
+
+Create a simple OWNER EDITING GUIDE explaining:
+
+1. Which file contains the WhatsApp number.
+2. How to update the business email.
+3. How to replace the founder photograph.
+4. How to replace the logo.
+5. How to add a new portfolio project.
+6. How to update an offer.
+7. How to remove an expired offer.
+8. How to update service descriptions.
+9. How to configure the backend.
+10. How to rebuild and deploy the website.
+
+Do not claim that configuration-based editing is the same as a visual admin panel.
+
+If an admin dashboard is added in a future version, implement proper authentication and authorization.
+
+Do not create an insecure public admin dashboard.
+
+---
+
+21. FUNCTIONAL TESTING
+
+After building the website, inspect the implementation and test its functionality.
+
+Check:
+
+- Logo navigation
+- All navigation links
+- Mobile navigation
+- Service detail buttons
+- Service-specific WhatsApp messages
+- Floating WhatsApp button
+- Instagram link
+- Email link
+- Portfolio filters
+- Portfolio image previews
+- Live project links
+- Current offers
+- Expired offer handling
+- Contact form validation
+- Contact form submission
+- Review form validation
+- Pending review storage
+- Review approval workflow
+- Responsive layouts
+- Missing image handling
+- Empty configuration values
+- Browser console errors
+- Build errors
+- Broken internal links
+
+Do not claim that a test passed if it was not actually performed.
+
+If a feature cannot be tested because credentials or a backend are missing, list it as pending configuration.
+
+Fix all errors that can be resolved within the project.
+
+---
+
+22. FINAL DEVELOPMENT INSTRUCTIONS
+
+Build the complete website according to the requirements in this prompt.
+
+Do not omit sections to save time.
+
+Do not replace the complete website with a simple hero section.
+
+Do not create fake reviews, fake customer projects, fake offers, or fabricated business information.
+
+Do not invent the business WhatsApp number.
+
+Use the actual founder photograph supplied by the owner.
+
+If the photograph or logo has not been provided, create an appropriate replaceable placeholder.
+
+Use a consistent design system across every section.
+
+Ensure that all interactive buttons perform their intended actions.
+
+Ensure that every section works on mobile and desktop.
+
+Keep the code clean, maintainable, and suitable for future updates.
+
+Preserve the source code and project files.
+
+Do not leave unfinished buttons that look functional but do nothing.
+
+If an integration requires additional configuration, clearly document it.
+
+Prioritize working functionality, professional design, responsiveness, and maintainability.
+
+---
+
+23. FINAL WEBSITE SECTION ORDER
+
+Follow this exact order:
+
+1. Home
+2. Our Services
+3. Portfolio / Our Work
+4. Current Offers
+5. Customer Reviews
+6. About Us / Founder
+7. Contact Us
+8. Footer
+
+Include the responsive navigation bar at the top and the floating WhatsApp button where configured.
+
+---
+
+24. FINAL DELIVERABLES
+
+At the end of development, provide:
+
+1. Complete website source code.
+2. All required project files.
+3. A clear folder structure.
+4. Instructions for running the project locally.
+5. Instructions for updating business details manually.
+6. Instructions for adding the founder photograph and logo.
+7. Instructions for updating services, portfolio items, and offers.
+8. Instructions for configuring the WhatsApp number.
+9. Instructions for configuring the contact form backend.
+10. Instructions for configuring the review database and approval workflow.
+11. Required environment variable names, without exposing secret values.
+12. Build and deployment instructions for Netlify or another compatible hosting platform.
+13. A list of integrations that are working.
+14. A list of integrations that still require configuration.
+15. A list of tests actually performed and their results.
+
+Do not state that the website is production-ready until the required integrations, security settings, and deployment configuration have been verified.
+
+FINAL GOAL
+
+Create a professional, trustworthy, modern, premium, and responsive website for DigWeb Expert.
+
+The website must clearly present its digital services, showcase demonstration projects honestly, display only genuine offers, feature the founder's real photograph, provide easy contact options, support genuine customer reviews with approval, and remain easy for the owner to edit and maintain.
+
+Build the complete website now.
