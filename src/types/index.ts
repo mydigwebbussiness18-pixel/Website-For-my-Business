@@ -59,6 +59,23 @@ export interface ContactEnquiry {
   submittedAt: string;
 }
 
+export type AppointmentStatus = "pending" | "confirmed" | "completed" | "cancelled";
+
+export interface AppointmentBooking {
+  id: string;
+  fullName: string;
+  businessName?: string;
+  phoneNumber: string;
+  email?: string;
+  interestedService: string;
+  appointmentDate?: string;
+  appointmentTime?: string;
+  message: string;
+  status: AppointmentStatus;
+  submittedAt: string;
+  savedToSupabase?: boolean;
+}
+
 export interface BusinessConfig {
   businessName: string;
   tagline: string;

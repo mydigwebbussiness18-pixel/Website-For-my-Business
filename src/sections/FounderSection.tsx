@@ -101,7 +101,12 @@ export const FounderSection: React.FC = () => {
             </motion.div>
 
             {/* Official Introduction Quote */}
-            <motion.blockquote variants={fadeInUpVariant} className="bg-blue-50/60 border border-blue-200/70 rounded-2xl p-6 text-slate-800 text-sm sm:text-base leading-relaxed italic shadow-xs">
+            <motion.blockquote
+              variants={fadeInUpVariant}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.28 }}
+              className="bg-slate-100/95 border border-slate-200/90 rounded-2xl p-6 text-slate-800 text-sm sm:text-base leading-relaxed italic shadow-sm hover:shadow-lg hover:shadow-slate-300/40 hover:border-slate-300 transition-all duration-300 cursor-default"
+            >
               "{t.founder.introduction}"
             </motion.blockquote>
 
@@ -120,7 +125,7 @@ export const FounderSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => openWhatsAppChat(businessConfig.contact.contactSectionWhatsappMessage)}
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-sm shadow-blue-500/20 active:scale-[0.98] cursor-pointer"
+                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-[#C9A227] text-white hover:text-[#0B132B] text-xs font-bold px-4 py-2.5 rounded-xl transition-all duration-300 shadow-md shadow-blue-500/20 hover:shadow-xl hover:shadow-amber-500/50 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
                   <span>{t.founder.chatWhatsApp}</span>
@@ -128,9 +133,9 @@ export const FounderSection: React.FC = () => {
 
                 <a
                   href={`mailto:${businessConfig.contact.email}`}
-                  className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium px-4 py-2.5 rounded-xl border border-slate-200 shadow-xs hover:border-slate-300 transition-all active:scale-[0.98]"
+                  className="group inline-flex items-center gap-2 bg-white hover:bg-blue-600 text-slate-700 hover:text-white text-xs font-semibold px-4 py-2.5 rounded-xl border border-slate-200 hover:border-blue-600 shadow-sm hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300 active:scale-[0.98]"
                 >
-                  <Mail className="w-3.5 h-3.5 text-blue-600" />
+                  <Mail className="w-3.5 h-3.5 text-blue-600 group-hover:text-white transition-colors duration-300" />
                   <span>{t.founder.emailDirectly}</span>
                 </a>
 
@@ -138,9 +143,9 @@ export const FounderSection: React.FC = () => {
                   href={businessConfig.contact.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium px-4 py-2.5 rounded-xl border border-slate-200 shadow-xs hover:border-slate-300 transition-all active:scale-[0.98]"
+                  className="group inline-flex items-center gap-2 bg-white hover:bg-pink-600 text-slate-700 hover:text-white text-xs font-semibold px-4 py-2.5 rounded-xl border border-slate-200 hover:border-pink-600 shadow-sm hover:shadow-lg hover:shadow-pink-500/30 hover:-translate-y-0.5 transition-all duration-300 active:scale-[0.98]"
                 >
-                  <Instagram className="w-3.5 h-3.5 text-pink-500" />
+                  <Instagram className="w-3.5 h-3.5 text-pink-500 group-hover:text-white transition-colors duration-300" />
                   <span>{businessConfig.contact.instagramUsername}</span>
                 </a>
               </div>

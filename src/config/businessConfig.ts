@@ -23,8 +23,8 @@ export const businessConfig: BusinessConfig = {
   description:
     "DigWeb Expert provides digital solutions to help businesses establish and improve their online presence through professional website development, online advertising, graphic design, and Google Business Profile services.",
   
-  // Business logo path (stored in public/images/logo.jpeg)
-  logo: "/images/logo.jpeg",
+  // Business logo path (uploaded official logo asset)
+  logo: "/assets/aistudio/Business_Logo_14133960.png",
 
   // Founder profile information
   founder: {

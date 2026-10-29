@@ -78,18 +78,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
             className="flex items-center gap-2.5 sm:gap-3 group shrink-0 focus-visible:ring-2 focus-visible:ring-blue-400 rounded-xl p-1"
             aria-label={`${businessConfig.businessName} Homepage`}
           >
-            <div className="w-10 h-10 rounded-full overflow-hidden bg-slate-900 border border-blue-400/40 flex items-center justify-center p-0.5 shadow-md shadow-blue-500/10 group-hover:scale-105 group-hover:border-blue-400 transition-all duration-300">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden bg-[#070D1E] border border-blue-400/40 flex items-center justify-center p-0.5 shadow-md shadow-blue-500/15 group-hover:scale-105 group-hover:border-blue-400 transition-all duration-300">
               <img
                 src={businessConfig.logo}
                 alt={`${businessConfig.businessName} Official Logo`}
-                className="w-full h-full object-cover rounded-full"
+                className="w-full h-full object-contain rounded-lg"
                 onError={(e) => {
                   (e.target as HTMLElement).style.display = "none";
                 }}
               />
             </div>
-            <span className="text-lg sm:text-xl font-extrabold tracking-tight text-white group-hover:text-blue-400 transition-colors duration-300 whitespace-nowrap">
-              DigWeb <span className="text-blue-400 font-bold">Expert</span>
+            <span className="text-lg sm:text-xl font-extrabold tracking-tight text-white group-hover:text-red-500 transition-colors duration-300 whitespace-nowrap">
+              DigWeb <span className="text-blue-400 font-bold group-hover:text-[#F59E0B] transition-colors duration-300">Expert</span>
             </span>
           </a>
 
@@ -137,7 +137,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
             <button
               type="button"
               onClick={() => openWhatsAppChat(businessConfig.contact.defaultWhatsappMessage)}
-              className="hidden sm:inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all duration-300 shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/40 whitespace-nowrap cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-2 bg-blue-600 hover:bg-[#C9A227] hover:text-[#0B132B] active:scale-[0.98] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all duration-300 shadow-md shadow-blue-500/25 hover:shadow-xl hover:shadow-amber-500/50 hover:-translate-y-0.5 whitespace-nowrap cursor-pointer"
             >
               <MessageCircle className="w-4 h-4" />
               <span>{t.nav.chatWhatsApp}</span>

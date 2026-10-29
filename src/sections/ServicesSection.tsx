@@ -140,18 +140,18 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                 <button
                   type="button"
                   onClick={() => onSelectService(service)}
-                  className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white text-[#0B132B] hover:text-blue-900 text-xs font-bold py-2.5 px-4 rounded-xl transition-all duration-300 border border-white/80 shadow-xs hover:shadow-md active:scale-[0.98] cursor-pointer"
+                  className="group w-full sm:w-1/2 inline-flex items-center justify-center gap-2 bg-white/95 hover:bg-[#0B132B] text-[#0B132B] hover:text-white text-xs font-bold py-2.5 px-4 rounded-xl transition-all duration-300 border border-white/80 hover:border-slate-800 shadow-md hover:shadow-xl hover:shadow-black/30 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
                 >
-                  <Info className="w-3.5 h-3.5 text-blue-700" />
+                  <Info className="w-3.5 h-3.5 text-blue-700 group-hover:text-amber-400 transition-colors duration-300" />
                   <span>{t.services.knowMore}</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => openWhatsAppChat(service.whatsappMessage)}
-                  className="w-full sm:w-1/2 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#0B132B] text-xs font-bold py-2.5 px-4 rounded-xl transition-all duration-300 shadow-md shadow-amber-500/25 hover:shadow-lg hover:shadow-amber-500/40 active:scale-[0.98] cursor-pointer"
+                  className="group w-full sm:w-1/2 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-blue-600 hover:to-blue-700 text-[#0B132B] hover:text-white text-xs font-bold py-2.5 px-4 rounded-xl transition-all duration-300 shadow-md shadow-amber-500/25 hover:shadow-xl hover:shadow-blue-500/50 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
                 >
-                  <MessageCircle className="w-3.5 h-3.5 text-[#0B132B]" />
+                  <MessageCircle className="w-3.5 h-3.5 text-[#0B132B] group-hover:text-white transition-colors duration-300" />
                   <span>{t.services.getService}</span>
                 </button>
               </div>

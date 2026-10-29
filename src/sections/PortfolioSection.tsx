@@ -99,40 +99,43 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
                 initial="hidden"
                 animate="visible"
                 exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.35 }}
-                className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-blue-500/8 transition-all duration-300 group"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.28 }}
+                className="relative bg-gradient-to-br from-[#102A56] via-[#0B1630] to-[#102A56] border border-[#3B82F6]/25 hover:border-[#3B82F6]/70 rounded-2xl overflow-hidden flex flex-col justify-between shadow-lg shadow-black/25 hover:shadow-2xl hover:shadow-[#1D4ED8]/20 transition-all duration-300 group"
               >
-                <div>
+                {/* Subtle gradient accent highlight (#1D4ED8) */}
+                <div className="absolute -top-16 -right-16 w-36 h-36 bg-[#1D4ED8]/15 rounded-full blur-2xl pointer-events-none" aria-hidden="true" />
+
+                <div className="relative z-10">
                   {/* Visual Preview Canvas */}
-                  <div className="relative aspect-[16/10] bg-slate-50 border-b border-slate-200/80 overflow-hidden flex flex-col justify-between p-4 group-hover:bg-slate-100/70 transition-colors">
+                  <div className="relative aspect-[16/10] bg-[#0B1630]/70 border-b border-[#3B82F6]/20 overflow-hidden flex flex-col justify-between p-4 group-hover:bg-[#0B1630]/90 transition-colors">
                     {/* Subtle mockup browser bar */}
-                    <div className="flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                    <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono">
                       <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-slate-300" />
-                        <span className="w-2 h-2 rounded-full bg-slate-300" />
-                        <span className="w-2 h-2 rounded-full bg-slate-300" />
+                        <span className="w-2 h-2 rounded-full bg-slate-700" />
+                        <span className="w-2 h-2 rounded-full bg-slate-700" />
+                        <span className="w-2 h-2 rounded-full bg-slate-700" />
                       </div>
-                      <span className="text-amber-700 bg-amber-50 border border-amber-200/80 px-2 py-0.5 rounded-full font-sans font-medium text-[10px] tracking-wide">
+                      <span className="text-[#38BDF8] bg-[#102A56] border border-[#3B82F6]/30 px-2 py-0.5 rounded-full font-sans font-medium text-[10px] tracking-wide">
                         {project.status}
                       </span>
                     </div>
 
                     {/* Visual mockup graphics representation */}
                     <div className="my-auto text-center space-y-2 py-4">
-                      <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200/80 text-blue-600 mx-auto flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-xs">
-                        <Layers className="w-6 h-6" />
+                      <div className="w-12 h-12 rounded-xl bg-[#102A56] border border-[#3B82F6]/30 text-[#38BDF8] mx-auto flex items-center justify-center group-hover:scale-110 group-hover:border-[#38BDF8]/60 group-hover:bg-[#1D4ED8]/30 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <Layers className="w-6 h-6 text-[#38BDF8] group-hover:text-white" />
                       </div>
-                      <span className="text-xs font-bold text-slate-800 block group-hover:text-blue-600 transition-colors">
+                      <span className="text-xs font-bold text-[#FFFFFF] block group-hover:text-[#D4AF37] hover:text-[#D4AF37] transition-colors duration-300">
                         {project.title}
                       </span>
                     </div>
 
                     {/* Clean tags */}
-                    <div className="flex items-center gap-1.5 text-[10px] text-slate-500 truncate">
+                    <div className="flex items-center gap-1.5 text-[10px] text-[#CBD5E1]/70 truncate">
                       {project.tags.map((tg, i) => (
                         <React.Fragment key={i}>
-                          {i > 0 && <span aria-hidden="true" className="text-slate-300">·</span>}
+                          {i > 0 && <span aria-hidden="true" className="text-slate-600">·</span>}
                           <span>{tg}</span>
                         </React.Fragment>
                       ))}
@@ -142,24 +145,24 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
                   {/* Card Content */}
                   <div className="p-6 space-y-3">
                     <div className="flex items-center justify-between gap-2 text-xs">
-                      <span className="text-blue-600 font-semibold bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-md text-[11px]">
+                      <span className="text-[#38BDF8] font-semibold bg-[#102A56] border border-[#3B82F6]/30 px-2.5 py-0.5 rounded-md text-[11px]">
                         {project.category}
                       </span>
-                      <span className="text-slate-400 text-[11px] font-medium">{project.status}</span>
+                      <span className="text-[#CBD5E1]/70 text-[11px] font-medium">{project.status}</span>
                     </div>
 
-                    <h3 className="text-lg font-bold text-[#0B132B] group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-lg font-bold text-[#FFFFFF] group-hover:text-[#D4AF37] hover:text-[#D4AF37] transition-colors duration-300 tracking-tight">
                       {project.title}
                     </h3>
 
-                    <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                    <p className="text-xs text-[#CBD5E1] leading-relaxed line-clamp-3 font-normal">
                       {project.description}
                     </p>
                   </div>
                 </div>
 
                 {/* Action Button */}
-                <div className="p-6 pt-0">
+                <div className="relative z-10 p-6 pt-0">
                   <button
                     type="button"
                     onClick={() =>
@@ -171,9 +174,9 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
                         category: project.category as any
                       })
                     }
-                    className="w-full inline-flex items-center justify-center gap-2 bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-700 text-xs font-semibold py-2.5 px-4 rounded-xl transition-all duration-200 border border-slate-200 group-hover:border-blue-600 shadow-xs active:scale-[0.98] cursor-pointer"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-[#102A56] hover:bg-[#1D4ED8] text-[#FFFFFF] text-xs font-bold py-2.5 px-4 rounded-xl transition-all duration-300 border border-[#3B82F6]/40 hover:border-[#38BDF8]/70 shadow-sm hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
                   >
-                    <Eye className="w-3.5 h-3.5" />
+                    <Eye className="w-3.5 h-3.5 text-[#38BDF8]" />
                     <span>{t.portfolio.viewDetails}</span>
                   </button>
                 </div>

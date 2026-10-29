@@ -80,7 +80,7 @@ export const OffersSection: React.FC = () => {
               <button
                 type="button"
                 onClick={scrollToContact}
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2.5 px-5 rounded-xl transition-all duration-200 shadow-sm shadow-blue-500/20 active:scale-[0.98] cursor-pointer"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-[#C9A227] hover:text-[#0B132B] text-white text-xs font-bold py-2.5 px-5 rounded-xl transition-all duration-300 shadow-md shadow-blue-500/20 hover:shadow-xl hover:shadow-amber-500/50 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
               >
                 <span>{t.offers.neutralBtn}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -139,7 +139,7 @@ export const OffersSection: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => openWhatsAppChat(offer.whatsappMessage)}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2.5 px-5 rounded-xl transition-all duration-200 shadow-sm shadow-blue-500/20 active:scale-[0.98] cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-[#C9A227] hover:text-[#0B132B] text-white text-xs font-bold py-2.5 px-5 rounded-xl transition-all duration-300 shadow-md shadow-blue-500/20 hover:shadow-xl hover:shadow-amber-500/50 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>{t.offers.claimBtn}</span>

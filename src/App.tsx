@@ -86,7 +86,7 @@ function AppContent() {
         <FAQSection />
 
         {/* Section Divider 7: Geometric Precision Angle into Contact */}
-        <SectionDivider variant="geometric" />
+        <SectionDivider variant="geometric-navy" />
 
         {/* Section 8: Contact Us */}
         <ContactSection />

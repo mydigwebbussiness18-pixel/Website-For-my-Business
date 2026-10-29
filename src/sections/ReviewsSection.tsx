@@ -117,7 +117,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
             className="lg:col-span-7 space-y-6"
           >
             <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-              <h3 className="text-lg font-bold text-[#0B132B]">
+              <h3 className="text-lg font-bold text-[#10233F]">
                 {t.reviews.approvedTitle}
               </h3>
               <button
@@ -131,14 +131,14 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
             </div>
 
             {approvedReviews.length === 0 ? (
-              <div className="bg-white border border-slate-200 rounded-2xl p-8 sm:p-12 text-center space-y-3 shadow-xs">
-                <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 mx-auto flex items-center justify-center">
-                  <Star className="w-6 h-6" />
+              <div className="bg-gradient-to-br from-[#0B1630] to-[#102A56] border border-[#3B82F6]/30 rounded-2xl p-8 sm:p-12 text-center space-y-3 shadow-lg shadow-black/20">
+                <div className="w-12 h-12 rounded-2xl bg-[#102A56] border border-[#3B82F6]/40 text-[#D4AF37] mx-auto flex items-center justify-center shadow-sm">
+                  <Star className="w-6 h-6 fill-[#D4AF37]" />
                 </div>
-                <h4 className="text-base font-bold text-[#0B132B]">
+                <h4 className="text-base font-bold text-[#FFFFFF]">
                   {t.reviews.emptyText}
                 </h4>
-                <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
+                <p className="text-xs text-[#CBD5E1] max-w-md mx-auto leading-relaxed">
                   {t.reviews.emptySubtext}
                 </p>
               </div>
@@ -156,28 +156,30 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                     variants={cardFadeInUpVariant}
                     whileHover={{ y: -3 }}
                     transition={{ duration: 0.2 }}
-                    className="bg-white border border-slate-200/90 rounded-2xl p-5 space-y-3 shadow-xs hover:shadow-md hover:border-slate-300 transition-all duration-200"
+                    className="relative bg-gradient-to-br from-[#0B1630] to-[#102A56] border border-[#3B82F6]/30 hover:border-[#38BDF8]/60 rounded-2xl p-5 space-y-3 shadow-lg shadow-black/20 hover:shadow-xl transition-all duration-300"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <h4 className="text-sm font-bold text-[#0B132B]">{rev.customerName}</h4>
+                        <h4 className="text-sm font-bold text-[#FFFFFF] tracking-tight">{rev.customerName}</h4>
                         <div className="flex items-center gap-1 mt-1">
                           {[1, 2, 3, 4, 5].map((s) => (
                             <Star
                               key={s}
                               className={`w-3.5 h-3.5 ${
                                 s <= rev.rating
-                                  ? "text-amber-400 fill-amber-400"
-                                  : "text-slate-200"
+                                  ? "text-[#D4AF37] fill-[#D4AF37]"
+                                  : "text-slate-600/40"
                               }`}
                             />
                           ))}
                         </div>
                       </div>
-                      <span className="text-[11px] text-slate-400 font-mono">{rev.createdAt}</span>
+                      <span className="text-[11px] text-[#38BDF8] font-semibold bg-[#102A56] border border-[#3B82F6]/30 px-2 py-0.5 rounded-md font-mono">
+                        {rev.createdAt}
+                      </span>
                     </div>
 
-                    <p className="text-xs text-slate-700 leading-relaxed italic bg-slate-50/80 p-3.5 rounded-xl border border-slate-200/80">
+                    <p className="text-xs text-[#CBD5E1] leading-relaxed italic bg-[#0B1630]/60 p-3.5 rounded-xl border border-[#3B82F6]/20">
                       "{rev.reviewText}"
                     </p>
                   </motion.div>
@@ -194,28 +196,28 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
             viewport={defaultViewport}
             className="lg:col-span-5"
           >
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm">
+            <div className="bg-gradient-to-br from-[#064E3B] via-[#043d2e] to-[#022c22] border border-emerald-600/40 hover:border-emerald-400/80 rounded-2xl p-6 sm:p-8 space-y-6 shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-emerald-950/70 hover:-translate-y-1 transition-all duration-300">
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-blue-600 text-xs font-semibold uppercase tracking-wider">
-                  <MessageSquarePlus className="w-4 h-4" />
+                <div className="flex items-center gap-2 text-emerald-300 text-xs font-semibold uppercase tracking-wider">
+                  <MessageSquarePlus className="w-4 h-4 text-emerald-400" />
                   <span>{t.reviews.formKicker}</span>
                 </div>
-                <h3 className="text-xl font-bold text-[#0B132B]">{t.reviews.formTitle}</h3>
-                <p className="text-xs text-slate-500">
+                <h3 className="text-xl font-bold text-white">{t.reviews.formTitle}</h3>
+                <p className="text-xs text-emerald-100/80">
                   {t.reviews.formSubtitle}
                 </p>
               </div>
 
               {submitSuccessMessage ? (
-                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-800 space-y-3">
+                <div className="bg-[#022c22]/90 border border-emerald-400/50 rounded-xl p-4 text-xs text-emerald-100 space-y-3">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0 mt-0.5" />
                     <span>{submitSuccessMessage}</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => setSubmitSuccessMessage(null)}
-                    className="text-xs font-semibold underline text-emerald-700 hover:text-emerald-900 cursor-pointer"
+                    className="text-xs font-semibold underline text-emerald-300 hover:text-white cursor-pointer"
                   >
                     {t.reviews.submitAnother}
                   </button>
@@ -223,16 +225,16 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {submitErrorMessage && (
-                    <div className="bg-rose-50 border border-rose-200 rounded-xl p-3 text-xs text-rose-700 flex items-start gap-2">
-                      <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                    <div className="bg-rose-950/80 border border-rose-500/50 rounded-xl p-3 text-xs text-rose-200 flex items-start gap-2">
+                      <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
                       <span>{submitErrorMessage}</span>
                     </div>
                   )}
 
                   {/* Field 1: Full Name */}
                   <div className="space-y-1.5">
-                    <label htmlFor="review-name" className="block text-xs font-medium text-slate-700">
-                      {t.reviews.nameLabel} <span className="text-rose-500">*</span>
+                    <label htmlFor="review-name" className="block text-xs font-semibold text-emerald-100">
+                      {t.reviews.nameLabel} <span className="text-rose-400">*</span>
                     </label>
                     <input
                       id="review-name"
@@ -242,15 +244,15 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                       placeholder={t.reviews.namePlaceholder}
                       maxLength={80}
                       disabled={isSubmitting}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                      className="w-full bg-[#FFFFFF] border border-emerald-600/40 rounded-xl px-3.5 py-2.5 text-xs text-[#0B1630] placeholder-[#64748B] focus:bg-[#FFFFFF] focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30 transition-all outline-none"
                       required
                     />
                   </div>
 
                   {/* Field 2: Star Rating: 1-5 */}
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-medium text-slate-700">
-                      {t.reviews.ratingLabel} <span className="text-rose-500">*</span>
+                    <label className="block text-xs font-semibold text-emerald-100">
+                      {t.reviews.ratingLabel} <span className="text-rose-400">*</span>
                     </label>
                     <div className="flex items-center gap-2">
                       <div className="flex items-center gap-1.5 py-1">
@@ -261,20 +263,20 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                             onClick={() => setRating(star)}
                             onMouseEnter={() => setHoverRating(star)}
                             onMouseLeave={() => setHoverRating(0)}
-                            className="p-1 focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg transition-transform hover:scale-110 active:scale-95 cursor-pointer"
+                            className="p-1 focus-visible:ring-2 focus-visible:ring-emerald-400 rounded-lg transition-transform hover:scale-110 active:scale-95 cursor-pointer"
                             aria-label={`Rate ${star} out of 5 stars`}
                           >
                             <Star
                               className={`w-6 h-6 transition-colors ${
                                 (hoverRating || rating) >= star
-                                  ? "text-amber-400 fill-amber-400"
-                                  : "text-slate-300"
+                                  ? "text-[#D4AF37] fill-[#D4AF37]"
+                                  : "text-emerald-900/80"
                               }`}
                             />
                           </button>
                         ))}
                       </div>
-                      <span className="text-xs text-slate-500 font-mono">
+                      <span className="text-xs text-emerald-200 font-mono">
                         {rating} {t.reviews.ratingCount}
                       </span>
                     </div>
@@ -282,8 +284,8 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
 
                   {/* Field 3: Write Your Review */}
                   <div className="space-y-1.5">
-                    <label htmlFor="review-text" className="block text-xs font-medium text-slate-700">
-                      {t.reviews.reviewLabel} <span className="text-rose-500">*</span>
+                    <label htmlFor="review-text" className="block text-xs font-semibold text-emerald-100">
+                      {t.reviews.reviewLabel} <span className="text-rose-400">*</span>
                     </label>
                     <textarea
                       id="review-text"
@@ -293,10 +295,10 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                       placeholder={t.reviews.reviewPlaceholder}
                       maxLength={800}
                       disabled={isSubmitting}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all resize-none outline-none"
+                      className="w-full bg-[#FFFFFF] border border-emerald-600/40 rounded-xl px-3.5 py-2.5 text-xs text-[#0B1630] placeholder-[#64748B] focus:bg-[#FFFFFF] focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30 transition-all resize-none outline-none"
                       required
                     />
-                    <div className="flex justify-between text-[11px] text-slate-400">
+                    <div className="flex justify-between text-[11px] text-emerald-200/70">
                       <span>{t.reviews.minLength}</span>
                       <span>{reviewText.length}/800</span>
                     </div>
@@ -306,7 +308,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white text-xs font-semibold py-3 px-4 rounded-xl transition-all shadow-sm shadow-blue-500/20 active:scale-[0.98] cursor-pointer"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-[#D4AF37] hover:bg-emerald-400 text-[#0B132B] hover:text-[#0B132B] disabled:bg-emerald-900/60 disabled:text-emerald-400 text-xs font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-md shadow-emerald-950/40 hover:shadow-xl hover:shadow-amber-500/40 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
                   >
                     {isSubmitting ? (
                       <span>{t.reviews.submittingBtn}</span>
@@ -318,8 +320,8 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                     )}
                   </button>
 
-                  <div className="flex items-start gap-2 text-[11px] text-slate-500 pt-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-2 text-[11px] text-emerald-200/80 pt-1">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
                     <span>{t.reviews.securityNote}</span>
                   </div>
                 </form>

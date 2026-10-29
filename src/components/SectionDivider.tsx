@@ -1,6 +1,6 @@
 import React from "react";
 
-export type DividerVariant = "wave" | "curve" | "geometric" | "crest" | "footer-crest";
+export type DividerVariant = "wave" | "curve" | "geometric" | "geometric-navy" | "crest" | "footer-crest";
 
 interface SectionDividerProps {
   variant?: DividerVariant;
@@ -9,7 +9,7 @@ interface SectionDividerProps {
 
 /**
  * Modern, elegant section dividers using lightweight SVGs
- * Uses Dark Navy Blue (#0B132B), Electric Blue (#2563EB / #3B82F6), and subtle Golden accents (#F59E0B / #FBBF24).
+ * Uses Dark Navy Blue (#0B132B / #10233F), Electric Blue (#2563EB / #3B82F6), and subtle Golden accents (#F59E0B / #C9A227).
  * Fully responsive and optimized for zero horizontal scroll.
  */
 export const SectionDivider: React.FC<SectionDividerProps> = ({
@@ -193,6 +193,62 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({
     );
   }
 
+  // Geometric-navy: Transitions from FAQ (#FAFAFC) to Contact (#10233F)
+  if (variant === "geometric-navy") {
+    return (
+      <div
+        className={`w-full overflow-hidden leading-none select-none pointer-events-none bg-[#FAFAFC] ${className}`}
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 1440 65"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          className="w-full h-8 sm:h-10 md:h-12 lg:h-14 block"
+        >
+          <defs>
+            <linearGradient id="geoNavyLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#2563EB" stopOpacity="0.4" />
+              <stop offset="30%" stopColor="#3B82F6" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#C9A227" stopOpacity="1" />
+              <stop offset="70%" stopColor="#3B82F6" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#2563EB" stopOpacity="0.4" />
+            </linearGradient>
+            <linearGradient id="geoNavyBlueFill" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#10233F" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#10233F" stopOpacity="0.85" />
+            </linearGradient>
+          </defs>
+
+          {/* Geometric facet ambient underlay */}
+          <polygon
+            points="0,18 680,48 720,42 760,48 1440,18 1440,65 0,65"
+            fill="url(#geoNavyBlueFill)"
+          />
+
+          {/* Solid Deep Navy Base matching ContactSection (#10233F) */}
+          <polygon
+            points="0,22 680,50 720,44 760,50 1440,22 1440,65 0,65"
+            fill="#10233F"
+          />
+
+          {/* Precision Electric Blue & Gold Accent Stroke */}
+          <polyline
+            points="0,22 680,50 720,44 760,50 1440,22"
+            stroke="url(#geoNavyLineGrad)"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* Futuristic Center Gold Diamond Pip */}
+          <polygon points="720,40 724,44 720,48 716,44" fill="#C9A227" />
+        </svg>
+      </div>
+    );
+  }
+
   // Crest: Transitions from Offers (White) to Reviews (#FAFAFC)
   if (variant === "crest") {
     return (
@@ -245,10 +301,10 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({
     );
   }
 
-  // Footer-crest: Transitions seamlessly from Contact (White) into Dark Navy Blue Footer (#0B132B)
+  // Footer-crest: Transitions seamlessly from Contact (#10233F) into Dark Navy Blue Footer (#0B132B)
   return (
     <div
-      className={`w-full overflow-hidden leading-none select-none pointer-events-none bg-white ${className}`}
+      className={`w-full overflow-hidden leading-none select-none pointer-events-none bg-[#10233F] ${className}`}
       aria-hidden="true"
     >
       <svg
