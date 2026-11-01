@@ -16,6 +16,7 @@ import {
   MessageCircle,
   Sparkles
 } from "lucide-react";
+import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
 
 export const FAQSection: React.FC = () => {
   const { t } = useLanguage();
@@ -48,9 +49,12 @@ export const FAQSection: React.FC = () => {
   return (
     <section
       id="faq"
-      className="py-24 bg-[#F1F5F9] relative"
+      className="py-24 bg-[#F1F5F9] relative overflow-hidden"
     >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Subtle Gentle Smoke Drift behind FAQ Accordions */}
+      <CinematicSmokeBackground preset="faq" />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header with Staggered Fade-in-up */}
         <motion.div
           variants={containerStaggerVariants}

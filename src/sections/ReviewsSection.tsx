@@ -11,6 +11,8 @@ import {
   defaultViewport
 } from "../utils/animations";
 import { Star, MessageSquarePlus, ShieldCheck, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { ThreeDCard } from "../components/ThreeDCard";
+import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
 
 interface ReviewsSectionProps {
   onOpenModeration: () => void;
@@ -85,9 +87,12 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
   return (
     <section
       id="reviews"
-      className="py-24 bg-[#FAFAFC] relative"
+      className="py-24 bg-[#FAFAFC] relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Soft, Elegant Deep Navy & Blue Smoke Drift */}
+      <CinematicSmokeBackground preset="reviews" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading with Staggered Fade-in-up */}
         <motion.div
           variants={containerStaggerVariants}
@@ -154,34 +159,41 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                   <motion.div
                     key={rev.id}
                     variants={cardFadeInUpVariant}
-                    whileHover={{ y: -3 }}
-                    transition={{ duration: 0.2 }}
-                    className="relative bg-gradient-to-br from-[#0B1630] to-[#102A56] border border-[#3B82F6]/30 hover:border-[#38BDF8]/60 rounded-2xl p-5 space-y-3 shadow-lg shadow-black/20 hover:shadow-xl transition-all duration-300"
                   >
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h4 className="text-sm font-bold text-[#FFFFFF] tracking-tight">{rev.customerName}</h4>
-                        <div className="flex items-center gap-1 mt-1">
-                          {[1, 2, 3, 4, 5].map((s) => (
-                            <Star
-                              key={s}
-                              className={`w-3.5 h-3.5 ${
-                                s <= rev.rating
-                                  ? "text-[#D4AF37] fill-[#D4AF37]"
-                                  : "text-slate-600/40"
-                              }`}
-                            />
-                          ))}
+                    <ThreeDCard maxTilt={6} scrollTiltStrength={4}>
+                      <div className="relative bg-gradient-to-br from-[#0B1630] to-[#102A56] border border-[#3B82F6]/30 hover:border-[#38BDF8]/60 rounded-2xl p-5 space-y-3 shadow-lg shadow-black/20 hover:shadow-xl transition-all duration-300 preserve-3d">
+                        <div className="flex items-start justify-between gap-4">
+                          <div style={{ transform: "translateZ(16px)" }}>
+                            <h4 className="text-sm font-bold text-[#FFFFFF] tracking-tight">{rev.customerName}</h4>
+                            <div className="flex items-center gap-1 mt-1">
+                              {[1, 2, 3, 4, 5].map((s) => (
+                                <Star
+                                  key={s}
+                                  className={`w-3.5 h-3.5 ${
+                                    s <= rev.rating
+                                      ? "text-[#D4AF37] fill-[#D4AF37]"
+                                      : "text-slate-600/40"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                          </div>
+                          <span
+                            style={{ transform: "translateZ(12px)" }}
+                            className="text-[11px] text-[#38BDF8] font-semibold bg-[#102A56] border border-[#3B82F6]/30 px-2 py-0.5 rounded-md font-mono"
+                          >
+                            {rev.createdAt}
+                          </span>
                         </div>
-                      </div>
-                      <span className="text-[11px] text-[#38BDF8] font-semibold bg-[#102A56] border border-[#3B82F6]/30 px-2 py-0.5 rounded-md font-mono">
-                        {rev.createdAt}
-                      </span>
-                    </div>
 
-                    <p className="text-xs text-[#CBD5E1] leading-relaxed italic bg-[#0B1630]/60 p-3.5 rounded-xl border border-[#3B82F6]/20">
-                      "{rev.reviewText}"
-                    </p>
+                        <p
+                          style={{ transform: "translateZ(14px)" }}
+                          className="text-xs text-[#CBD5E1] leading-relaxed italic bg-[#0B1630]/60 p-3.5 rounded-xl border border-[#3B82F6]/20"
+                        >
+                          "{rev.reviewText}"
+                        </p>
+                      </div>
+                    </ThreeDCard>
                   </motion.div>
                 ))}
               </motion.div>

@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { ServiceItem, PortfolioProject } from "./types";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import { Navbar } from "./components/Navbar";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
 import { SectionDivider } from "./components/SectionDivider";
-import { ServiceDetailModal } from "./components/ServiceDetailModal";
-import { ProjectPreviewModal } from "./components/ProjectPreviewModal";
-import { ReviewApprovalModal } from "./components/ReviewApprovalModal";
-import { OwnerGuideModal } from "./components/OwnerGuideModal";
-import { PrivacyPolicyModal } from "./components/PrivacyPolicyModal";
+import { ThreeDMarketingCanvas } from "./components/ThreeDMarketingCanvas";
+import { ThreeDScrollProgress } from "./components/ThreeDScrollProgress";
+
+// Lazy-loaded secondary modals to optimize initial bundle size and First Input Delay
+const ServiceDetailModal = React.lazy(() =>
+  import("./components/ServiceDetailModal").then((m) => ({ default: m.ServiceDetailModal }))
+);
+const ProjectPreviewModal = React.lazy(() =>
+  import("./components/ProjectPreviewModal").then((m) => ({ default: m.ProjectPreviewModal }))
+);
+const ReviewApprovalModal = React.lazy(() =>
+  import("./components/ReviewApprovalModal").then((m) => ({ default: m.ReviewApprovalModal }))
+);
+const OwnerGuideModal = React.lazy(() =>
+  import("./components/OwnerGuideModal").then((m) => ({ default: m.OwnerGuideModal }))
+);
+const PrivacyPolicyModal = React.lazy(() =>
+  import("./components/PrivacyPolicyModal").then((m) => ({ default: m.PrivacyPolicyModal }))
+);
 
 // 8 Sections in exact requested order
 import { HeroSection } from "./sections/HeroSection";
@@ -36,13 +50,39 @@ function AppContent() {
     setReviewUpdateCounter((prev) => prev + 1);
   };
 
+  // Direct route and hash support for all 8 pages (home, services, portfolio, offers, reviews, about, faq, contact)
+  React.useEffect(() => {
+    const handleInitialRoute = () => {
+      const hash = window.location.hash.replace("#", "");
+      const pathname = window.location.pathname.replace(/^\//, "").split("/")[0];
+      const targetId = hash || pathname;
+      if (targetId) {
+        const el = document.getElementById(targetId);
+        if (el) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: "smooth" });
+          }, 120);
+        }
+      }
+    };
+    handleInitialRoute();
+    window.addEventListener("hashchange", handleInitialRoute);
+    return () => window.removeEventListener("hashchange", handleInitialRoute);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#FAFAFC] text-[#0F172A] flex flex-col font-sans selection:bg-blue-600 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#FAFAFC] text-[#0F172A] flex flex-col font-sans selection:bg-blue-600 selection:text-white overflow-x-hidden relative">
+      {/* 3D Scroll Progress Beam */}
+      <ThreeDScrollProgress />
+
+      {/* Background 3D Digital Marketing Scroll-Driven Scene */}
+      <ThreeDMarketingCanvas />
+
       {/* Responsive Top Navigation with Compact Language Switcher */}
       <Navbar onOpenOwnerGuide={() => setIsOwnerGuideOpen(true)} />
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-x-hidden">
+      <main className="flex-1 overflow-x-hidden relative z-10">
         {/* Section 1: Home (Hero) */}
         <HeroSection />
 
@@ -104,32 +144,34 @@ function AppContent() {
       {/* Floating WhatsApp Quick Action Button */}
       <FloatingWhatsApp />
 
-      {/* Modals & Dialogs */}
-      <ServiceDetailModal
-        service={selectedService}
-        onClose={() => setSelectedService(null)}
-      />
+      {/* Modals & Dialogs (Loaded on Demand) */}
+      <Suspense fallback={null}>
+        <ServiceDetailModal
+          service={selectedService}
+          onClose={() => setSelectedService(null)}
+        />
 
-      <ProjectPreviewModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+        <ProjectPreviewModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
 
-      <ReviewApprovalModal
-        isOpen={isModerationOpen}
-        onClose={() => setIsModerationOpen(false)}
-        onReviewsUpdated={handleReviewsUpdated}
-      />
+        <ReviewApprovalModal
+          isOpen={isModerationOpen}
+          onClose={() => setIsModerationOpen(false)}
+          onReviewsUpdated={handleReviewsUpdated}
+        />
 
-      <OwnerGuideModal
-        isOpen={isOwnerGuideOpen}
-        onClose={() => setIsOwnerGuideOpen(false)}
-      />
+        <OwnerGuideModal
+          isOpen={isOwnerGuideOpen}
+          onClose={() => setIsOwnerGuideOpen(false)}
+        />
 
-      <PrivacyPolicyModal
-        isOpen={isPrivacyPolicyOpen}
-        onClose={() => setIsPrivacyPolicyOpen(false)}
-      />
+        <PrivacyPolicyModal
+          isOpen={isPrivacyPolicyOpen}
+          onClose={() => setIsPrivacyPolicyOpen(false)}
+        />
+      </Suspense>
     </div>
   );
 }

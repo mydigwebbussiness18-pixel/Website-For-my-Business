@@ -8,7 +8,9 @@ import {
   fadeInUpVariant,
   defaultViewport
 } from "../utils/animations";
-import { MessageCircle, Mail, Instagram, UserCheck } from "lucide-react";
+import { MessageCircle, Mail, Instagram, UserCheck, Award } from "lucide-react";
+import { ThreeDCard } from "../components/ThreeDCard";
+import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
 
 export const FounderSection: React.FC = () => {
   const { t } = useLanguage();
@@ -16,9 +18,12 @@ export const FounderSection: React.FC = () => {
   return (
     <section
       id="about"
-      className="py-24 bg-white relative"
+      className="py-24 bg-white relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Atmospheric Cinematic Blue Smoke Surrounding Profile & Story */}
+      <CinematicSmokeBackground preset="about" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading with Staggered Fade-in-up */}
         <motion.div
           variants={containerStaggerVariants}
@@ -48,21 +53,35 @@ export const FounderSection: React.FC = () => {
             viewport={defaultViewport}
             className="lg:col-span-5 flex justify-center"
           >
-            <div className="relative w-full max-w-md">
-              {/* Photo Frame Container */}
-              <div className="relative rounded-3xl overflow-hidden border-2 border-slate-200/90 bg-white shadow-xl group">
+            <ThreeDCard maxTilt={7} scrollTiltStrength={4} className="w-full max-w-md">
+              <div className="relative rounded-3xl overflow-hidden border-2 border-slate-200/90 bg-white shadow-xl group preserve-3d">
                 <img
                   src={businessConfig.founder.image}
                   alt={`${businessConfig.founder.name}, ${businessConfig.founder.designation}`}
                   className="w-full h-auto object-cover max-h-[520px] transition-transform duration-500 group-hover:scale-[1.03]"
                   loading="lazy"
+                  decoding="async"
+                  width="520"
+                  height="520"
                   onError={(e) => {
                     (e.target as HTMLElement).style.display = "none";
                   }}
                 />
 
-                {/* Subtle caption overlay at bottom of photo */}
-                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent p-6 text-left">
+                {/* Floating 3D Verified Badge */}
+                <div
+                  style={{ transform: "translateZ(26px)" }}
+                  className="absolute top-4 right-4 bg-[#0B1630]/90 backdrop-blur-md border border-[#38BDF8]/60 px-3 py-1.5 rounded-full flex items-center gap-1.5 text-[11px] font-bold text-white shadow-lg"
+                >
+                  <Award className="w-3.5 h-3.5 text-[#38BDF8]" />
+                  <span>Lead Strategist</span>
+                </div>
+
+                {/* Subtle caption overlay at bottom of photo with 3D Depth */}
+                <div
+                  style={{ transform: "translateZ(18px)" }}
+                  className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/95 via-slate-950/70 to-transparent p-6 text-left"
+                >
                   <h3 className="text-lg font-bold text-white tracking-tight">
                     {businessConfig.founder.name}
                   </h3>
@@ -77,7 +96,7 @@ export const FounderSection: React.FC = () => {
                 className="absolute -top-3 -right-3 w-16 h-16 border-t-2 border-r-2 border-blue-500/40 rounded-tr-3xl pointer-events-none"
                 aria-hidden="true"
               />
-            </div>
+            </ThreeDCard>
           </motion.div>
 
           {/* Right Column: Founder Introduction & Principles (7 cols) */}
@@ -143,6 +162,8 @@ export const FounderSection: React.FC = () => {
                   href={businessConfig.contact.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Visit DigWeb Expert on Instagram"
+                  title="Follow DigWeb Expert on Instagram"
                   className="group inline-flex items-center gap-2 bg-white hover:bg-pink-600 text-slate-700 hover:text-white text-xs font-semibold px-4 py-2.5 rounded-xl border border-slate-200 hover:border-pink-600 shadow-sm hover:shadow-lg hover:shadow-pink-500/30 hover:-translate-y-0.5 transition-all duration-300 active:scale-[0.98]"
                 >
                   <Instagram className="w-3.5 h-3.5 text-pink-500 group-hover:text-white transition-colors duration-300" />

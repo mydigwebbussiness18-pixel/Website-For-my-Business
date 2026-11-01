@@ -37,6 +37,10 @@ export const Footer: React.FC<FooterProps> = ({
                   src={businessConfig.logo}
                   alt={`${businessConfig.businessName} Logo`}
                   className="w-full h-full object-contain rounded-lg"
+                  loading="lazy"
+                  decoding="async"
+                  width="44"
+                  height="44"
                 />
               </div>
               <span className="text-xl font-bold tracking-tight text-white">
@@ -129,6 +133,8 @@ export const Footer: React.FC<FooterProps> = ({
                 href={businessConfig.contact.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Visit DigWeb Expert on Instagram"
+                title="Follow DigWeb Expert on Instagram"
                 className="flex items-center gap-2 text-slate-200 hover:text-pink-400 transition-colors duration-200 font-medium group"
               >
                 <Instagram className="w-4 h-4 text-pink-400 group-hover:scale-110 transition-transform duration-200 shrink-0" />

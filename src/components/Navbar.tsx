@@ -3,7 +3,7 @@ import { businessConfig } from "../config/businessConfig";
 import { openWhatsAppChat } from "../utils/whatsapp";
 import { useLanguage } from "../i18n/LanguageContext";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, Instagram } from "lucide-react";
 
 interface NavbarProps {
   onOpenOwnerGuide: () => void;
@@ -16,27 +16,48 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    let isScrolled = false;
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      const sectionIds = ["home", "services", "portfolio", "offers", "reviews", "about", "faq", "contact"];
-      const scrollPosition = window.scrollY + 200;
-
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(id);
-            break;
-          }
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const nowScrolled = window.scrollY > 20;
+        if (nowScrolled !== isScrolled) {
+          isScrolled = nowScrolled;
+          setScrolled(nowScrolled);
         }
-      }
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    handleScroll();
+
+    // Asynchronous IntersectionObserver for active section: zero layout reflows
+    const sectionIds = ["home", "services", "portfolio", "offers", "reviews", "about", "faq", "contact"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+            break;
+          }
+        }
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const navLinks = [
@@ -83,6 +104,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
                 src={businessConfig.logo}
                 alt={`${businessConfig.businessName} Official Logo`}
                 className="w-full h-full object-contain rounded-lg"
+                width="44"
+                height="44"
+                fetchPriority="high"
+                decoding="async"
                 onError={(e) => {
                   (e.target as HTMLElement).style.display = "none";
                 }}
@@ -133,6 +158,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
             >
               {t.nav.ownerGuide}
             </button>
+
+            <a
+              href={businessConfig.contact.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="DigWeb Expert on Instagram"
+              title="Follow us on Instagram (@digweb__expert__18)"
+              className="hidden sm:inline-flex items-center justify-center w-8 h-8 rounded-xl bg-slate-800/80 hover:bg-pink-500/20 text-slate-300 hover:text-pink-400 border border-slate-700/80 hover:border-pink-500/40 transition-all duration-300 hover:scale-105 active:scale-95 shadow-xs"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
 
             <button
               type="button"
@@ -201,6 +237,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
                 <MessageCircle className="w-4 h-4" />
                 <span>{t.nav.chatWhatsApp}</span>
               </button>
+              <a
+                href={businessConfig.contact.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 active:scale-98 text-white font-semibold py-2.5 px-4 rounded-xl transition-all duration-300 shadow-md shadow-pink-500/20"
+              >
+                <Instagram className="w-4 h-4" />
+                <span>Instagram ({businessConfig.contact.instagramUsername})</span>
+              </a>
               <button
                 type="button"
                 onClick={() => {

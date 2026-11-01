@@ -462,13 +462,13 @@ export const translations: Record<Language, Translations> = {
       ]
     },
     offers: {
-      kicker: "Promotions & Packages",
-      heading: "Current Offers",
-      subheading: "Explore available service offers from DigWeb Expert.",
+      kicker: "Diwali Special Offers",
+      heading: "🪔 DigWeb Expert – Diwali Special Offers",
+      subheading: "Special Website Packages to Help Your Business Grow Online.",
       neutralTitle: "Special offers will be announced here.",
       neutralText: "Contact us to discuss your requirements and discover customized packages for your business.",
       neutralBtn: "Contact Us for Custom Packages",
-      claimBtn: "Claim This Offer on WhatsApp",
+      claimBtn: "Get This Package",
       validUntil: "Valid until"
     },
     reviews: {
@@ -887,13 +887,13 @@ export const translations: Record<Language, Translations> = {
       ]
     },
     offers: {
-      kicker: "ઓફર્સ અને પેકેજીસ",
-      heading: "વિશેષ ઓફર્સ",
-      subheading: "DigWeb Expert ની ઉપલબ્ધ સર્વિસ ઓફર્સ તપાસો.",
-      neutralTitle: "વિશેષ ઓફર્સ અહીં જાહેર કરવામાં આવશે.",
+      kicker: "દિવાળી વિશેષ ઑફર્સ",
+      heading: "🪔 DigWeb Expert – Diwali Special Offers",
+      subheading: "Special Website Packages to Help Your Business Grow Online.",
+      neutralTitle: "વિશેષ ઑફર્સ અહીં જાહેર કરવામાં આવશે.",
       neutralText: "તમારી જરૂરિયાતો અંગે ચર્ચા કરવા અને તમારા વ્યવસાય માટે અનુકૂળ પેકેજ જાણવા અમારો સંપર્ક કરો.",
       neutralBtn: "કસ્ટમ પેકેજ માટે સંપર્ક કરો",
-      claimBtn: "WhatsApp પર ઓફર મેળવો",
+      claimBtn: "Get This Package",
       validUntil: "માન્યતા તારીખ"
     },
     reviews: {
@@ -1312,13 +1312,13 @@ export const translations: Record<Language, Translations> = {
       ]
     },
     offers: {
-      kicker: "प्रमोशन्स एवं पैकेजेस",
-      heading: "वर्तमान ऑफर्स",
-      subheading: "DigWeb Expert की उपलब्ध सर्विस ऑफर्स देखें।",
+      kicker: "दिवाली स्पेशल ऑफर्स",
+      heading: "🪔 DigWeb Expert – Diwali Special Offers",
+      subheading: "Special Website Packages to Help Your Business Grow Online.",
       neutralTitle: "विशेष ऑफर्स की घोषणा यहां की जाएगी।",
       neutralText: "अपनी आवश्यकताओं पर चर्चा करने और अपने व्यापार के लिए अनुकूल पैकेज जानने के लिए हमसे संपर्क करें।",
       neutralBtn: "कस्टम पैकेज के लिए संपर्क करें",
-      claimBtn: "WhatsApp पर ऑफर प्राप्त करें",
+      claimBtn: "Get This Package",
       validUntil: "वैधता तिथि"
     },
     reviews: {

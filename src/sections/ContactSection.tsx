@@ -28,6 +28,8 @@ import {
 import { submitAppointmentBooking } from "../services/storageService";
 import { SUPABASE_PROJECT_ID } from "../services/supabaseClient";
 import { AppointmentBooking } from "../types";
+import { ThreeDCard } from "../components/ThreeDCard";
+import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
 
 export const ContactSection: React.FC = () => {
   const { t } = useLanguage();
@@ -104,9 +106,12 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="py-24 bg-[#10233F] relative"
+      className="py-24 bg-[#10233F] relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Moody Deep Navy Smoke with Electric Blue & Cyan Illumination */}
+      <CinematicSmokeBackground preset="contact" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading with Staggered Fade-in-up */}
         <motion.div
           variants={containerStaggerVariants}
@@ -151,100 +156,118 @@ export const ContactSection: React.FC = () => {
               className="space-y-4"
             >
               {/* Direct Option 1: WhatsApp */}
-              <motion.div
-                variants={cardFadeInUpVariant}
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.2 }}
-                className="bg-[#162D50] border border-[#23406D] rounded-2xl p-5 space-y-3 shadow-md hover:border-emerald-400/50 transition-all duration-200"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
-                    <MessageCircle className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white">{t.contact.waTitle}</h4>
-                    <p className="text-xs text-[#C9A227] font-mono">
-                      {businessConfig.contact.whatsappNumber}
+              <motion.div variants={cardFadeInUpVariant}>
+                <ThreeDCard maxTilt={7} scrollTiltStrength={4}>
+                  <div className="bg-[#162D50] border border-[#23406D] rounded-2xl p-5 space-y-3 shadow-md hover:border-emerald-400/50 transition-all duration-200 preserve-3d">
+                    <div className="flex items-center gap-3">
+                      <div
+                        style={{ transform: "translateZ(18px)" }}
+                        className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0"
+                      >
+                        <MessageCircle className="w-5 h-5" />
+                      </div>
+                      <div style={{ transform: "translateZ(14px)" }}>
+                        <h4 className="text-sm font-bold text-white">{t.contact.waTitle}</h4>
+                        <p className="text-xs text-[#C9A227] font-mono">
+                          {businessConfig.contact.whatsappNumber}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-300">
+                      {t.contact.waSub}
                     </p>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        openWhatsAppChat(businessConfig.contact.contactSectionWhatsappMessage)
+                      }
+                      style={{ transform: "translateZ(12px)" }}
+                      className="w-full inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-all shadow-md shadow-emerald-500/20 active:scale-[0.98] cursor-pointer"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span>{t.contact.waBtn}</span>
+                    </button>
                   </div>
-                </div>
-                <p className="text-xs text-slate-300">
-                  {t.contact.waSub}
-                </p>
-                <button
-                  type="button"
-                  onClick={() =>
-                    openWhatsAppChat(businessConfig.contact.contactSectionWhatsappMessage)
-                  }
-                  className="w-full inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-all shadow-md shadow-emerald-500/20 active:scale-[0.98] cursor-pointer"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>{t.contact.waBtn}</span>
-                </button>
+                </ThreeDCard>
               </motion.div>
 
               {/* Direct Option 2: Instagram */}
-              <motion.div
-                variants={cardFadeInUpVariant}
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.2 }}
-                className="bg-[#162D50] border border-[#23406D] rounded-2xl p-5 space-y-3 shadow-md hover:border-pink-400/50 transition-all duration-200"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-pink-500/15 border border-pink-500/30 text-pink-400 flex items-center justify-center shrink-0">
-                    <Instagram className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white">{t.contact.igTitle}</h4>
-                    <p className="text-xs text-[#C9A227] font-mono">
-                      {businessConfig.contact.instagramUsername}
+              <motion.div variants={cardFadeInUpVariant}>
+                <ThreeDCard maxTilt={7} scrollTiltStrength={4}>
+                  <div className="bg-[#162D50] border border-[#23406D] rounded-2xl p-5 space-y-3 shadow-md hover:border-pink-400/50 transition-all duration-200 preserve-3d">
+                    <div className="flex items-center gap-3">
+                      <a
+                        href={businessConfig.contact.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="DigWeb Expert Instagram Profile"
+                        style={{ transform: "translateZ(18px)" }}
+                        className="w-10 h-10 rounded-xl bg-pink-500/15 border border-pink-500/30 text-pink-400 flex items-center justify-center shrink-0 hover:bg-pink-500/25 hover:border-pink-500/60 transition-colors"
+                      >
+                        <Instagram className="w-5 h-5" />
+                      </a>
+                      <div style={{ transform: "translateZ(14px)" }}>
+                        <h4 className="text-sm font-bold text-white">{t.contact.igTitle}</h4>
+                        <a
+                          href={businessConfig.contact.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-[#C9A227] hover:text-[#D4AF37] hover:underline font-mono inline-block"
+                        >
+                          {businessConfig.contact.instagramUsername}
+                        </a>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-300">
+                      {t.contact.igSub}
                     </p>
+                    <a
+                      href={businessConfig.contact.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ transform: "translateZ(12px)" }}
+                      className="w-full inline-flex items-center justify-center gap-2 bg-[#1E3A66] hover:bg-[#254A82] text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-all border border-[#2E5288] hover:border-[#C9A227]/40 shadow-xs active:scale-[0.98] cursor-pointer"
+                    >
+                      <Instagram className="w-4 h-4 text-pink-400" />
+                      <span>{t.contact.igBtn}</span>
+                    </a>
                   </div>
-                </div>
-                <p className="text-xs text-slate-300">
-                  {t.contact.igSub}
-                </p>
-                <a
-                  href={businessConfig.contact.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#1E3A66] hover:bg-[#254A82] text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-all border border-[#2E5288] hover:border-[#C9A227]/40 shadow-xs active:scale-[0.98]"
-                >
-                  <Instagram className="w-4 h-4 text-pink-400" />
-                  <span>{t.contact.igBtn}</span>
-                </a>
+                </ThreeDCard>
               </motion.div>
 
               {/* Direct Option 3: Email */}
-              <motion.div
-                variants={cardFadeInUpVariant}
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.2 }}
-                className="bg-[#162D50] border border-[#23406D] rounded-2xl p-5 space-y-3 shadow-md hover:border-blue-400/50 transition-all duration-200"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white">{t.contact.emailTitle}</h4>
-                    <p className="text-xs text-[#C9A227] font-mono truncate">
-                      {businessConfig.contact.email}
+              <motion.div variants={cardFadeInUpVariant}>
+                <ThreeDCard maxTilt={7} scrollTiltStrength={4}>
+                  <div className="bg-[#162D50] border border-[#23406D] rounded-2xl p-5 space-y-3 shadow-md hover:border-blue-400/50 transition-all duration-200 preserve-3d">
+                    <div className="flex items-center gap-3">
+                      <div
+                        style={{ transform: "translateZ(18px)" }}
+                        className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0"
+                      >
+                        <Mail className="w-5 h-5" />
+                      </div>
+                      <div style={{ transform: "translateZ(14px)" }}>
+                        <h4 className="text-sm font-bold text-white">{t.contact.emailTitle}</h4>
+                        <p className="text-xs text-[#C9A227] font-mono truncate">
+                          {businessConfig.contact.email}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-300">
+                      {t.contact.emailSub}
                     </p>
+                    <a
+                      href={`mailto:${businessConfig.contact.email}?subject=${encodeURIComponent(
+                        "Enquiry for DigWeb Expert Services"
+                      )}`}
+                      style={{ transform: "translateZ(12px)" }}
+                      className="w-full inline-flex items-center justify-center gap-2 bg-[#1E3A66] hover:bg-[#254A82] text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-all border border-[#2E5288] hover:border-[#C9A227]/40 shadow-xs active:scale-[0.98]"
+                    >
+                      <Mail className="w-4 h-4 text-blue-400" />
+                      <span>{t.contact.emailBtn}</span>
+                    </a>
                   </div>
-                </div>
-                <p className="text-xs text-slate-300">
-                  {t.contact.emailSub}
-                </p>
-                <a
-                  href={`mailto:${businessConfig.contact.email}?subject=${encodeURIComponent(
-                    "Enquiry for DigWeb Expert Services"
-                  )}`}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#1E3A66] hover:bg-[#254A82] text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-all border border-[#2E5288] hover:border-[#C9A227]/40 shadow-xs active:scale-[0.98]"
-                >
-                  <Mail className="w-4 h-4 text-blue-400" />
-                  <span>{t.contact.emailBtn}</span>
-                </a>
+                </ThreeDCard>
               </motion.div>
             </motion.div>
           </div>

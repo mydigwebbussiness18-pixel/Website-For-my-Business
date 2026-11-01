@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { businessConfig } from "../config/businessConfig";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -15,34 +15,56 @@ import {
   Globe,
   Shield,
   Sparkles,
-  TrendingUp
+  TrendingUp,
+  Rocket
 } from "lucide-react";
+import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
 
 export const HeroSection: React.FC = () => {
   const { t } = useLanguage();
 
-  // Subtle interactive parallax offset for desktop users
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
-  const [reduceMotion, setReduceMotion] = useState(false);
+  const showcaseRef = useRef<HTMLDivElement | null>(null);
+  const badge1Ref = useRef<HTMLDivElement | null>(null);
+  const badge2Ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      setReduceMotion(isReduced);
-    }
+    if (typeof window === "undefined") return;
+    const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isReduced) return;
+
+    let ticking = false;
+    let currentMouseX = 0;
+    let currentMouseY = 0;
+
+    const updateTransforms = () => {
+      const scrollY = window.scrollY;
+      if (showcaseRef.current) {
+        const transY = currentMouseY - Math.min(60, scrollY * 0.1);
+        const rotX = Math.min(12, scrollY * 0.025);
+        const rotY = Math.sin(scrollY * 0.008) * 6;
+        showcaseRef.current.style.transform = `translate3d(${currentMouseX}px, ${transY}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+      }
+      if (badge1Ref.current) {
+        badge1Ref.current.style.transform = `translate3d(-15px, ${-scrollY * 0.06}px, 35px)`;
+      }
+      if (badge2Ref.current) {
+        badge2Ref.current.style.transform = `translate3d(15px, ${scrollY * 0.05}px, 40px)`;
+      }
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking && window.scrollY < 900) {
+        ticking = true;
+        requestAnimationFrame(updateTransforms);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    updateTransforms();
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (reduceMotion || window.innerWidth < 1024) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 16;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 16;
-    setMouseOffset({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setMouseOffset({ x: 0, y: 0 });
-  };
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -54,8 +76,6 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="home"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-[#0B1630] transition-colors duration-300 scroll-mt-24"
     >
       {/* 16:9 Realistic Digital Marketing Workspace Background Visual */}
@@ -63,9 +83,15 @@ export const HeroSection: React.FC = () => {
         <img
           src={heroBg}
           alt=""
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-[75%_center] lg:object-center opacity-95 transition-transform duration-700"
         />
-        {/* Dark navy overlay: Left side is dark, clean, and visually quiet for readable typography, while right side reveals glowing monitors and charts */}
+
+        {/* Cinematic Animated Blue Smoke Effect behind Hero Visual */}
+        <CinematicSmokeBackground preset="hero" />
+
+        {/* Dark navy overlay: Left side is dark, clean, and visually quiet for readable typography, while right side reveals glowing monitors, charts & smoke */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B1630] via-[#0B1630]/90 to-[#0B1630]/40 lg:from-[#0B1630] lg:via-[#0B1630]/75 lg:to-transparent" />
         {/* Top vignette to blend smoothly into the dark navy header */}
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#0B132B]/95 to-transparent" />
@@ -173,18 +199,54 @@ export const HeroSection: React.FC = () => {
             className="lg:col-span-5 flex justify-center lg:justify-end"
           >
             <div
-              style={
-                !reduceMotion
-                  ? {
-                      transform: `translate3d(${mouseOffset.x}px, ${mouseOffset.y}px, 0)`,
-                      transition: "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)"
-                    }
-                  : undefined
-              }
-              className="relative w-full max-w-md"
+              ref={showcaseRef}
+              style={{
+                perspective: 1200,
+                transition: "transform 0.18s cubic-bezier(0.16, 1, 0.3, 1)"
+              }}
+              className="relative w-full max-w-md perspective-1200"
             >
+              {/* 3D Floating Marketing Badge 1: High ROI Meta Ads */}
+              <div
+                ref={badge1Ref}
+                style={{
+                  transform: "translate3d(-15px, 0px, 35px)",
+                  transition: "transform 0.2s ease-out"
+                }}
+                className="absolute -top-5 -left-4 sm:-left-8 z-30 bg-[#0B1630]/95 backdrop-blur-md border border-[#38BDF8]/60 px-3.5 py-2 rounded-2xl shadow-[0_10px_25px_rgba(56,189,248,0.3)] flex items-center gap-2 text-xs font-bold text-white hover:scale-105 transition-transform duration-200"
+              >
+                <div className="w-7 h-7 rounded-xl bg-blue-600/30 border border-blue-400 flex items-center justify-center text-[#38BDF8] shadow-sm">
+                  <Rocket className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[10px] text-slate-300 font-normal">Active Campaigns</div>
+                  <div className="text-[#38BDF8] font-bold text-[11px] leading-tight">Meta Ads Growth</div>
+                </div>
+              </div>
+
+              {/* 3D Floating Marketing Badge 2: Organic Reach */}
+              <div
+                ref={badge2Ref}
+                style={{
+                  transform: "translate3d(15px, 0px, 40px)",
+                  transition: "transform 0.2s ease-out"
+                }}
+                className="absolute -bottom-5 -right-4 sm:-right-8 z-30 bg-[#0B1630]/95 backdrop-blur-md border border-[#D4AF37]/60 px-3.5 py-2 rounded-2xl shadow-[0_10px_25px_rgba(212,175,55,0.25)] flex items-center gap-2 text-xs font-bold text-white hover:scale-105 transition-transform duration-200"
+              >
+                <div className="w-7 h-7 rounded-xl bg-amber-500/20 border border-amber-400/60 flex items-center justify-center text-[#D4AF37] shadow-sm">
+                  <TrendingUp className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[10px] text-slate-300 font-normal">Business Reach</div>
+                  <div className="text-[#D4AF37] font-bold text-[11px] leading-tight">+180% Engagement</div>
+                </div>
+              </div>
+
               {/* Premium Right-side Hero Card with #0B1630 -> #102A56 gradient, #1D4ED8 highlights, electric-blue border, and cyan glow */}
-              <div className="relative rounded-[24px] p-6 sm:p-8 bg-gradient-to-br from-[#102A56]/95 via-[#0B1630]/95 to-[#102A56]/90 backdrop-blur-xl border border-[#3B82F6]/60 hover:border-[#38BDF8]/80 shadow-[0_16px_40px_rgba(3,7,18,0.5),0_0_24px_rgba(56,189,248,0.18)] hover:shadow-[0_20px_50px_rgba(3,7,18,0.6),0_0_32px_rgba(56,189,248,0.28)] hover:-translate-y-[3px] transition-all duration-300 space-y-6 overflow-hidden">
+              <div
+                style={{ transformStyle: "preserve-3d" }}
+                className="relative rounded-[24px] p-6 sm:p-8 bg-gradient-to-br from-[#102A56]/95 via-[#0B1630]/95 to-[#102A56]/90 backdrop-blur-xl border border-[#3B82F6]/60 hover:border-[#38BDF8]/80 shadow-[0_16px_40px_rgba(3,7,18,0.5),0_0_24px_rgba(56,189,248,0.18)] hover:shadow-[0_20px_50px_rgba(3,7,18,0.6),0_0_32px_rgba(56,189,248,0.28)] transition-all duration-300 space-y-6 overflow-hidden"
+              >
                 {/* Subtle gradient highlights (#1D4ED8) */}
                 <div className="absolute -top-16 -right-16 w-44 h-44 bg-[#1D4ED8]/25 rounded-full blur-2xl pointer-events-none" aria-hidden="true" />
                 <div className="absolute -bottom-16 -left-16 w-40 h-40 bg-[#1D4ED8]/15 rounded-full blur-2xl pointer-events-none" aria-hidden="true" />

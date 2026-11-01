@@ -171,10 +171,10 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({
             fill="url(#geoBlueFill)"
           />
 
-          {/* Pure White Base matching OffersSection */}
+          {/* Base matching OffersSection (#070D1E) */}
           <polygon
             points="0,22 680,50 720,44 760,50 1440,22 1440,65 0,65"
-            fill="#FFFFFF"
+            fill="#070D1E"
           />
 
           {/* Precision Electric Blue & Golden Accent Stroke */}
@@ -249,11 +249,11 @@ export const SectionDivider: React.FC<SectionDividerProps> = ({
     );
   }
 
-  // Crest: Transitions from Offers (White) to Reviews (#FAFAFC)
+  // Crest: Transitions from Offers (#070D1E) to Reviews (#FAFAFC)
   if (variant === "crest") {
     return (
       <div
-        className={`w-full overflow-hidden leading-none select-none pointer-events-none bg-white ${className}`}
+        className={`w-full overflow-hidden leading-none select-none pointer-events-none bg-[#070D1E] ${className}`}
         aria-hidden="true"
       >
         <svg
