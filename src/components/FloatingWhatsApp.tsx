@@ -22,22 +22,8 @@ export const FloatingWhatsApp: React.FC = () => {
   return (
     <aside
       aria-label="Direct WhatsApp Contact"
-      className="fixed bottom-6 right-6 z-30 flex items-center gap-2.5"
+      className="fixed bottom-6 left-6 z-30 flex items-center gap-2.5"
     >
-      {/* Tooltip on hover/focus */}
-      <div
-        role="tooltip"
-        className={`hidden md:block transition-all duration-200 pointer-events-none ${
-          showTooltip
-            ? "opacity-100 translate-x-0"
-            : "opacity-0 translate-x-2"
-        }`}
-      >
-        <div className="bg-slate-900/95 backdrop-blur-md text-white text-xs font-semibold py-1.5 px-3 rounded-xl shadow-lg border border-slate-700/80 whitespace-nowrap">
-          {isConfigured ? t.nav.chatWhatsApp : "WhatsApp Setup"}
-        </div>
-      </div>
-
       <button
         type="button"
         onClick={handleClick}
@@ -62,6 +48,20 @@ export const FloatingWhatsApp: React.FC = () => {
           {isConfigured ? t.nav.chatWhatsApp : "WhatsApp Setup"}
         </span>
       </button>
+
+      {/* Tooltip on hover/focus (pointing inwards to the right) */}
+      <div
+        role="tooltip"
+        className={`hidden md:block transition-all duration-200 pointer-events-none ${
+          showTooltip
+            ? "opacity-100 translate-x-0"
+            : "opacity-0 -translate-x-2"
+        }`}
+      >
+        <div className="bg-slate-900/95 backdrop-blur-md text-white text-xs font-semibold py-1.5 px-3 rounded-xl shadow-lg border border-slate-700/80 whitespace-nowrap">
+          {isConfigured ? t.nav.chatWhatsApp : "WhatsApp Setup"}
+        </div>
+      </div>
     </aside>
   );
 };
