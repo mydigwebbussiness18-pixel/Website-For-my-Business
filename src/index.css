@@ -5,9 +5,22 @@
   color-scheme: light;
 }
 
-html {
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 /* Custom scrollbar for clean premium light aesthetic */
@@ -59,6 +72,65 @@ html {
 
 .animate-subtle-float {
   animation: subtleFloat 6s ease-in-out infinite;
+}
+
+/* Elegant smooth floating animation for website images & visual elements (10-12px displacement, 3.8s ease-in-out) */
+@keyframes imageFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes heroCardFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-image-float {
+  animation: imageFloat 3.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-hero-float {
+  animation: heroCardFloat 4.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes profileImageFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1.03);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.03);
+  }
+}
+
+.animate-profile-float {
+  animation: profileImageFloat 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Continuous Pulse Zoom Animation (scale 1.0 to 1.06, 4.5s ease-in-out infinite) */
+@keyframes pulseZoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.animate-pulse-zoom {
+  animation: pulseZoom 4.5s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
 }
 
 /* 3D Transform and perspective utilities for scroll-based animations */

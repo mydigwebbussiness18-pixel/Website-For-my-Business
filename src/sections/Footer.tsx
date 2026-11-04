@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="bg-[#0B132B] text-slate-300 text-xs pt-16 pb-12 transition-colors duration-300">
+    <footer className="bg-[#0B132B] text-slate-300 text-xs pt-16 pb-12 transition-colors duration-300 w-full max-w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800/90">
           {/* Brand & Description (4 cols) */}
@@ -133,12 +133,14 @@ export const Footer: React.FC<FooterProps> = ({
                 href={businessConfig.contact.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Visit DigWeb Expert on Instagram"
-                title="Follow DigWeb Expert on Instagram"
+                aria-label="Follow Us on Instagram"
+                title={`Follow Us on Instagram (${businessConfig.contact.instagramUsername})`}
                 className="flex items-center gap-2 text-slate-200 hover:text-pink-400 transition-colors duration-200 font-medium group"
               >
-                <Instagram className="w-4 h-4 text-pink-400 group-hover:scale-110 transition-transform duration-200 shrink-0" />
-                <span>{businessConfig.contact.instagramUsername}</span>
+                <div className="w-6 h-6 rounded-lg bg-pink-500/15 border border-pink-500/30 flex items-center justify-center text-pink-400 group-hover:bg-gradient-to-tr group-hover:from-purple-600 group-hover:to-pink-500 group-hover:text-white transition-all duration-200 shrink-0">
+                  <Instagram className="w-3.5 h-3.5 group-hover:scale-110 transition-transform duration-200" />
+                </div>
+                <span>Follow Us on Instagram</span>
               </a>
             </div>
           </div>

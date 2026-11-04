@@ -43,8 +43,8 @@ export const businessConfig: BusinessConfig = {
   contact: {
     whatsappNumber: "+91 9875274952", // Actual business WhatsApp number
     email: "mydigwebbussiness.18@gmail.com",
-    instagram: "https://www.instagram.com/digweb__expert__18/",
-    instagramUsername: "@digweb__expert__18",
+    instagram: "https://www.instagram.com/digweb___expert___18?dlrf=MWg4cHBoYXQxeWJ5cA==",
+    instagramUsername: "@digweb___expert___18",
     defaultWhatsappMessage: "Hello DigWeb Expert, I would like to know more about your services.",
     contactSectionWhatsappMessage: "Hello DigWeb Expert, I would like to discuss your digital services."
   },

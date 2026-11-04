@@ -225,11 +225,12 @@ export const ContactSection: React.FC = () => {
                       href={businessConfig.contact.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label="Visit Our Instagram (@digweb___expert___18)"
                       style={{ transform: "translateZ(12px)" }}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-[#1E3A66] hover:bg-[#254A82] text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition-all border border-[#2E5288] hover:border-[#C9A227]/40 shadow-xs active:scale-[0.98] cursor-pointer"
+                      className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 hover:from-purple-500 hover:via-pink-500 hover:to-rose-400 text-white text-xs sm:text-sm font-bold py-2.5 px-4 rounded-xl transition-all duration-200 shadow-md shadow-pink-600/25 hover:shadow-lg hover:shadow-pink-600/40 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
                     >
-                      <Instagram className="w-4 h-4 text-pink-400" />
-                      <span>{t.contact.igBtn}</span>
+                      <Instagram className="w-4 h-4 text-white" />
+                      <span>Visit Our Instagram</span>
                     </a>
                   </div>
                 </ThreeDCard>

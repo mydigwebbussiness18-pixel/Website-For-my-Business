@@ -698,7 +698,7 @@ export const ThreeDMarketingCanvas: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[1] opacity-90 transition-opacity duration-500"
+      className="fixed inset-0 pointer-events-none z-[1] opacity-90 transition-opacity duration-500 w-full h-full max-w-full overflow-hidden"
       aria-hidden="true"
     />
   );

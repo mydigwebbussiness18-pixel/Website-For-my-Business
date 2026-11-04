@@ -58,7 +58,7 @@ export const FounderSection: React.FC = () => {
                 <img
                   src={businessConfig.founder.image}
                   alt={`${businessConfig.founder.name}, ${businessConfig.founder.designation}`}
-                  className="w-full h-auto object-cover max-h-[520px] transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="w-full h-auto object-cover max-h-[520px] transition-transform duration-500 animate-profile-float"
                   loading="lazy"
                   decoding="async"
                   width="520"
@@ -163,11 +163,11 @@ export const FounderSection: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Visit DigWeb Expert on Instagram"
-                  title="Follow DigWeb Expert on Instagram"
-                  className="group inline-flex items-center gap-2 bg-white hover:bg-pink-600 text-slate-700 hover:text-white text-xs font-semibold px-4 py-2.5 rounded-xl border border-slate-200 hover:border-pink-600 shadow-sm hover:shadow-lg hover:shadow-pink-500/30 hover:-translate-y-0.5 transition-all duration-300 active:scale-[0.98]"
+                  title={`Follow DigWeb Expert on Instagram (${businessConfig.contact.instagramUsername})`}
+                  className="group inline-flex items-center gap-2 bg-white hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 text-slate-700 hover:text-white text-xs font-semibold px-4 py-2.5 rounded-xl border border-slate-200 hover:border-pink-500 shadow-sm hover:shadow-lg hover:shadow-pink-500/30 hover:-translate-y-0.5 transition-all duration-300 active:scale-[0.98]"
                 >
                   <Instagram className="w-3.5 h-3.5 text-pink-500 group-hover:text-white transition-colors duration-300" />
-                  <span>{businessConfig.contact.instagramUsername}</span>
+                  <span>Instagram ({businessConfig.contact.instagramUsername})</span>
                 </a>
               </div>
             </motion.div>

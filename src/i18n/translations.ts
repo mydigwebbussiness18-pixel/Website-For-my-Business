@@ -523,7 +523,7 @@ export const translations: Record<Language, Translations> = {
       waBtn: "Chat on WhatsApp",
       igTitle: "Instagram Profile",
       igSub: "Explore latest design creatives, stories, and service updates.",
-      igBtn: "Follow Us on Instagram",
+      igBtn: "Visit Our Instagram",
       emailTitle: "Business Email",
       emailSub: "Send formal project briefs, requirement documents, and inquiries.",
       emailBtn: "Email Us",

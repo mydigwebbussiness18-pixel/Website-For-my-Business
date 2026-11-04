@@ -44,11 +44,12 @@ export const HeroSection: React.FC = () => {
         const rotY = Math.sin(scrollY * 0.008) * 6;
         showcaseRef.current.style.transform = `translate3d(${currentMouseX}px, ${transY}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
       }
+      const isMobile = window.innerWidth < 640;
       if (badge1Ref.current) {
-        badge1Ref.current.style.transform = `translate3d(-15px, ${-scrollY * 0.06}px, 35px)`;
+        badge1Ref.current.style.transform = `translate3d(${isMobile ? 0 : -15}px, ${-scrollY * 0.06}px, 35px)`;
       }
       if (badge2Ref.current) {
-        badge2Ref.current.style.transform = `translate3d(15px, ${scrollY * 0.05}px, 40px)`;
+        badge2Ref.current.style.transform = `translate3d(${isMobile ? 0 : 15}px, ${scrollY * 0.05}px, 40px)`;
       }
       ticking = false;
     };
@@ -210,10 +211,10 @@ export const HeroSection: React.FC = () => {
               <div
                 ref={badge1Ref}
                 style={{
-                  transform: "translate3d(-15px, 0px, 35px)",
+                  transform: "translate3d(0px, 0px, 35px)",
                   transition: "transform 0.2s ease-out"
                 }}
-                className="absolute -top-5 -left-4 sm:-left-8 z-30 bg-[#0B1630]/95 backdrop-blur-md border border-[#38BDF8]/60 px-3.5 py-2 rounded-2xl shadow-[0_10px_25px_rgba(56,189,248,0.3)] flex items-center gap-2 text-xs font-bold text-white hover:scale-105 transition-transform duration-200"
+                className="absolute -top-5 left-1 sm:-left-8 z-30 bg-[#0B1630]/95 backdrop-blur-md border border-[#38BDF8]/60 px-3.5 py-2 rounded-2xl shadow-[0_10px_25px_rgba(56,189,248,0.3)] flex items-center gap-2 text-xs font-bold text-white hover:scale-105 transition-transform duration-200"
               >
                 <div className="w-7 h-7 rounded-xl bg-blue-600/30 border border-blue-400 flex items-center justify-center text-[#38BDF8] shadow-sm">
                   <Rocket className="w-4 h-4" />
@@ -228,10 +229,10 @@ export const HeroSection: React.FC = () => {
               <div
                 ref={badge2Ref}
                 style={{
-                  transform: "translate3d(15px, 0px, 40px)",
+                  transform: "translate3d(0px, 0px, 40px)",
                   transition: "transform 0.2s ease-out"
                 }}
-                className="absolute -bottom-5 -right-4 sm:-right-8 z-30 bg-[#0B1630]/95 backdrop-blur-md border border-[#D4AF37]/60 px-3.5 py-2 rounded-2xl shadow-[0_10px_25px_rgba(212,175,55,0.25)] flex items-center gap-2 text-xs font-bold text-white hover:scale-105 transition-transform duration-200"
+                className="absolute -bottom-5 right-1 sm:-right-8 z-30 bg-[#0B1630]/95 backdrop-blur-md border border-[#D4AF37]/60 px-3.5 py-2 rounded-2xl shadow-[0_10px_25px_rgba(212,175,55,0.25)] flex items-center gap-2 text-xs font-bold text-white hover:scale-105 transition-transform duration-200"
               >
                 <div className="w-7 h-7 rounded-xl bg-amber-500/20 border border-amber-400/60 flex items-center justify-center text-[#D4AF37] shadow-sm">
                   <TrendingUp className="w-4 h-4" />
@@ -242,10 +243,10 @@ export const HeroSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Premium Right-side Hero Card with #0B1630 -> #102A56 gradient, #1D4ED8 highlights, electric-blue border, and cyan glow */}
+              {/* Premium Right-side Hero Card with smooth floating animation */}
               <div
                 style={{ transformStyle: "preserve-3d" }}
-                className="relative rounded-[24px] p-6 sm:p-8 bg-gradient-to-br from-[#102A56]/95 via-[#0B1630]/95 to-[#102A56]/90 backdrop-blur-xl border border-[#3B82F6]/60 hover:border-[#38BDF8]/80 shadow-[0_16px_40px_rgba(3,7,18,0.5),0_0_24px_rgba(56,189,248,0.18)] hover:shadow-[0_20px_50px_rgba(3,7,18,0.6),0_0_32px_rgba(56,189,248,0.28)] transition-all duration-300 space-y-6 overflow-hidden"
+                className="relative rounded-[24px] p-6 sm:p-8 bg-gradient-to-br from-[#102A56]/95 via-[#0B1630]/95 to-[#102A56]/90 backdrop-blur-xl border border-[#3B82F6]/60 hover:border-[#38BDF8]/80 shadow-[0_16px_40px_rgba(3,7,18,0.5),0_0_24px_rgba(56,189,248,0.18)] hover:shadow-[0_20px_50px_rgba(3,7,18,0.6),0_0_32px_rgba(56,189,248,0.28)] transition-all duration-300 space-y-6 overflow-hidden animate-hero-float"
               >
                 {/* Subtle gradient highlights (#1D4ED8) */}
                 <div className="absolute -top-16 -right-16 w-44 h-44 bg-[#1D4ED8]/25 rounded-full blur-2xl pointer-events-none" aria-hidden="true" />
@@ -262,9 +263,9 @@ export const HeroSection: React.FC = () => {
                   </span>
                 </div>
 
-                {/* Existing Logo Container with #0B1630 background, subtle #3B82F6 border, and restrained #38BDF8 cyan glow */}
+                {/* Brand Logo Container with smooth floating animation */}
                 <div className="relative z-10 flex flex-col items-center text-center space-y-4 pt-1">
-                  <div className="relative group">
+                  <div className="relative group animate-image-float">
                     <div className="absolute -inset-1.5 bg-gradient-to-r from-[#1D4ED8] via-[#38BDF8] to-[#3B82F6] rounded-[22px] blur-md opacity-35 group-hover:opacity-50 transition-opacity duration-300" />
                     <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-[20px] overflow-hidden border border-[#3B82F6]/50 p-2 bg-[#0B1630] shadow-[0_0_20px_rgba(56,189,248,0.22)]">
                       <img

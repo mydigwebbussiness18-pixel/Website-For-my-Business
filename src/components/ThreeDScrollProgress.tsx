@@ -30,7 +30,7 @@ export const ThreeDScrollProgress: React.FC = () => {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-50 h-[3px] bg-transparent pointer-events-none"
+      className="fixed top-0 left-0 right-0 z-50 h-[3px] bg-transparent pointer-events-none overflow-hidden max-w-full"
       aria-hidden="true"
     >
       <div

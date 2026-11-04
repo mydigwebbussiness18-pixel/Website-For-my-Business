@@ -31,7 +31,7 @@ export const FloatingWhatsApp: React.FC = () => {
         onMouseLeave={() => setShowTooltip(false)}
         onFocus={() => setShowTooltip(true)}
         onBlur={() => setShowTooltip(false)}
-        className={`group relative flex items-center gap-2.5 px-4 py-3 rounded-full shadow-lg transition-all duration-300 focus-visible:ring-4 focus-visible:ring-emerald-400 cursor-pointer ${
+        className={`group relative flex items-center gap-2.5 px-4 py-3 rounded-full shadow-lg transition-all duration-300 focus-visible:ring-4 focus-visible:ring-emerald-400 cursor-pointer animate-pulse-zoom ${
           isConfigured
             ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-600/30 hover:shadow-emerald-600/40 hover:-translate-y-0.5 active:scale-95"
             : "bg-slate-300 text-slate-700 opacity-80 cursor-not-allowed"
