@@ -36,14 +36,14 @@ export const ThreeDMarketingCanvas: React.FC = () => {
     if (!ctx) return;
 
     let animId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let width = (canvas.width = document.documentElement.clientWidth || window.innerWidth);
+    let height = (canvas.height = document.documentElement.clientHeight || window.innerHeight);
 
     // Responsive sizing
     const handleResize = () => {
       if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      width = canvas.width = document.documentElement.clientWidth || window.innerWidth;
+      height = canvas.height = document.documentElement.clientHeight || window.innerHeight;
     };
     window.addEventListener("resize", handleResize, { passive: true });
 

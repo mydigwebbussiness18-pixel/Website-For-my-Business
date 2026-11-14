@@ -5,10 +5,10 @@ import { useLanguage } from "../i18n/LanguageContext";
 import { openWhatsAppChat } from "../utils/whatsapp";
 import {
   containerStaggerVariants,
-  gridStaggerVariants,
   fadeInUpVariant,
-  cardFadeInUpVariant,
-  defaultViewport
+  serviceCardScrollVariant,
+  defaultViewport,
+  cardViewport
 } from "../utils/animations";
 import {
   CheckCircle2,
@@ -74,18 +74,17 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
           </motion.p>
         </motion.div>
 
-        {/* 4 Professional Service Cards Grid with Balanced ~50% Electric Blue & Light Blue Gradient */}
-        <motion.div
-          variants={gridStaggerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
-          className="grid md:grid-cols-2 lg:grid-cols-2 gap-8"
-        >
+        {/* 4 Professional Service Cards Grid with Scroll-Triggered Fade-In */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
           {t.services.items.map((service, idx) => (
             <motion.div
               key={service.id}
-              variants={cardFadeInUpVariant}
+              custom={idx}
+              variants={serviceCardScrollVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={cardViewport}
+              className="h-full"
             >
               <ThreeDCard
                 maxTilt={6}
@@ -179,7 +178,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               </ThreeDCard>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -99,9 +99,9 @@ export const OwnerGuideModal: React.FC<OwnerGuideModalProps> = ({ isOpen, onClos
       answer: "Replace `public/images/logo.jpeg` with your new circular logo file, or point `logo: \"/images/your-logo.png\"` in `src/config/businessConfig.ts`. It will reflect in the top navbar, hero visual, and footer."
     },
     {
-      q: "5. How to add a new portfolio project?",
-      file: "src/config/businessConfig.ts",
-      answer: "In `src/config/businessConfig.ts`, scroll to the `portfolio` array. Add a new object following the `PortfolioProject` interface, specifying `title`, `category`, `description`, `features`, `status` (\"Demo Project\" or \"Concept Project\"), and optional `projectUrl`."
+      q: "5. How to update a portfolio project's name or live demo link?",
+      file: "src/config/portfolioProjects.ts",
+      answer: "Open `src/config/portfolioProjects.ts` and locate the project inside `portfolioProjectsConfig`. Update `projectName` and `liveDemoUrl` (e.g. your Netlify URL). Both the Portfolio card title and the \"View Live Demo ↗\" button in the Project Details modal update automatically."
     },
     {
       q: "6. How to update or activate an offer?",

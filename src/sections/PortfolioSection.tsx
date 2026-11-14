@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PortfolioProject } from "../types";
 import { useLanguage } from "../i18n/LanguageContext";
+import { getPortfolioProjectConfig, normalizeLiveDemoUrl } from "../config/portfolioProjects";
 import {
   containerStaggerVariants,
-  gridStaggerVariants,
   fadeInUpVariant,
-  cardFadeInUpVariant,
-  defaultViewport
+  cardScrollRevealVariant,
+  defaultViewport,
+  cardViewport
 } from "../utils/animations";
 import { Eye, Layers } from "lucide-react";
 import { ThreeDCard } from "../components/ThreeDCard";
@@ -27,7 +28,16 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
     { key: "Graphic Design", label: t.portfolio.filterDesign }
   ];
 
-  const filteredProjects = t.portfolio.items.filter((proj) => {
+  const mergedProjects = t.portfolio.items.map((proj) => {
+    const config = getPortfolioProjectConfig(proj.id);
+    return {
+      ...proj,
+      title: config?.projectName?.trim() || proj.title,
+      projectUrl: normalizeLiveDemoUrl(config?.liveDemoUrl)
+    };
+  });
+
+  const filteredProjects = mergedProjects.filter((proj) => {
     if (activeFilter === "All") return true;
     return proj.category === activeFilter;
   });
@@ -86,24 +96,23 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
           </div>
         </motion.div>
 
-        {/* Portfolio Grid with Staggered Fade-in-up */}
+        {/* Portfolio Grid with Scroll-Triggered Staggered Fade-in */}
         <motion.div
-          variants={gridStaggerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={defaultViewport}
           layout
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
+            {filteredProjects.map((project, idx) => (
               <motion.div
                 key={project.id}
                 layout
-                variants={cardFadeInUpVariant}
+                custom={idx}
+                variants={cardScrollRevealVariant}
                 initial="hidden"
-                animate="visible"
+                whileInView="visible"
+                viewport={cardViewport}
                 exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
+                className="h-full"
               >
                 <ThreeDCard
                   maxTilt={8}
@@ -189,7 +198,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
                           onSelectProject({
                             ...project,
                             image: `/images/portfolio/${project.id}.jpg`,
-                            projectUrl: "",
+                            projectUrl: project.projectUrl,
                             status: project.status as any,
                             category: project.category as any
                           })

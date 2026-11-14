@@ -77,7 +77,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-[#0B1630] transition-colors duration-300 scroll-mt-24"
+      className="relative pt-28 pb-16 sm:pt-32 sm:pb-24 md:pt-40 md:pb-32 overflow-hidden bg-[#0B1630] transition-colors duration-300 scroll-mt-24"
     >
       {/* 16:9 Realistic Digital Marketing Workspace Background Visual */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
@@ -100,38 +100,38 @@ export const HeroSection: React.FC = () => {
         <div className="absolute inset-x-0 bottom-0 h-24 sm:h-32 bg-gradient-to-b from-transparent via-[#0B1630]/50 to-[#FAFAFC]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-8 items-center">
           {/* Left Column: Value Proposition & CTAs with Staggered Entrance */}
           <motion.div
             variants={containerStaggerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-7 space-y-8 text-center lg:text-left"
+            className="lg:col-span-7 space-y-5 sm:space-y-7 lg:space-y-8 text-center lg:text-left"
           >
             {/* Clean, unboxed kicker metadata */}
             <motion.div
               variants={fadeInUpVariant}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/70 border border-blue-500/30 text-xs font-semibold tracking-wider uppercase text-blue-300 shadow-sm backdrop-blur-sm"
+              className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-0.5 px-3.5 py-1.5 rounded-full bg-blue-950/70 border border-blue-500/30 text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-blue-300 shadow-sm backdrop-blur-sm max-w-full"
             >
-              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+              <Sparkles className="w-3.5 h-3.5 text-blue-400 shrink-0" />
               <span className="text-blue-200">{t.hero.kicker}</span>
               <span aria-hidden="true" className="text-blue-400/60">·</span>
               <span className="text-blue-400">{t.hero.kickerSub}</span>
             </motion.div>
 
-            {/* Main Headline */}
+            {/* Main Headline (30px-34px mobile via clamp, font-weight 800, line-height 1.18) */}
             <motion.h1
               variants={fadeInUpVariant}
-              className="text-3.5xl sm:text-4.5xl md:text-5xl lg:text-5.5xl font-extrabold text-white tracking-tight leading-[1.18] text-balance drop-shadow-sm"
+              className="text-[clamp(1.9375rem,2.2vw+1.45rem,3.375rem)] font-extrabold text-white tracking-[-0.02em] leading-[1.18] sm:leading-[1.15] text-balance max-w-[18ch] sm:max-w-[20ch] lg:max-w-none mx-auto lg:mx-0 drop-shadow-sm"
             >
               {t.hero.headline}
             </motion.h1>
 
-            {/* Supporting Description */}
+            {/* Supporting Description (15px-16px mobile via clamp, font-weight 400, line-height 1.6) */}
             <motion.p
               variants={fadeInUpVariant}
-              className="text-base sm:text-lg text-slate-200 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal"
+              className="text-[clamp(0.9375rem,0.45vw+0.85rem,1.125rem)] font-normal text-slate-200/95 max-w-[38ch] sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0 leading-[1.6]"
             >
               {t.hero.description}
             </motion.p>
@@ -139,7 +139,7 @@ export const HeroSection: React.FC = () => {
             {/* Action Buttons with futuristic micro-interactions */}
             <motion.div
               variants={fadeInUpVariant}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 sm:gap-4 pt-2"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 sm:gap-4 pt-2 sm:pt-1 max-w-sm sm:max-w-none mx-auto lg:mx-0"
             >
               <button
                 type="button"
@@ -163,10 +163,10 @@ export const HeroSection: React.FC = () => {
             {/* Honest Service Highlights Strip */}
             <motion.div
               variants={fadeInUpVariant}
-              className="pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-3 gap-4 text-left"
+              className="pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5 text-center lg:text-left"
             >
               <div className="space-y-1">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-white">
+                <div className="flex items-center justify-center lg:justify-start gap-1.5 text-xs font-bold text-white">
                   <CheckCircle className="w-4 h-4 text-blue-400 shrink-0" />
                   <span>{t.hero.highlight1Title}</span>
                 </div>
@@ -174,7 +174,7 @@ export const HeroSection: React.FC = () => {
               </div>
 
               <div className="space-y-1">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-white">
+                <div className="flex items-center justify-center lg:justify-start gap-1.5 text-xs font-bold text-white">
                   <Globe className="w-4 h-4 text-blue-400 shrink-0" />
                   <span>{t.hero.highlight2Title}</span>
                 </div>
@@ -182,7 +182,7 @@ export const HeroSection: React.FC = () => {
               </div>
 
               <div className="space-y-1 col-span-2 sm:col-span-1">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-white">
+                <div className="flex items-center justify-center lg:justify-start gap-1.5 text-xs font-bold text-white">
                   <Shield className="w-4 h-4 text-blue-400 shrink-0" />
                   <span>{t.hero.highlight3Title}</span>
                 </div>

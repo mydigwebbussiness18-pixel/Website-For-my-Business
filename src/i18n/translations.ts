@@ -212,6 +212,9 @@ export interface Translations {
     honestDemoNotice: string;
     honestDemoBody: string;
     launchLive: string;
+    viewLiveDemo: string;
+    demoProjectBadge: string;
+    liveDemoUnavailable: string;
     urlNotConfigured: string;
     externalWarningTitle: string;
     proceedLive: string;
@@ -635,10 +638,13 @@ export const translations: Record<Language, Translations> = {
       getServiceWhatsApp: "Get This Service on WhatsApp",
       close: "Close",
       projectDemoUrl: "demo.digwebexpert.com",
-      honestDemoNotice: "Honest Demonstration Notice:",
-      honestDemoBody: "This project is built as a demonstration concept showcasing layout design, responsiveness, and technical structure. It is not an active client contract or commercial endorsement.",
-      launchLive: "Launch Live Concept",
-      urlNotConfigured: "Live URL not configured yet. (Add link in src/config/businessConfig.ts)",
+      honestDemoNotice: "Demo Website Notice",
+      honestDemoBody: "Please Note: This is a demo website created to showcase our design and development capabilities. It is not an official website of any real business. If you would like a similar or more advanced website for your business, feel free to contact DigWeb Expert.",
+      launchLive: "View Live Demo",
+      viewLiveDemo: "View Live Demo",
+      demoProjectBadge: "DEMO PROJECT",
+      liveDemoUnavailable: "Live demo URL not added yet",
+      urlNotConfigured: "Live URL not configured yet. (Add link in src/config/portfolioProjects.ts)",
       externalWarningTitle: "You are about to leave the DigWeb Expert website to view an external live demonstration at:",
       proceedLive: "Proceed to Live Site",
       cancel: "Cancel"
@@ -1060,10 +1066,13 @@ export const translations: Record<Language, Translations> = {
       getServiceWhatsApp: "WhatsApp પર આ સેવા મેળવો",
       close: "બંધ કરો",
       projectDemoUrl: "demo.digwebexpert.com",
-      honestDemoNotice: "પ્રામાણિક ડેમો નોંધ:",
-      honestDemoBody: "આ પ્રોજેક્ટ લેઆઉટ ગુણવત્તા અને તકનીકી ક્ષમતા દર્શાવતો ડેમો કન્સેપ્ટ છે. તે કોઈ ચાલુ ક્લાયન્ટ કોન્ટ્રાક્ટ કે સ્પોન્સરશિપ નથી.",
-      launchLive: "લાઈવ કન્સેપ્ટ જુઓ",
-      urlNotConfigured: "લાઈવ લિંક હજુ કન્ફિગર થઈ નથી. (src/config/businessConfig.ts માં લિંક ઉમેરો)",
+      honestDemoNotice: "ડેમો વેબસાઇટ નોંધ",
+      honestDemoBody: "કૃપા કરીને નોંધ લો: આ અમારી ડિઝાઇન અને ડેવલપમેન્ટ ક્ષમતાઓ દર્શાવવા માટે બનાવવામાં આવેલ એક ડેમો વેબસાઇટ છે. તે કોઈપણ વાસ્તવિક વ્યવસાયની સત્તાવાર વેબસાઇટ નથી. જો તમને તમારા વ્યવસાય માટે આના જેવી અથવા વધુ આધુનિક વેબસાઇટ બનાવવી હોય, તો DigWeb Expert નો સંપર્ક કરો.",
+      launchLive: "લાઈવ ડેમો જુઓ",
+      viewLiveDemo: "લાઈવ ડેમો જુઓ",
+      demoProjectBadge: "DEMO PROJECT",
+      liveDemoUnavailable: "લાઈવ ડેમો લિંક હજુ ઉમેરાઈ નથી",
+      urlNotConfigured: "લાઈવ લિંક હજુ કન્ફિગર થઈ નથી. (src/config/portfolioProjects.ts માં લિંક ઉમેરો)",
       externalWarningTitle: "તમે બહારની લાઈવ ડેમો વેબસાઇટ જોવા માટે DigWeb Expert સાઇટ છોડી રહ્યા છો:",
       proceedLive: "લાઈવ સાઇટ પર આગળ વધો",
       cancel: "રદ કરો"
@@ -1485,10 +1494,13 @@ export const translations: Record<Language, Translations> = {
       getServiceWhatsApp: "WhatsApp पर यह सेवा प्राप्त करें",
       close: "बंद करें",
       projectDemoUrl: "demo.digwebexpert.com",
-      honestDemoNotice: "प्रामाणिक डेमो सूचना:",
-      honestDemoBody: "यह प्रोजेक्ट लेआउट गुणवत्ता और तकनीकी क्षमता प्रदर्शित करने हेतु बनाया गया डेमो कॉन्सेप्ट है। यह कोई सक्रिय क्लाइंट अनुबंध अथवा विज्ञापन नहीं है।",
-      launchLive: "लाइव कॉन्सेप्ट देखें",
-      urlNotConfigured: "लाइव लिंक अभी कॉन्फ़िगर नहीं है। (src/config/businessConfig.ts में लिंक जोड़ें)",
+      honestDemoNotice: "डेमो वेबसाइट सूचना",
+      honestDemoBody: "कृपया ध्यान दें: यह हमारी डिज़ाइन और डेवलपमेंट क्षमताओं को प्रदर्शित करने के लिए बनाई गई एक डेमो वेबसाइट है। यह किसी वास्तविक व्यवसाय की आधिकारिक वेबसाइट नहीं है। यदि आप अपने व्यवसाय के लिए ऐसी ही या इससे भी उन्नत वेबसाइट बनवाना चाहते हैं, तो DigWeb Expert से संपर्क करें।",
+      launchLive: "लाइव डेमो देखें",
+      viewLiveDemo: "लाइव डेमो देखें",
+      demoProjectBadge: "DEMO PROJECT",
+      liveDemoUnavailable: "लाइव डेमो लिंक अभी जोड़ा नहीं गया है",
+      urlNotConfigured: "लाइव लिंक अभी कॉन्फ़िगर नहीं है। (src/config/portfolioProjects.ts में लिंक जोड़ें)",
       externalWarningTitle: "आप बाहरी लाइव डेमो देखने के लिए DigWeb Expert साइट से बाहर जा रहे हैं:",
       proceedLive: "लाइव साइट पर जाएं",
       cancel: "रद्द करें"

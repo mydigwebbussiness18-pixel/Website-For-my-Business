@@ -1,4 +1,5 @@
 import { BusinessConfig } from "../types";
+import { getPortfolioProjectConfig, normalizeLiveDemoUrl } from "./portfolioProjects";
 
 /**
  * ============================================================================
@@ -11,8 +12,8 @@ import { BusinessConfig } from "../types";
  * 3. Instagram: Update `contact.instagram` and `contact.instagramUsername`.
  * 4. Founder Photo: Put your photo in `public/images/founder.jpg` or change `founder.image`.
  * 5. Logo: Put your logo in `public/images/logo.jpeg` or change `logo`.
- * 6. Services & Portfolio: Edit items in `services` and `portfolio` arrays.
- * 7. Offers: Set `isActive: true` on an offer or add new ones to display them in Section 4.
+ * 6. Portfolio Names & Live Demo URLs: Edit `src/config/portfolioProjects.ts` (`projectName` & `liveDemoUrl`).
+ * 7. Services & Offers: Edit items in `services` and `offers` arrays below.
  * 
  * Changing values in this file updates all corresponding sections across the website automatically.
  */
@@ -149,11 +150,11 @@ export const businessConfig: BusinessConfig = {
     }
   ],
 
-  // Demonstration projects & concepts
+  // Demonstration projects & concepts (linked to centralized src/config/portfolioProjects.ts)
   portfolio: [
     {
       id: "hotel-demo",
-      title: "Hotel Website Demo",
+      title: getPortfolioProjectConfig("hotel-demo")?.projectName || "Hotel Website Demo",
       category: "Website Development",
       description: "A modern, immersive hotel and hospitality concept featuring room showcases, direct inquiry pathways, and amenities overview.",
       longDescription: "This demonstration project illustrates a luxury boutique hotel website architecture. It highlights high-impact hero visuals, interactive room type selection, guest amenity breakdown, dining highlights, and a streamlined booking enquiry flow.",
@@ -164,13 +165,13 @@ export const businessConfig: BusinessConfig = {
         "Interactive photo gallery layout"
       ],
       image: "/images/portfolio/hotel-demo.jpg",
-      projectUrl: "", // Leave empty for screenshot modal or insert live demo URL
+      projectUrl: normalizeLiveDemoUrl(getPortfolioProjectConfig("hotel-demo")?.liveDemoUrl),
       status: "Demo Project",
       tags: ["Hospitality", "Responsive Design", "Booking Flow"]
     },
     {
       id: "restaurant-demo",
-      title: "Restaurant Website Demo",
+      title: getPortfolioProjectConfig("restaurant-demo")?.projectName || "Restaurant Website Demo",
       category: "Website Development",
       description: "A culinary concept site featuring interactive digital menus, chef specials, table reservation forms, and location guidance.",
       longDescription: "Designed for modern dining establishments and cafes. This demo presents a clean categorized food & beverage menu, operating hours, chef notes, customer review highlights, and click-to-WhatsApp table reservation booking.",
@@ -181,13 +182,13 @@ export const businessConfig: BusinessConfig = {
         "Chef's seasonal specials highlight"
       ],
       image: "/images/portfolio/restaurant-demo.jpg",
-      projectUrl: "",
+      projectUrl: normalizeLiveDemoUrl(getPortfolioProjectConfig("restaurant-demo")?.liveDemoUrl),
       status: "Demo Project",
       tags: ["Culinary", "Digital Menu", "Table Booking"]
     },
     {
       id: "furniture-demo",
-      title: "Furniture Business Website Demo",
+      title: getPortfolioProjectConfig("furniture-demo")?.projectName || "Furniture Business Website Demo",
       category: "Website Development",
       description: "An elegant Scandinavian furniture catalog layout emphasizing craftsmanship, material specifications, and product inquiries.",
       longDescription: "A clean, minimalist e-catalog demonstration for home and office furniture manufacturers. Displays room-based collections (living room, bedroom, office), dimensions, timber materials, and direct WhatsApp product availability checks.",
@@ -198,13 +199,13 @@ export const businessConfig: BusinessConfig = {
         "Direct quotation inquiry action"
       ],
       image: "/images/portfolio/furniture-demo.jpg",
-      projectUrl: "",
+      projectUrl: normalizeLiveDemoUrl(getPortfolioProjectConfig("furniture-demo")?.liveDemoUrl),
       status: "Demo Project",
       tags: ["E-Commerce Concept", "Catalog", "Minimalist"]
     },
     {
       id: "real-estate-demo",
-      title: "Real Estate Website Demo",
+      title: getPortfolioProjectConfig("real-estate-demo")?.projectName || "Real Estate Website Demo",
       category: "Website Development",
       description: "A premier property showcase concept showcasing residential listings, floor plans, neighborhood insights, and inspection requests.",
       longDescription: "Demonstrates a modern property portal interface for real estate developers and brokers. Showcases property specifications (bedrooms, square footage, pricing placeholders), location highlights, and instant brochure downloads.",
@@ -215,13 +216,13 @@ export const businessConfig: BusinessConfig = {
         "Neighborhood highlights and map area"
       ],
       image: "/images/portfolio/real-estate-demo.jpg",
-      projectUrl: "",
+      projectUrl: normalizeLiveDemoUrl(getPortfolioProjectConfig("real-estate-demo")?.liveDemoUrl),
       status: "Demo Project",
       tags: ["Real Estate", "Property Cards", "Lead Capture"]
     },
     {
       id: "graphic-design-samples",
-      title: "Graphic Design Samples",
+      title: getPortfolioProjectConfig("graphic-design-samples")?.projectName || "Graphic Design Samples",
       category: "Graphic Design",
       description: "Curated collection of social media creatives, promotional sales posters, and typographic marketing graphics.",
       longDescription: "A concept portfolio demonstrating commercial visual design skills across social media banners, corporate flyers, festival greetings, and promotional sale announcements with tight typographic control.",
@@ -232,13 +233,13 @@ export const businessConfig: BusinessConfig = {
         "Clean, legible commercial typography"
       ],
       image: "/images/portfolio/graphic-design-samples.jpg",
-      projectUrl: "",
+      projectUrl: normalizeLiveDemoUrl(getPortfolioProjectConfig("graphic-design-samples")?.liveDemoUrl),
       status: "Concept Project",
       tags: ["Social Media", "Creatives", "Typography"]
     },
     {
       id: "landing-page-demo",
-      title: "Landing Page Demo",
+      title: getPortfolioProjectConfig("landing-page-demo")?.projectName || "Landing Page Demo",
       category: "Website Development",
       description: "A high-conversion service landing page structure with clear visual hierarchy, benefits breakdown, and lead capture form.",
       longDescription: "Demonstrates single-page sales and lead-generation architecture. Features focused headline copy, 3-step service process, transparent feature comparisons, and accessible contact call-to-actions.",
@@ -249,7 +250,7 @@ export const businessConfig: BusinessConfig = {
         "Fast single-page navigation"
       ],
       image: "/images/portfolio/landing-page-demo.jpg",
-      projectUrl: "",
+      projectUrl: normalizeLiveDemoUrl(getPortfolioProjectConfig("landing-page-demo")?.liveDemoUrl),
       status: "Demo Project",
       tags: ["Lead Generation", "Single Page", "Fast Loading"]
     }

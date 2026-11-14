@@ -57,7 +57,49 @@ export const cardFadeInUpVariant: Variants = {
   },
 };
 
+export const cardScrollRevealVariant: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 28,
+    scale: 0.96,
+  },
+  visible: (index: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      delay: Math.min((index % 3) * 0.1, 0.25),
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+export const serviceCardScrollVariant: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    scale: 0.96,
+  },
+  visible: (index: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      delay: Math.min((index % 2) * 0.12, 0.24),
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
 export const defaultViewport = {
   once: true,
   amount: 0.15,
 };
+
+export const cardViewport = {
+  once: true,
+  amount: 0.12,
+};
+

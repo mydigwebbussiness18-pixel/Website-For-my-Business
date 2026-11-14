@@ -1,4 +1,5 @@
 import React, { useState, Suspense } from "react";
+import { MotionConfig } from "framer-motion";
 import { ServiceItem, PortfolioProject } from "./types";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import { Navbar } from "./components/Navbar";
@@ -71,7 +72,7 @@ function AppContent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFC] text-[#0F172A] flex flex-col font-sans selection:bg-blue-600 selection:text-white overflow-x-hidden relative">
+    <div className="min-h-screen w-full max-w-full bg-[#0B132B] text-[#0F172A] flex flex-col font-sans selection:bg-blue-600 selection:text-white overflow-x-clip relative">
       {/* 3D Scroll Progress Beam */}
       <ThreeDScrollProgress />
 
@@ -82,7 +83,7 @@ function AppContent() {
       <Navbar onOpenOwnerGuide={() => setIsOwnerGuideOpen(true)} />
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-x-hidden relative z-10">
+      <main className="flex-1 w-full max-w-full overflow-x-clip relative z-10">
         {/* Section 1: Home (Hero) */}
         <HeroSection />
 
@@ -178,8 +179,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <AppContent />
-    </LanguageProvider>
+    <MotionConfig reducedMotion="user">
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
+    </MotionConfig>
   );
 }

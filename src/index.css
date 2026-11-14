@@ -2,19 +2,36 @@
 
 :root {
   font-family: 'Plus Jakarta Sans', 'Noto Sans Gujarati', 'Noto Sans Devanagari', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
-html,
-body {
-  overflow-x: hidden;
+html {
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  background-color: #0B132B;
+  overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: #C9A227 #0B132B;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #0B132B;
+  overflow-x: clip;
+  -webkit-overflow-scrolling: touch;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 *,
@@ -23,23 +40,34 @@ body {
   box-sizing: border-box;
 }
 
-/* Custom scrollbar for clean premium light aesthetic */
+input,
+select,
+textarea {
+  color-scheme: light;
+}
+
+/* Integrated luxury dark-navy & gold scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+  background: #0B132B;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: linear-gradient(180deg, #D4AF37 0%, #C9A227 100%);
   border-radius: 9999px;
+  border: 2px solid #0B132B;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: linear-gradient(180deg, #F59E0B 0%, #D4AF37 100%);
+}
+
+::-webkit-scrollbar-corner {
+  background: #0B132B;
 }
 
 /* Accessible focus ring style */
