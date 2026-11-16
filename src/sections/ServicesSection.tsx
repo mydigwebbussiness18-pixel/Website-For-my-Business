@@ -79,7 +79,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
         </motion.div>
 
         {/* 4 Professional Service Cards Grid with Scroll-Triggered Fade-In */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 w-full min-w-0">
           {t.services.items.map((service, idx) => (
             <motion.div
               key={service.id}
@@ -88,7 +88,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               initial="hidden"
               whileInView="visible"
               viewport={cardViewport}
-              className="h-full"
+              className="h-full w-full min-w-0 max-w-full"
             >
               <ThreeDCard
                 maxTilt={6}

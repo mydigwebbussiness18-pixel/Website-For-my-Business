@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 
 export type SmokeSectionPreset =
   | "hero"
@@ -345,39 +345,83 @@ export const CinematicSmokeBackground: React.FC<CinematicSmokeBackgroundProps> =
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [webglSupported, setWebglSupported] = useState(true);
 
-  // Merge preset defaults with custom overrides
-  const cfg = {
-    ...PRESET_CONFIGS[preset],
-    ...(customConfig || {}),
-    colors: {
-      ...PRESET_CONFIGS[preset].colors,
-      ...(customConfig?.colors || {})
-    }
-  };
+  // Merge preset defaults with custom overrides cleanly so object references remain stable
+  const baseCfg = PRESET_CONFIGS[preset];
+  const cfgIntensity = customConfig?.intensity ?? baseCfg.intensity;
+  const cfgSpeed = customConfig?.speed ?? baseCfg.speed;
+  const cfgOpacity = customConfig?.opacity ?? baseCfg.opacity;
+  const cfgScale = customConfig?.scale ?? baseCfg.scale;
+  const cfgVignette = customConfig?.vignette ?? baseCfg.vignette;
+  const cfgBiasX = customConfig?.centerBias?.[0] ?? baseCfg.centerBias[0];
+  const cfgBiasY = customConfig?.centerBias?.[1] ?? baseCfg.centerBias[1];
+  const cfgColorsDeep = customConfig?.colors?.deep ?? baseCfg.colors.deep;
+  const cfgColorsElectric = customConfig?.colors?.electric ?? baseCfg.colors.electric;
+  const cfgColorsCyan = customConfig?.colors?.cyan ?? baseCfg.colors.cyan;
+  const cfgColorsViolet = customConfig?.colors?.violet ?? baseCfg.colors.violet;
+  const cfgColorsEdge = customConfig?.colors?.edge ?? baseCfg.colors.edge;
+
+  const cfg = useMemo(
+    () => ({
+      intensity: cfgIntensity,
+      speed: cfgSpeed,
+      opacity: cfgOpacity,
+      scale: cfgScale,
+      vignette: cfgVignette,
+      centerBias: [cfgBiasX, cfgBiasY] as [number, number],
+      colors: {
+        deep: cfgColorsDeep,
+        electric: cfgColorsElectric,
+        cyan: cfgColorsCyan,
+        violet: cfgColorsViolet,
+        edge: cfgColorsEdge
+      }
+    }),
+    [
+      cfgIntensity,
+      cfgSpeed,
+      cfgOpacity,
+      cfgScale,
+      cfgVignette,
+      cfgBiasX,
+      cfgBiasY,
+      cfgColorsDeep,
+      cfgColorsElectric,
+      cfgColorsCyan,
+      cfgColorsViolet,
+      cfgColorsEdge
+    ]
+  );
 
   useEffect(() => {
-    // Accessibility check: user motion preference
+    // Accessibility & mobile viewport check
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(motionQuery.matches);
+
+    const checkViewport = () => {
+      setIsMobileViewport(window.innerWidth < 768);
+    };
+    checkViewport();
 
     const handleMotionChange = (e: MediaQueryListEvent) => {
       setPrefersReducedMotion(e.matches);
     };
     motionQuery.addEventListener("change", handleMotionChange);
-    return () => motionQuery.removeEventListener("change", handleMotionChange);
+    window.addEventListener("resize", checkViewport, { passive: true });
+    return () => {
+      motionQuery.removeEventListener("change", handleMotionChange);
+      window.removeEventListener("resize", checkViewport);
+    };
   }, []);
+
+  const useStaticAtmosphericFallback = prefersReducedMotion || isMobileViewport;
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
-    if (!canvas || !container) return;
-
-    // Check if reduced motion is requested; if so, halt render loop
-    if (prefersReducedMotion) {
-      return;
-    }
+    if (!canvas || !container || useStaticAtmosphericFallback) return;
 
     // Initialize WebGL context
     let gl = canvas.getContext("webgl", {
@@ -617,16 +661,7 @@ export const CinematicSmokeBackground: React.FC<CinematicSmokeBackgroundProps> =
         gl.deleteBuffer(posBuffer);
       }
     };
-  }, [
-    prefersReducedMotion,
-    cfg.intensity,
-    cfg.speed,
-    cfg.opacity,
-    cfg.scale,
-    cfg.vignette,
-    cfg.centerBias,
-    cfg.colors
-  ]);
+  }, [useStaticAtmosphericFallback, cfg]);
 
   return (
     <div
@@ -634,8 +669,8 @@ export const CinematicSmokeBackground: React.FC<CinematicSmokeBackgroundProps> =
       className={`absolute inset-0 pointer-events-none select-none overflow-hidden z-0 ${className}`}
       aria-hidden="true"
     >
-      {/* Reduced-Motion Static Graceful Fallback: Cinematic smoky blue atmospheric gradient */}
-      {prefersReducedMotion && (
+      {/* Static Graceful Atmospheric Gradient (Reduced Motion & Mobile) */}
+      {useStaticAtmosphericFallback && (
         <div
           className="absolute inset-0 w-full h-full"
           style={{
@@ -647,20 +682,19 @@ export const CinematicSmokeBackground: React.FC<CinematicSmokeBackgroundProps> =
         />
       )}
 
-      {/* WebGL Animated Cinematic Smoke Canvas */}
-      {!prefersReducedMotion && webglSupported && (
+      {/* WebGL Animated Cinematic Smoke Canvas (Desktop & Tablet) */}
+      {!useStaticAtmosphericFallback && webglSupported && (
         <canvas
           ref={canvasRef}
           className="w-full h-full block"
           style={{
-            mixBlendMode: blendMode,
-            filter: "blur(0.5px)"
+            mixBlendMode: blendMode
           }}
         />
       )}
 
       {/* 2D Canvas Fallback in case WebGL is unavailable */}
-      {!prefersReducedMotion && !webglSupported && (
+      {!useStaticAtmosphericFallback && !webglSupported && (
         <Canvas2DFallback preset={preset} cfg={cfg} />
       )}
     </div>

@@ -113,7 +113,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
       {/* Deep Atmospheric Smoke with Glowing Smoke Trails */}
       <CinematicSmokeBackground preset="portfolio" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 box-border">
         {/* Header with Staggered Fade-in-up */}
         <motion.div
           variants={containerStaggerVariants}
@@ -139,15 +139,15 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
           initial="hidden"
           whileInView="visible"
           viewport={defaultViewport}
-          className="flex items-center justify-center mb-12"
+          className="flex items-center justify-center mb-10 sm:mb-12 w-full min-w-0"
         >
-          <div className="flex items-center gap-1.5 p-1 bg-slate-100/90 border border-slate-200/80 rounded-2xl overflow-x-auto max-w-full shadow-xs">
+          <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-1.5 p-1 bg-slate-100/90 border border-slate-200/80 rounded-2xl max-w-full shadow-xs">
             {filterTabs.map((tab) => (
               <button
                 key={tab.key}
                 type="button"
                 onClick={() => setActiveFilter(tab.key)}
-                className={`px-4 py-2 text-xs font-semibold rounded-xl transition-all duration-200 whitespace-nowrap cursor-pointer ${
+                className={`px-3 sm:px-4 py-2 text-xs font-semibold rounded-xl transition-all duration-200 whitespace-nowrap cursor-pointer ${
                   activeFilter === tab.key
                     ? "bg-white text-blue-600 shadow-xs border border-slate-200/80"
                     : "text-slate-600 hover:text-slate-900 hover:bg-white/60"
@@ -162,7 +162,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
         {/* Portfolio Grid with Universal Preview Cards & Scroll-Triggered Fade-in */}
         <motion.div
           layout
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full min-w-0"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
@@ -175,7 +175,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
                 whileInView="visible"
                 viewport={cardViewport}
                 exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
-                className="h-full"
+                className="h-full w-full min-w-0 max-w-full"
               >
                 <PortfolioProjectCard
                   project={project}

@@ -39,32 +39,45 @@ export const ThreeDMarketingCanvas: React.FC = () => {
     let width = (canvas.width = document.documentElement.clientWidth || window.innerWidth);
     let height = (canvas.height = document.documentElement.clientHeight || window.innerHeight);
 
-    // Responsive sizing
+    const isCoarsePointer = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    let isMobile = width < 768;
+
+    // Cache scroll extents via resize + ResizeObserver to avoid forced layout reads during scroll
+    let targetScrollY = window.scrollY;
+    let currentScrollY = window.scrollY;
+    let maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+
+    const updateMaxScroll = () => {
+      maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    };
+
     const handleResize = () => {
       if (!canvas) return;
       width = canvas.width = document.documentElement.clientWidth || window.innerWidth;
       height = canvas.height = document.documentElement.clientHeight || window.innerHeight;
+      isMobile = width < 768;
+      updateMaxScroll();
     };
     window.addEventListener("resize", handleResize, { passive: true });
 
-    // Smooth scroll tracking with rAF throttle
-    let targetScrollY = window.scrollY;
-    let currentScrollY = window.scrollY;
-    let maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    let scrollQueued = false;
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(updateMaxScroll);
+      resizeObserver.observe(document.documentElement);
+    }
 
+    let scrollQueued = false;
     const handleScroll = () => {
       if (scrollQueued) return;
       scrollQueued = true;
       requestAnimationFrame(() => {
         scrollQueued = false;
         targetScrollY = window.scrollY;
-        maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       });
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Mouse parallax tracking with rAF throttle
+    // Mouse parallax tracking with rAF throttle (desktop/fine pointer only)
     let targetMouseX = 0;
     let targetMouseY = 0;
     let mouseX = 0;
@@ -80,10 +93,11 @@ export const ThreeDMarketingCanvas: React.FC = () => {
         targetMouseY = (e.clientY / height - 0.5) * 2;
       });
     };
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    if (!isCoarsePointer) {
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    }
 
-    const isMobile = width < 768;
-    const particleCount = isMobile ? 18 : 40;
+    const particleCount = isMobile ? 16 : 36;
 
     // 3D Particles
     const particles: Array<{
@@ -198,17 +212,21 @@ export const ThreeDMarketingCanvas: React.FC = () => {
 
         const proj = project(p3d, cx, cy);
         if (proj.visible && proj.scale > 0) {
-          const alpha = Math.min(0.65, Math.max(0.1, (proj.scale * 0.45)));
-          ctx.beginPath();
-          ctx.arc(proj.x, proj.y, pt.size * proj.scale, 0, Math.PI * 2);
+          const alpha = Math.min(0.65, Math.max(0.1, proj.scale * 0.45));
+          const r = pt.size * proj.scale;
           ctx.fillStyle = pt.color;
+          // Fast radial halo substitute (avoids expensive per-particle Canvas shadowBlur)
+          ctx.globalAlpha = alpha * 0.22;
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, r * 2.4, 0, Math.PI * 2);
+          ctx.fill();
+
           ctx.globalAlpha = alpha;
-          ctx.shadowBlur = 8 * proj.scale;
-          ctx.shadowColor = pt.color;
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, r, 0, Math.PI * 2);
           ctx.fill();
         }
       }
-      ctx.shadowBlur = 0;
       ctx.globalAlpha = 1;
 
       // 2. Section 1 / Hero: 3D Floating Marketing Megaphone
@@ -687,10 +705,13 @@ export const ThreeDMarketingCanvas: React.FC = () => {
 
     return () => {
       cancelAnimationFrame(animId);
+      if (resizeObserver) resizeObserver.disconnect();
       document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("mousemove", handleMouseMove);
+      if (!isCoarsePointer) {
+        window.removeEventListener("mousemove", handleMouseMove);
+      }
       motionQuery.removeEventListener("change", handleMotionChange);
     };
   }, [prefersReducedMotion]);

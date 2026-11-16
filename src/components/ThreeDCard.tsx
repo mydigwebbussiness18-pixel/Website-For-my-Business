@@ -20,21 +20,35 @@ export const ThreeDCard: React.FC<ThreeDCardProps> = ({
   const glareRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isTouchOrSmall =
+      window.matchMedia("(hover: none), (pointer: coarse)").matches ||
+      window.innerWidth < 768;
+
+    // On touch/small mobile viewports or reduced motion, skip continuous scroll-tilt
+    // and mouse glare work for 60fps touch scrolling and zero card edge shift.
+    if (prefersReduced || isTouchOrSmall) {
+      if (innerRef.current) {
+        innerRef.current.style.transform = "";
+      }
+      return;
+    }
+
+    const cardEl = cardRef.current;
+    if (!cardEl) return;
 
     let rafId = 0;
     let isHovered = false;
+    let isVisible = false;
     let currentScrollRot = 0;
 
     const handleScroll = () => {
-      if (!cardRef.current || !innerRef.current || isHovered) return;
+      if (!isVisible || !cardRef.current || !innerRef.current || isHovered) return;
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
-        if (!cardRef.current || !innerRef.current || isHovered) return;
+        if (!isVisible || !cardRef.current || !innerRef.current || isHovered) return;
         const rect = cardRef.current.getBoundingClientRect();
-        // Viewport culling: only calculate if card is near or in viewport
-        if (rect.bottom < -100 || rect.top > window.innerHeight + 100) return;
+        if (rect.bottom < -80 || rect.top > window.innerHeight + 80) return;
 
         const viewportCenter = window.innerHeight * 0.5;
         const cardCenter = rect.top + rect.height * 0.5;
@@ -45,8 +59,16 @@ export const ThreeDCard: React.FC<ThreeDCardProps> = ({
       });
     };
 
-    const cardEl = cardRef.current;
-    if (!cardEl) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0]?.isIntersecting ?? false;
+        if (isVisible) {
+          handleScroll();
+        }
+      },
+      { rootMargin: "100px 0px" }
+    );
+    observer.observe(cardEl);
 
     const onMouseEnter = () => {
       isHovered = true;
@@ -95,9 +117,8 @@ export const ThreeDCard: React.FC<ThreeDCardProps> = ({
     cardEl.addEventListener("mousemove", onMouseMove, { passive: true });
     cardEl.addEventListener("mouseleave", onMouseLeave);
 
-    handleScroll();
-
     return () => {
+      observer.disconnect();
       window.removeEventListener("scroll", handleScroll);
       cardEl.removeEventListener("mouseenter", onMouseEnter);
       cardEl.removeEventListener("mousemove", onMouseMove);
@@ -110,7 +131,7 @@ export const ThreeDCard: React.FC<ThreeDCardProps> = ({
     <div
       ref={cardRef}
       style={{ perspective: 1200 }}
-      className={`relative group ${className}`}
+      className={`relative group w-full max-w-full min-w-0 ${className}`}
     >
       <div
         ref={innerRef}
@@ -118,15 +139,15 @@ export const ThreeDCard: React.FC<ThreeDCardProps> = ({
           transformStyle: "preserve-3d",
           transition: "transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
-        className="w-full h-full relative"
+        className="w-full h-full max-w-full min-w-0 relative"
       >
         {children}
 
-        {/* Dynamic 3D lighting sheen reflection */}
+        {/* Dynamic 3D lighting sheen reflection (desktop hover) */}
         {enableGlare && (
           <div
             ref={glareRef}
-            className="absolute inset-0 rounded-[inherit] pointer-events-none transition-opacity duration-300 opacity-0"
+            className="hidden md:block absolute inset-0 rounded-[inherit] pointer-events-none transition-opacity duration-300 opacity-0"
             aria-hidden="true"
           />
         )}

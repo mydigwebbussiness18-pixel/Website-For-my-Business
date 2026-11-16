@@ -260,9 +260,8 @@ img {
     #10233f 78%,
     #0b132b 100%
   );
-  background-size: 260% 260%;
+  background-size: 220% 220%;
   animation: brandGradientShift 12s ease-in-out infinite alternate;
-  will-change: background-position;
 }
 
 .animate-brand-gradient-light {
@@ -274,9 +273,8 @@ img {
     #fafafc 85%,
     #f3f7fe 100%
   );
-  background-size: 240% 240%;
+  background-size: 200% 200%;
   animation: brandGradientShift 14s ease-in-out infinite alternate;
-  will-change: background-position;
 }
 
 .animate-glow-drift-a {
@@ -296,8 +294,8 @@ img {
 
 @media (max-width: 768px) {
   .mobile-glow-opt {
-    filter: blur(44px);
-    opacity: 0.78;
+    filter: blur(22px);
+    opacity: 0.72;
   }
 }
 

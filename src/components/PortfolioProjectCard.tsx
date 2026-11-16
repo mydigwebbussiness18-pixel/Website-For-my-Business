@@ -11,7 +11,7 @@ export interface PortfolioProjectCardProps {
   onSelectProject: (project: PortfolioProject) => void;
 }
 
-export const PortfolioProjectCard: React.FC<PortfolioProjectCardProps> = ({
+const PortfolioProjectCardComponent: React.FC<PortfolioProjectCardProps> = ({
   project,
   viewDetailsLabel,
   liveDemoLabel = "Live Demo",
@@ -32,20 +32,20 @@ export const PortfolioProjectCard: React.FC<PortfolioProjectCardProps> = ({
     <ThreeDCard
       maxTilt={8}
       scrollTiltStrength={5}
-      className="h-full rounded-2xl"
+      className="h-full w-full max-w-full min-w-0 rounded-2xl"
     >
-      <div className="h-full relative bg-gradient-to-br from-[#102A56] via-[#0B1630] to-[#102A56] border border-[#3B82F6]/25 hover:border-[#3B82F6]/70 rounded-2xl overflow-hidden flex flex-col justify-between shadow-lg shadow-black/25 hover:shadow-2xl hover:shadow-[#1D4ED8]/20 transition-all duration-300 group preserve-3d">
+      <div className="h-full w-full max-w-full min-w-0 box-border relative bg-gradient-to-br from-[#102A56] via-[#0B1630] to-[#102A56] border border-[#3B82F6]/25 hover:border-[#3B82F6]/70 rounded-2xl overflow-hidden flex flex-col justify-between shadow-lg shadow-black/25 hover:shadow-2xl hover:shadow-[#1D4ED8]/20 transition-all duration-300 group preserve-3d">
         {/* Subtle gradient accent highlight (#1D4ED8) */}
         <div
-          className="absolute -top-16 -right-16 w-36 h-36 bg-[#1D4ED8]/15 rounded-full blur-2xl pointer-events-none"
+          className="hidden sm:block absolute -top-16 -right-16 w-36 h-36 bg-[#1D4ED8]/15 rounded-full blur-2xl pointer-events-none"
           aria-hidden="true"
         />
 
-        <div className="relative z-10">
+        <div className="relative z-10 w-full min-w-0">
           {/* Universal Website Preview Image Frame with 3D Depth */}
           <div
             style={{ transform: "translateZ(20px)" }}
-            className="relative aspect-[16/10] bg-[#0B1630]/80 border-b border-[#3B82F6]/20 overflow-hidden flex flex-col justify-between p-4 group-hover:bg-[#0B1630]/95 transition-colors"
+            className="relative w-full max-w-full min-w-0 aspect-[16/10] bg-[#0B1630]/80 border-b border-[#3B82F6]/20 overflow-hidden flex flex-col justify-between p-3 sm:p-4 group-hover:bg-[#0B1630]/95 transition-colors"
           >
             {showPreviewImage ? (
               <>
@@ -55,6 +55,8 @@ export const PortfolioProjectCard: React.FC<PortfolioProjectCardProps> = ({
                   referrerPolicy="no-referrer"
                   loading="lazy"
                   decoding="async"
+                  width={800}
+                  height={500}
                   onError={() => setImgError(true)}
                   className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
@@ -66,7 +68,7 @@ export const PortfolioProjectCard: React.FC<PortfolioProjectCardProps> = ({
             ) : (
               /* Graceful Branded Website Mockup Fallback when image is omitted or fails to load */
               <div
-                className="absolute inset-0 bg-gradient-to-br from-[#0F244D] via-[#0B132B] to-[#102A56] flex items-center justify-center p-6 pointer-events-none"
+                className="absolute inset-0 bg-gradient-to-br from-[#0F244D] via-[#0B132B] to-[#102A56] flex items-center justify-center p-4 sm:p-6 pointer-events-none"
                 aria-hidden="true"
               >
                 <div className="w-full max-w-[210px] rounded-xl border border-[#3B82F6]/30 bg-[#0B132B]/85 shadow-lg overflow-hidden">
@@ -93,19 +95,19 @@ export const PortfolioProjectCard: React.FC<PortfolioProjectCardProps> = ({
             )}
 
             {/* Top Mockup Browser Bar & Demo Project Badge */}
-            <div className="relative z-10 flex items-center justify-between text-[11px] text-slate-400 font-mono">
-              <div className="flex items-center gap-1.5">
+            <div className="relative z-10 flex items-center justify-between gap-2 text-[11px] text-slate-400 font-mono w-full min-w-0">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <span className="w-2 h-2 rounded-full bg-slate-700" />
                 <span className="w-2 h-2 rounded-full bg-slate-700" />
                 <span className="w-2 h-2 rounded-full bg-slate-700" />
               </div>
-              <span className="text-[#38BDF8] bg-[#102A56]/95 border border-[#3B82F6]/30 px-2 py-0.5 rounded-full font-sans font-medium text-[10px] tracking-wide">
+              <span className="text-[#38BDF8] bg-[#102A56]/95 border border-[#3B82F6]/30 px-2 py-0.5 rounded-full font-sans font-medium text-[10px] tracking-wide whitespace-nowrap shrink-0">
                 {project.status}
               </span>
             </div>
 
-            {/* Bottom Preview Tags Strip */}
-            <div className="relative z-10 flex items-center gap-1.5 text-[10px] text-[#CBD5E1]/95 truncate">
+            {/* Bottom Preview Tags Strip (wraps cleanly inside mobile width) */}
+            <div className="relative z-10 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[10px] text-[#CBD5E1]/95 w-full min-w-0 leading-snug">
               {project.tags.map((tg, i) => (
                 <React.Fragment key={i}>
                   {i > 0 && (
@@ -113,51 +115,51 @@ export const PortfolioProjectCard: React.FC<PortfolioProjectCardProps> = ({
                       ·
                     </span>
                   )}
-                  <span>{tg}</span>
+                  <span className="break-words">{tg}</span>
                 </React.Fragment>
               ))}
             </div>
           </div>
 
           {/* Card Content with 3D Depth */}
-          <div className="p-6 space-y-3">
+          <div className="p-4 sm:p-6 space-y-3 w-full min-w-0">
             <div
               style={{ transform: "translateZ(14px)" }}
-              className="flex items-center justify-between gap-2 text-xs"
+              className="flex flex-wrap items-center justify-between gap-2 text-xs min-w-0"
             >
-              <span className="text-[#38BDF8] font-semibold bg-[#102A56] border border-[#3B82F6]/30 px-2.5 py-0.5 rounded-md text-[11px]">
+              <span className="text-[#38BDF8] font-semibold bg-[#102A56] border border-[#3B82F6]/30 px-2.5 py-0.5 rounded-md text-[11px] max-w-full break-words">
                 {project.category}
               </span>
-              <span className="text-[#CBD5E1]/70 text-[11px] font-medium">
+              <span className="text-[#CBD5E1]/70 text-[11px] font-medium shrink-0">
                 {project.status}
               </span>
             </div>
 
             <h3
               style={{ transform: "translateZ(18px)" }}
-              className="text-lg font-bold text-[#FFFFFF] group-hover:text-[#D4AF37] hover:text-[#D4AF37] transition-colors duration-300 tracking-tight"
+              className="text-base sm:text-lg font-bold text-[#FFFFFF] group-hover:text-[#D4AF37] hover:text-[#D4AF37] transition-colors duration-300 tracking-tight break-words"
             >
               {project.title}
             </h3>
 
-            <p className="text-xs text-[#CBD5E1] leading-relaxed line-clamp-3 font-normal">
+            <p className="text-xs text-[#CBD5E1] leading-relaxed line-clamp-3 font-normal break-words">
               {project.description}
             </p>
           </div>
         </div>
 
-        {/* Action Footer: View Project Details + Optional Live Demo Button */}
+        {/* Action Footer: Stacks cleanly on narrow mobile, side-by-side on sm+ */}
         <div
           style={{ transform: "translateZ(16px)" }}
-          className="relative z-10 p-6 pt-0 flex items-center gap-2.5"
+          className="relative z-10 p-4 sm:p-6 pt-0 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full min-w-0"
         >
           <button
             type="button"
             onClick={() => onSelectProject(project)}
-            className="flex-1 inline-flex items-center justify-center gap-2 bg-[#102A56] hover:bg-[#1D4ED8] text-[#FFFFFF] text-xs font-bold py-2.5 px-4 rounded-xl transition-all duration-300 border border-[#3B82F6]/40 hover:border-[#38BDF8]/70 shadow-sm hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
+            className="w-full sm:w-auto sm:flex-1 min-w-0 inline-flex items-center justify-center gap-2 bg-[#102A56] hover:bg-[#1D4ED8] text-[#FFFFFF] text-xs font-bold py-2.5 px-4 rounded-xl transition-all duration-300 border border-[#3B82F6]/40 hover:border-[#38BDF8]/70 shadow-sm hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
           >
-            <Eye className="w-3.5 h-3.5 text-[#38BDF8]" />
-            <span>{viewDetailsLabel}</span>
+            <Eye className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
+            <span className="truncate">{viewDetailsLabel}</span>
           </button>
 
           {liveDemoUrl && (
@@ -165,10 +167,10 @@ export const PortfolioProjectCard: React.FC<PortfolioProjectCardProps> = ({
               href={liveDemoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#1D4ED8] to-[#2563EB] hover:from-[#2563EB] hover:to-[#38BDF8] text-[#FFFFFF] text-xs font-bold py-2.5 px-3.5 rounded-xl transition-all duration-300 border border-[#38BDF8]/40 hover:border-[#38BDF8]/80 shadow-sm hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 active:scale-[0.98] whitespace-nowrap"
+              className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#1D4ED8] to-[#2563EB] hover:from-[#2563EB] hover:to-[#38BDF8] text-[#FFFFFF] text-xs font-bold py-2.5 px-3.5 rounded-xl transition-all duration-300 border border-[#38BDF8]/40 hover:border-[#38BDF8]/80 shadow-sm hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 active:scale-[0.98] whitespace-nowrap"
             >
               <span>{liveDemoLabel}</span>
-              <ExternalLink className="w-3.5 h-3.5" />
+              <ExternalLink className="w-3.5 h-3.5 shrink-0" />
             </a>
           )}
         </div>
@@ -176,3 +178,5 @@ export const PortfolioProjectCard: React.FC<PortfolioProjectCardProps> = ({
     </ThreeDCard>
   );
 };
+
+export const PortfolioProjectCard = React.memo(PortfolioProjectCardComponent);
