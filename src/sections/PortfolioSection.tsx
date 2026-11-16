@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PortfolioProject } from "../types";
 import { useLanguage } from "../i18n/LanguageContext";
-import { getPortfolioProjectConfig, normalizeLiveDemoUrl } from "../config/portfolioProjects";
+import {
+  portfolioProjectsConfig,
+  normalizeLiveDemoUrl
+} from "../config/portfolioProjects";
+import { resolvePortfolioPreviewImage } from "../config/portfolioPreviewImages";
 import {
   containerStaggerVariants,
   fadeInUpVariant,
@@ -10,8 +14,7 @@ import {
   defaultViewport,
   cardViewport
 } from "../utils/animations";
-import { Eye, Layers } from "lucide-react";
-import { ThreeDCard } from "../components/ThreeDCard";
+import { PortfolioProjectCard } from "../components/PortfolioProjectCard";
 import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
 
 interface PortfolioSectionProps {
@@ -22,20 +25,80 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
   const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState<string>("All");
 
-  const filterTabs = [
-    { key: "All", label: t.portfolio.filterAll },
-    { key: "Website Development", label: t.portfolio.filterWeb },
-    { key: "Graphic Design", label: t.portfolio.filterDesign }
-  ];
+  // Merge centralized project configuration with localized translations.
+  // Any newly added project in `src/config/portfolioProjects.ts` automatically
+  // renders with the exact same universal preview-image card layout.
+  const mergedProjects: PortfolioProject[] = useMemo(() => {
+    const localizedById = new Map(t.portfolio.items.map((item) => [item.id, item]));
 
-  const mergedProjects = t.portfolio.items.map((proj) => {
-    const config = getPortfolioProjectConfig(proj.id);
-    return {
-      ...proj,
-      title: config?.projectName?.trim() || proj.title,
-      projectUrl: normalizeLiveDemoUrl(config?.liveDemoUrl)
-    };
-  });
+    return portfolioProjectsConfig.map((config) => {
+      const localized = localizedById.get(config.id);
+      const resolvedPreview = resolvePortfolioPreviewImage(config.id, config.previewImage);
+      const category = localized?.category || config.category || "Website Development";
+      const title = config.projectName?.trim() || localized?.title || config.id;
+      const description =
+        localized?.description ||
+        config.description ||
+        "A modern, responsive demonstration website crafted to showcase services and convert customer enquiries.";
+      const longDescription =
+        localized?.longDescription ||
+        config.longDescription ||
+        description;
+      const features =
+        localized?.features?.length
+          ? localized.features
+          : config.features?.length
+            ? config.features
+            : [
+                "Responsive desktop, tablet & mobile design",
+                "Clean service & visual showcase layout",
+                "Fast loading performance & modern UI",
+                "Direct enquiry & WhatsApp integration"
+              ];
+      const tags =
+        localized?.tags?.length
+          ? localized.tags
+          : config.tags?.length
+            ? config.tags
+            : [category, "Responsive Design"];
+      const status = (localized?.status || config.status || "Demo Project") as PortfolioProject["status"];
+
+      return {
+        id: config.id,
+        title,
+        category: category as PortfolioProject["category"],
+        description,
+        longDescription,
+        features,
+        image: resolvedPreview || `/images/portfolio/${config.id}.jpg`,
+        previewImage: resolvedPreview,
+        projectUrl: normalizeLiveDemoUrl(config.liveDemoUrl),
+        status,
+        tags
+      };
+    });
+  }, [t.portfolio.items]);
+
+  // Preserve core category filter tabs and automatically include any new categories from future projects
+  const filterTabs = useMemo(() => {
+    const baseTabs = [
+      { key: "All", label: t.portfolio.filterAll },
+      { key: "Website Development", label: t.portfolio.filterWeb },
+      { key: "Healthcare Website", label: t.portfolio.filterHealthcare },
+      { key: "Graphic Design", label: t.portfolio.filterDesign }
+    ];
+    const knownKeys = new Set(baseTabs.map((tab) => tab.key));
+    const extraTabs: { key: string; label: string }[] = [];
+
+    for (const proj of mergedProjects) {
+      if (proj.category && !knownKeys.has(proj.category)) {
+        knownKeys.add(proj.category);
+        extraTabs.push({ key: proj.category, label: proj.category });
+      }
+    }
+
+    return [...baseTabs, ...extraTabs];
+  }, [mergedProjects, t.portfolio]);
 
   const filteredProjects = mergedProjects.filter((proj) => {
     if (activeFilter === "All") return true;
@@ -96,7 +159,7 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
           </div>
         </motion.div>
 
-        {/* Portfolio Grid with Scroll-Triggered Staggered Fade-in */}
+        {/* Portfolio Grid with Universal Preview Cards & Scroll-Triggered Fade-in */}
         <motion.div
           layout
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -114,103 +177,11 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({ onSelectProj
                 exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
                 className="h-full"
               >
-                <ThreeDCard
-                  maxTilt={8}
-                  scrollTiltStrength={5}
-                  className="h-full rounded-2xl"
-                >
-                  <div className="h-full relative bg-gradient-to-br from-[#102A56] via-[#0B1630] to-[#102A56] border border-[#3B82F6]/25 hover:border-[#3B82F6]/70 rounded-2xl overflow-hidden flex flex-col justify-between shadow-lg shadow-black/25 hover:shadow-2xl hover:shadow-[#1D4ED8]/20 transition-all duration-300 group preserve-3d">
-                    {/* Subtle gradient accent highlight (#1D4ED8) */}
-                    <div className="absolute -top-16 -right-16 w-36 h-36 bg-[#1D4ED8]/15 rounded-full blur-2xl pointer-events-none" aria-hidden="true" />
-
-                    <div className="relative z-10">
-                      {/* Visual Preview Canvas with 3D Depth */}
-                      <div
-                        style={{ transform: "translateZ(20px)" }}
-                        className="relative aspect-[16/10] bg-[#0B1630]/70 border-b border-[#3B82F6]/20 overflow-hidden flex flex-col justify-between p-4 group-hover:bg-[#0B1630]/90 transition-colors"
-                      >
-                        {/* Subtle mockup browser bar */}
-                        <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono">
-                          <div className="flex items-center gap-1.5">
-                            <span className="w-2 h-2 rounded-full bg-slate-700" />
-                            <span className="w-2 h-2 rounded-full bg-slate-700" />
-                            <span className="w-2 h-2 rounded-full bg-slate-700" />
-                          </div>
-                          <span className="text-[#38BDF8] bg-[#102A56] border border-[#3B82F6]/30 px-2 py-0.5 rounded-full font-sans font-medium text-[10px] tracking-wide">
-                            {project.status}
-                          </span>
-                        </div>
-
-                        {/* Visual mockup graphics representation */}
-                        <div className="my-auto text-center space-y-2 py-4">
-                          <div className="w-12 h-12 rounded-xl bg-[#102A56] border border-[#3B82F6]/30 text-[#38BDF8] mx-auto flex items-center justify-center group-hover:scale-110 group-hover:border-[#38BDF8]/60 group-hover:bg-[#1D4ED8]/30 group-hover:text-white transition-all duration-300 shadow-sm">
-                            <Layers className="w-6 h-6 text-[#38BDF8] group-hover:text-white" />
-                          </div>
-                          <span className="text-xs font-bold text-[#FFFFFF] block group-hover:text-[#D4AF37] hover:text-[#D4AF37] transition-colors duration-300">
-                            {project.title}
-                          </span>
-                        </div>
-
-                        {/* Clean tags */}
-                        <div className="flex items-center gap-1.5 text-[10px] text-[#CBD5E1]/70 truncate">
-                          {project.tags.map((tg, i) => (
-                            <React.Fragment key={i}>
-                              {i > 0 && <span aria-hidden="true" className="text-slate-600">·</span>}
-                              <span>{tg}</span>
-                            </React.Fragment>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Card Content with 3D Depth */}
-                      <div className="p-6 space-y-3">
-                        <div
-                          style={{ transform: "translateZ(14px)" }}
-                          className="flex items-center justify-between gap-2 text-xs"
-                        >
-                          <span className="text-[#38BDF8] font-semibold bg-[#102A56] border border-[#3B82F6]/30 px-2.5 py-0.5 rounded-md text-[11px]">
-                            {project.category}
-                          </span>
-                          <span className="text-[#CBD5E1]/70 text-[11px] font-medium">{project.status}</span>
-                        </div>
-
-                        <h3
-                          style={{ transform: "translateZ(18px)" }}
-                          className="text-lg font-bold text-[#FFFFFF] group-hover:text-[#D4AF37] hover:text-[#D4AF37] transition-colors duration-300 tracking-tight"
-                        >
-                          {project.title}
-                        </h3>
-
-                        <p className="text-xs text-[#CBD5E1] leading-relaxed line-clamp-3 font-normal">
-                          {project.description}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Action Button */}
-                    <div
-                      style={{ transform: "translateZ(16px)" }}
-                      className="relative z-10 p-6 pt-0"
-                    >
-                      <button
-                        type="button"
-                        onClick={() =>
-                          onSelectProject({
-                            ...project,
-                            image: `/images/portfolio/${project.id}.jpg`,
-                            projectUrl: project.projectUrl,
-                            status: project.status as any,
-                            category: project.category as any
-                          })
-                        }
-                        className="w-full inline-flex items-center justify-center gap-2 bg-[#102A56] hover:bg-[#1D4ED8] text-[#FFFFFF] text-xs font-bold py-2.5 px-4 rounded-xl transition-all duration-300 border border-[#3B82F6]/40 hover:border-[#38BDF8]/70 shadow-sm hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
-                      >
-                        <Eye className="w-3.5 h-3.5 text-[#38BDF8]" />
-                        <span>{t.portfolio.viewDetails}</span>
-                      </button>
-                    </div>
-                  </div>
-                </ThreeDCard>
+                <PortfolioProjectCard
+                  project={project}
+                  viewDetailsLabel={t.portfolio.viewDetails}
+                  onSelectProject={onSelectProject}
+                />
               </motion.div>
             ))}
           </AnimatePresence>

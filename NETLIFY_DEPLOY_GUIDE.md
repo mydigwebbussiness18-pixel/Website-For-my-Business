@@ -49,7 +49,7 @@ If you want to deploy immediately without Git:
 1. **`netlify.toml`**:
    - Build command: `npm run build`
    - Output publish folder: `dist`
-   - Node.js runtime: Node 20
+   - Node.js runtime: Node 22
    - SPA 200 redirect rule (`/* -> /index.html`) to prevent 404s on page refresh
    - Security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`)
    - High-performance asset caching (`Cache-Control: public, max-age=31536000, immutable`)

@@ -17,6 +17,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
+import { MagneticButton } from "../components/MagneticButton";
 
 export const FAQSection: React.FC = () => {
   const { t } = useLanguage();
@@ -192,8 +193,9 @@ export const FAQSection: React.FC = () => {
             </p>
           </div>
 
-          <button
+          <MagneticButton
             type="button"
+            wrapperClassName="shrink-0"
             onClick={() =>
               openWhatsAppChat(businessConfig.contact.contactSectionWhatsappMessage)
             }
@@ -201,7 +203,7 @@ export const FAQSection: React.FC = () => {
           >
             <MessageCircle className="w-4 h-4" />
             <span>{t.faq.chatWhatsAppBtn}</span>
-          </button>
+          </MagneticButton>
         </motion.div>
       </div>
     </section>

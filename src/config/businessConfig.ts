@@ -187,21 +187,21 @@ export const businessConfig: BusinessConfig = {
       tags: ["Culinary", "Digital Menu", "Table Booking"]
     },
     {
-      id: "furniture-demo",
-      title: getPortfolioProjectConfig("furniture-demo")?.projectName || "Furniture Business Website Demo",
-      category: "Website Development",
-      description: "An elegant Scandinavian furniture catalog layout emphasizing craftsmanship, material specifications, and product inquiries.",
-      longDescription: "A clean, minimalist e-catalog demonstration for home and office furniture manufacturers. Displays room-based collections (living room, bedroom, office), dimensions, timber materials, and direct WhatsApp product availability checks.",
+      id: "hospital-demo",
+      title: getPortfolioProjectConfig("hospital-demo")?.projectName || "Hospital & Clinic Website Demo",
+      category: "Healthcare Website",
+      description: "A modern, professional, and responsive Hospital & Clinic Website designed to showcase medical services, doctors, hospital facilities, and appointment inquiry features.",
+      longDescription: "A modern, professional, and responsive Hospital & Clinic Website designed to showcase medical services, doctors, hospital facilities, and appointment inquiry features. Built for multi-specialty hospitals, clinics, and diagnostic centers to deliver clear patient navigation and instant online appointment inquiries.",
       features: [
-        "Room-by-room catalog browsing",
-        "Detailed product specs & material details",
-        "High-contrast minimalist aesthetic",
-        "Direct quotation inquiry action"
+        "Medical departments & specialty services showcase",
+        "Doctor profiles with specialization & timings",
+        "Hospital facilities & diagnostic capabilities overview",
+        "Online & WhatsApp patient appointment inquiry system"
       ],
-      image: "/images/portfolio/furniture-demo.jpg",
-      projectUrl: normalizeLiveDemoUrl(getPortfolioProjectConfig("furniture-demo")?.liveDemoUrl),
+      image: "/images/portfolio/hospital-demo.jpg",
+      projectUrl: normalizeLiveDemoUrl(getPortfolioProjectConfig("hospital-demo")?.liveDemoUrl),
       status: "Demo Project",
-      tags: ["E-Commerce Concept", "Catalog", "Minimalist"]
+      tags: ["Hospital Website", "Clinic Website", "Healthcare", "Appointment System", "Responsive Design"]
     },
     {
       id: "real-estate-demo",

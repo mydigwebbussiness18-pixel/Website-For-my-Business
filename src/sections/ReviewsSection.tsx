@@ -13,6 +13,7 @@ import {
 import { Star, MessageSquarePlus, ShieldCheck, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { ThreeDCard } from "../components/ThreeDCard";
 import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
+import { AnimatedGradientBackground } from "../components/AnimatedGradientBackground";
 
 interface ReviewsSectionProps {
   onOpenModeration: () => void;
@@ -89,6 +90,9 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
       id="reviews"
       className="py-24 bg-[#FAFAFC] relative overflow-hidden"
     >
+      {/* Subtle Corporate Animated Gradient Background */}
+      <AnimatedGradientBackground variant="reviews" />
+
       {/* Soft, Elegant Deep Navy & Blue Smoke Drift */}
       <CinematicSmokeBackground preset="reviews" />
 

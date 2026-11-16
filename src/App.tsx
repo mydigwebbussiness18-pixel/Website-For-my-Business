@@ -4,6 +4,7 @@ import { ServiceItem, PortfolioProject } from "./types";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import { Navbar } from "./components/Navbar";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
+import { FloatingBackToTop } from "./components/FloatingBackToTop";
 import { SectionDivider } from "./components/SectionDivider";
 import { ThreeDMarketingCanvas } from "./components/ThreeDMarketingCanvas";
 import { ThreeDScrollProgress } from "./components/ThreeDScrollProgress";
@@ -144,6 +145,9 @@ function AppContent() {
 
       {/* Floating WhatsApp Quick Action Button */}
       <FloatingWhatsApp />
+
+      {/* Premium Back to Top Floating Button */}
+      <FloatingBackToTop />
 
       {/* Modals & Dialogs (Loaded on Demand) */}
       <Suspense fallback={null}>

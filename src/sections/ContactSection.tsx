@@ -30,6 +30,8 @@ import { SUPABASE_PROJECT_ID } from "../services/supabaseClient";
 import { AppointmentBooking } from "../types";
 import { ThreeDCard } from "../components/ThreeDCard";
 import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
+import { AnimatedGradientBackground } from "../components/AnimatedGradientBackground";
+import { MagneticButton } from "../components/MagneticButton";
 
 export const ContactSection: React.FC = () => {
   const { t } = useLanguage();
@@ -108,6 +110,9 @@ export const ContactSection: React.FC = () => {
       id="contact"
       className="py-24 bg-[#10233F] relative overflow-hidden"
     >
+      {/* Premium Dark Navy & Muted Gold Animated Gradient Background */}
+      <AnimatedGradientBackground variant="contact" />
+
       {/* Moody Deep Navy Smoke with Electric Blue & Cyan Illumination */}
       <CinematicSmokeBackground preset="contact" />
 
@@ -544,9 +549,10 @@ export const ContactSection: React.FC = () => {
                   </div>
 
                   {/* Submit Button */}
-                  <button
+                  <MagneticButton
                     type="submit"
                     disabled={isSubmitting}
+                    wrapperClassName="w-full"
                     className="w-full inline-flex items-center justify-center gap-2 bg-[#C9A227] hover:bg-[#E5A823] active:scale-[0.98] disabled:bg-[#C9A227]/50 text-[#10233F] text-xs font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-[#C9A227]/30 hover:shadow-2xl hover:shadow-amber-500/60 hover:-translate-y-1 focus:ring-2 focus:ring-[#C9A227]/50 focus:outline-none cursor-pointer"
                   >
                     {isSubmitting ? (
@@ -560,7 +566,7 @@ export const ContactSection: React.FC = () => {
                         <span>Confirm Appointment Booking & Save</span>
                       </>
                     )}
-                  </button>
+                  </MagneticButton>
 
                   <div className="flex items-start gap-2 text-[11px] text-slate-500 pt-1">
                     <ShieldCheck className="w-3.5 h-3.5 text-[#C9A227] shrink-0 mt-0.5" />

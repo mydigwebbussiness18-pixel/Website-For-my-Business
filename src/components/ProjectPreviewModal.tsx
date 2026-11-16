@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PortfolioProject } from "../types";
 import { useLanguage } from "../i18n/LanguageContext";
 import { getPortfolioProjectConfig, normalizeLiveDemoUrl } from "../config/portfolioProjects";
+import { resolvePortfolioPreviewImage } from "../config/portfolioPreviewImages";
 import { X, CheckCircle2, AlertCircle, Globe, Sparkles } from "lucide-react";
 
 interface ProjectPreviewModalProps {
@@ -11,6 +12,11 @@ interface ProjectPreviewModalProps {
 
 export const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ project, onClose }) => {
   const { t } = useLanguage();
+  const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [project?.id, project?.previewImage]);
 
   useEffect(() => {
     if (!project) return;
@@ -31,8 +37,22 @@ export const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ projec
   const projectConfig = getPortfolioProjectConfig(project.id);
 
   const displayName = projectConfig?.projectName?.trim() || localizedProject.title;
+  const displayCategory = localizedProject.category || projectConfig?.category || project.category;
+  const displayDescription = localizedProject.description || projectConfig?.description || project.description;
+  const displayLongDescription =
+    localizedProject.longDescription || projectConfig?.longDescription || displayDescription;
+  const displayFeatures =
+    localizedProject.features?.length
+      ? localizedProject.features
+      : projectConfig?.features?.length
+        ? projectConfig.features
+        : project.features;
+
   const liveDemoUrl = normalizeLiveDemoUrl(projectConfig?.liveDemoUrl || project.projectUrl);
   const hasLiveDemo = Boolean(liveDemoUrl);
+  const previewImg = !imgError
+    ? resolvePortfolioPreviewImage(project.id, project.previewImage || projectConfig?.previewImage)
+    : undefined;
 
   return (
     <div
@@ -61,7 +81,7 @@ export const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ projec
           <div className="pr-8">
             <div className="flex flex-wrap items-center gap-2 text-xs">
               <span className="text-blue-600 font-semibold bg-blue-50 border border-blue-200/80 px-2.5 py-0.5 rounded-md">
-                {localizedProject.category}
+                {displayCategory}
               </span>
               <span
                 className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-amber-800 bg-amber-100/80 border border-amber-300/80 px-2.5 py-0.5 rounded-full"
@@ -76,7 +96,7 @@ export const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ projec
                 {displayName}
               </h2>
 
-              {/* Prominent Top Live Demo Action Button (replaces non-clickable Demo Project badge) */}
+              {/* Prominent Top Live Demo Action Button */}
               <div className="shrink-0">
                 {hasLiveDemo ? (
                   <a
@@ -104,7 +124,7 @@ export const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ projec
             </div>
 
             <p className="text-slate-600 text-sm mt-3 leading-relaxed">
-              {localizedProject.longDescription}
+              {displayLongDescription}
             </p>
           </div>
 
@@ -127,15 +147,36 @@ export const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ projec
               </div>
 
               {/* Preview Content */}
-              <div className="py-7 sm:py-8 px-3 sm:px-4 text-center">
-                <div className="max-w-md mx-auto space-y-3">
-                  <div className="inline-flex h-6 px-3 bg-blue-50 rounded-full mx-auto border border-blue-200 items-center justify-center text-[11px] text-blue-600 font-semibold">
-                    {localizedProject.category}
+              {previewImg ? (
+                <div className="pt-4 space-y-4">
+                  <div className="aspect-[16/9] w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-900 shadow-sm">
+                    <img
+                      src={previewImg}
+                      alt={`${displayName} - ${displayCategory} website preview`}
+                      referrerPolicy="no-referrer"
+                      onError={() => setImgError(true)}
+                      className="w-full h-full object-cover object-center"
+                    />
                   </div>
-                  <h3 className="text-lg font-bold text-[#0B132B]">{displayName}</h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">{localizedProject.description}</p>
+                  <div className="text-center max-w-lg mx-auto space-y-1.5 px-2 pb-1">
+                    <div className="inline-flex h-6 px-3 bg-blue-50 rounded-full mx-auto border border-blue-200 items-center justify-center text-[11px] text-blue-600 font-semibold">
+                      {displayCategory}
+                    </div>
+                    <h3 className="text-lg font-bold text-[#0B132B]">{displayName}</h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">{displayDescription}</p>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="py-7 sm:py-8 px-3 sm:px-4 text-center">
+                  <div className="max-w-md mx-auto space-y-3">
+                    <div className="inline-flex h-6 px-3 bg-blue-50 rounded-full mx-auto border border-blue-200 items-center justify-center text-[11px] text-blue-600 font-semibold">
+                      {displayCategory}
+                    </div>
+                    <h3 className="text-lg font-bold text-[#0B132B]">{displayName}</h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">{displayDescription}</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -145,7 +186,7 @@ export const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ projec
               {t.modals.coreCapabilities}
             </h4>
             <div className="grid sm:grid-cols-2 gap-2.5">
-              {localizedProject.features.map((feature, i) => (
+              {displayFeatures.map((feature, i) => (
                 <div key={i} className="flex items-start gap-2 text-xs text-slate-700">
                   <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                   <span>{feature}</span>
@@ -195,4 +236,3 @@ export const ProjectPreviewModal: React.FC<ProjectPreviewModalProps> = ({ projec
     </div>
   );
 };
-

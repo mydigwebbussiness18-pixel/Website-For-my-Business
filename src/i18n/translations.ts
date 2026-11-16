@@ -66,6 +66,7 @@ export interface Translations {
     subheading: string;
     filterAll: string;
     filterWeb: string;
+    filterHealthcare: string;
     filterDesign: string;
     viewDetails: string;
     demoTag: string;
@@ -365,6 +366,7 @@ export const translations: Record<Language, Translations> = {
       subheading: "Explore selected website concepts, design samples, and digital project demonstrations.",
       filterAll: "All",
       filterWeb: "Website Development",
+      filterHealthcare: "Healthcare Website",
       filterDesign: "Graphic Design",
       viewDetails: "View Project Details",
       demoTag: "Demo Project",
@@ -403,19 +405,19 @@ export const translations: Record<Language, Translations> = {
           tags: ["Culinary", "Digital Menu", "Table Booking"]
         },
         {
-          id: "furniture-demo",
-          title: "Furniture Business Website Demo",
-          category: "Website Development",
-          description: "An elegant Scandinavian furniture catalog layout emphasizing craftsmanship, material specifications, and product inquiries.",
-          longDescription: "A clean, minimalist e-catalog demonstration for home and office furniture manufacturers. Displays room-based collections (living room, bedroom, office), dimensions, timber materials, and direct WhatsApp product availability checks.",
+          id: "hospital-demo",
+          title: "Hospital & Clinic Website Demo",
+          category: "Healthcare Website",
+          description: "A modern, professional, and responsive Hospital & Clinic Website designed to showcase medical services, doctors, hospital facilities, and appointment inquiry features.",
+          longDescription: "A modern, professional, and responsive Hospital & Clinic Website designed to showcase medical services, doctors, hospital facilities, and appointment inquiry features. Built for multi-specialty hospitals, clinics, and diagnostic centers to deliver clear patient navigation and instant online appointment inquiries.",
           features: [
-            "Room-by-room catalog browsing",
-            "Detailed product specs & material details",
-            "High-contrast minimalist aesthetic",
-            "Direct quotation inquiry action"
+            "Medical departments & specialty services showcase",
+            "Doctor profiles with specialization & timings",
+            "Hospital facilities & diagnostic capabilities overview",
+            "Online & WhatsApp patient appointment inquiry system"
           ],
           status: "Demo Project",
-          tags: ["E-Commerce Concept", "Catalog", "Minimalist"]
+          tags: ["Hospital Website", "Clinic Website", "Healthcare", "Appointment System", "Responsive Design"]
         },
         {
           id: "real-estate-demo",
@@ -793,6 +795,7 @@ export const translations: Record<Language, Translations> = {
       subheading: "પસંદગીના વેબસાઇટ કન્સેપ્ટ્સ, ડિઝાઇન સેમ્પલ્સ અને ડિજિટલ પ્રોજેક્ટ ડેમો જુઓ.",
       filterAll: "બધા",
       filterWeb: "વેબસાઇટ ડેવલપમેન્ટ",
+      filterHealthcare: "હેલ્થકેર વેબસાઇટ",
       filterDesign: "ગ્રાફિક ડિઝાઇન",
       viewDetails: "પ્રોજેક્ટ વિગતો જુઓ",
       demoTag: "ડેમો પ્રોજેક્ટ",
@@ -831,19 +834,19 @@ export const translations: Record<Language, Translations> = {
           tags: ["રેસ્ટોરન્ટ", "ડિજિટલ મેનૂ", "ટેબલ બુકિંગ"]
         },
         {
-          id: "furniture-demo",
-          title: "Furniture Business Website Demo",
-          category: "Website Development",
-          description: "ફર્નિચર શોરૂમ માટે મટીરીયલ વિગતો અને પ્રોડક્ટ ઇન્ક્વાયરી સાથેનું મિનિમલિસ્ટ સ્કેન્ડિનેવિયન કેટાલોગ લેઆઉટ.",
-          longDescription: "હોમ અને ઓફિસ ફર્નિચર ઉત્પાદકો માટે રૂમ અનુસાર કલેક્શન, માપ, લાકડાની ગુણવત્તા અને WhatsApp દ્વારા ઉપલબ્ધતા જાણવાની સુવિધા.",
+          id: "hospital-demo",
+          title: "Hospital & Clinic Website Demo",
+          category: "Healthcare Website",
+          description: "મેડિકલ સેવાઓ, ડોક્ટરોની માહિતી, હોસ્પિટલ સુવિધાઓ અને એપોઇન્ટમેન્ટ ઇન્ક્વાયરી દર્શાવતી આધુનિક અને રિસ્પોન્સિવ હોસ્પિટલ અને ક્લિનિક વેબસાઇટ.",
+          longDescription: "મલ્ટી-સ્પેશિયાલિટી હોસ્પિટલો અને ક્લિનિક્સ માટે તબીબી વિભાગો, ડોક્ટર પ્રોફાઇલ્સ, હોસ્પિટલ સુવિધાઓ અને ઝડપી ઓનલાઇન એપોઇન્ટમેન્ટ પૂછપરછ દર્શાવતો વ્યાવસાયિક વેબસાઇટ ડેમો.",
           features: [
-            "રૂમ અનુસાર પ્રોડક્ટ બ્રાઉઝિંગ",
-            "સંપૂર્ણ સ્પેક્સ અને મટીરીયલ વિગતો",
-            "હાઇ-કોન્ટ્રાસ્ટ મિનિમલિસ્ટ ડિઝાઇન",
-            "ડાયરેક્ટ ક્વોટેશન ઇન્ક્વાયરી બટન"
+            "મેડિકલ વિભાગો અને ખાસ સેવાઓનું શોકેસ",
+            "ડોક્ટરોની પ્રોફાઇલ, ડિગ્રી અને સમયપત્રક",
+            "હોસ્પિટલ સુવિધાઓ અને લેબ વિગતો",
+            "ઓનલાઇન અને WhatsApp એપોઇન્ટમેન્ટ ઇન્ક્વાયરી સિસ્ટમ"
           ],
           status: "Demo Project",
-          tags: ["ઇ-કોમર્સ કન્સેપ્ટ", "કેટાલોગ", "મિનિમલિસ્ટ"]
+          tags: ["હોસ્પિટલ વેબસાઇટ", "ક્લિનિક વેબસાઇટ", "હેલ્થકેર", "એપોઇન્ટમેન્ટ સિસ્ટમ", "રિસ્પોન્સિવ ડિઝાઇન"]
         },
         {
           id: "real-estate-demo",
@@ -1221,6 +1224,7 @@ export const translations: Record<Language, Translations> = {
       subheading: "चुनिंदा वेबसाइट कॉन्सेप्ट्स, डिजाइन सैंपल्स और डिजिटल प्रोजेक्ट डेमो देखें।",
       filterAll: "सभी",
       filterWeb: "वेबसाइट डेवलपमेंट",
+      filterHealthcare: "हेल्थकेयर वेबसाइट",
       filterDesign: "ग्राफिक डिजाइन",
       viewDetails: "प्रोजेक्ट विवरण देखें",
       demoTag: "डेमो प्रोजेक्ट",
@@ -1259,19 +1263,19 @@ export const translations: Record<Language, Translations> = {
           tags: ["रेस्तरां", "डिजिटल मेनू", "टेबल बुकिंग"]
         },
         {
-          id: "furniture-demo",
-          title: "Furniture Business Website Demo",
-          category: "Website Development",
-          description: "फर्नीचर व्यवसाय के लिए सामग्री विवरण और उत्पाद पूछताछ के साथ सुरुचिपूर्ण स्कैंडिनेवियाई कैटलॉग।",
-          longDescription: "होम और ऑफिस फर्नीचर निर्माताओं के लिए कमरों के अनुसार कैटलॉग, आयाम, लकड़ी की गुणवत्ता और WhatsApp द्वारा उपलब्धता जानने की सुविधा।",
+          id: "hospital-demo",
+          title: "Hospital & Clinic Website Demo",
+          category: "Healthcare Website",
+          description: "चिकित्सा सेवाओं, डॉक्टरों की जानकारी, अस्पताल सुविधाओं और अपॉइंटमेंट पूछताछ सुविधाओं को प्रदर्शित करने वाली आधुनिक और रिस्पॉन्सिव अस्पताल एवं क्लिनिक वेबसाइट।",
+          longDescription: "मल्टी-स्पेशियलिटी अस्पतालों और क्लिनिक्स के लिए चिकित्सा विभागों, डॉक्टर प्रोफाइल, अस्पताल की सुविधाओं और ऑनलाइन अपॉइंटमेंट पूछताछ के साथ तैयार व्यावसायिक वेबसाइट डेमो।",
           features: [
-            "कक्ष-अनुसार उत्पाद ब्राउज़िंग",
-            "विस्तृत स्पेक्स एवं सामग्री विवरण",
-            "हाई-कंट्रास्ट मिनिमलिस्ट डिजाइन",
-            "प्रत्यक्ष कोटेशन पूछताछ बटन"
+            "चिकित्सा विभाग और विशेष सेवाओं का शोकेस",
+            "डॉक्टर प्रोफाइल, विशेषज्ञता और समय सारिणी",
+            "अस्पताल सुविधाएं और डायग्नोस्टिक विवरण",
+            "ऑनलाइन और WhatsApp अपॉइंटमेंट पूछताछ प्रणाली"
           ],
           status: "Demo Project",
-          tags: ["ई-कॉमर्स कॉन्सेप्ट", "कैटलॉग", "मिनिमलिस्ट"]
+          tags: ["अस्पताल वेबसाइट", "क्लिनिक वेबसाइट", "हेल्थकेयर", "अपॉइंटमेंट सिस्टम", "रिस्पॉन्सिव डिजाइन"]
         },
         {
           id: "real-estate-demo",

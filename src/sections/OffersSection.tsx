@@ -22,6 +22,8 @@ import {
 } from "lucide-react";
 import { ThreeDCard } from "../components/ThreeDCard";
 import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
+import { AnimatedGradientBackground } from "../components/AnimatedGradientBackground";
+import { MagneticButton } from "../components/MagneticButton";
 
 import diwaliStarterImg from "../assets/images/diwali_starter_mockup_1793541756781.jpg";
 import diwaliGrowthImg from "../assets/images/diwali_growth_mockup_1793541769265.jpg";
@@ -147,6 +149,9 @@ export const OffersSection: React.FC = () => {
       id="offers"
       className="py-24 bg-[#070D1E] text-white relative overflow-hidden transition-colors"
     >
+      {/* Premium Dark Luxury Animated Gradient Background */}
+      <AnimatedGradientBackground variant="offers" />
+
       {/* Cinematic Smoke Background Atmosphere */}
       <CinematicSmokeBackground preset="offers" />
 
@@ -313,14 +318,15 @@ export const OffersSection: React.FC = () => {
                     style={{ transform: "translateZ(20px)" }}
                     className="pt-6 border-t border-slate-800/80 mt-6 space-y-2.5"
                   >
-                    <button
+                    <MagneticButton
                       type="button"
+                      wrapperClassName="w-full"
                       onClick={() => handleSelectPackage(offer)}
                       className="w-full inline-flex items-center justify-center gap-2.5 bg-[#16A34A] hover:bg-[#15803D] text-white text-sm sm:text-base font-bold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-950/40 hover:shadow-emerald-900/60 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] cursor-pointer"
                     >
                       <MessageCircle className="w-5 h-5 text-white" />
                       <span>{t.offers.claimBtn}</span>
-                    </button>
+                    </MagneticButton>
 
                     <button
                       type="button"

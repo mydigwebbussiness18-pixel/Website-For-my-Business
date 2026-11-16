@@ -15,11 +15,18 @@ export type ProjectStatus = "Demo Project" | "Concept Project";
 export interface PortfolioProject {
   id: string;
   title: string;
-  category: "Website Development" | "Graphic Design" | "Meta Ads" | "Google Business Profile";
+  category:
+    | "Website Development"
+    | "Healthcare Website"
+    | "Graphic Design"
+    | "Meta Ads"
+    | "Google Business Profile"
+    | (string & {});
   description: string;
   longDescription: string;
   features: string[];
   image: string;
+  previewImage?: string;
   projectUrl: string;
   status: ProjectStatus;
   tags: string[];

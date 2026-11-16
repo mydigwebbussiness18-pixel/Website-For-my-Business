@@ -202,6 +202,105 @@ img {
   content-visibility: auto;
 }
 
+/* Premium Corporate Animated Gradient Background (8s-15s smooth GPU-friendly cycles) */
+@keyframes brandGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 20% 80%;
+  }
+}
+
+@keyframes brandGlowDriftA {
+  0% {
+    transform: translate3d(-4%, -3%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(5%, 4%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(2%, -2%, 0) scale(0.98);
+  }
+}
+
+@keyframes brandGlowDriftB {
+  0% {
+    transform: translate3d(4%, 3%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-5%, -4%, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(-2%, 2%, 0) scale(0.97);
+  }
+}
+
+@keyframes brandGlowDriftC {
+  0% {
+    transform: translate3d(0%, 2%, 0) scale(0.98);
+  }
+  50% {
+    transform: translate3d(-3%, -3%, 0) scale(1.04);
+  }
+  100% {
+    transform: translate3d(3%, 1%, 0) scale(1);
+  }
+}
+
+.animate-brand-gradient-dark {
+  background: linear-gradient(
+    125deg,
+    #070d1e 0%,
+    #0b1630 28%,
+    #102a56 54%,
+    #10233f 78%,
+    #0b132b 100%
+  );
+  background-size: 260% 260%;
+  animation: brandGradientShift 12s ease-in-out infinite alternate;
+  will-change: background-position;
+}
+
+.animate-brand-gradient-light {
+  background: linear-gradient(
+    125deg,
+    #ffffff 0%,
+    #f8fafc 32%,
+    #eff6ff 62%,
+    #fafafc 85%,
+    #f3f7fe 100%
+  );
+  background-size: 240% 240%;
+  animation: brandGradientShift 14s ease-in-out infinite alternate;
+  will-change: background-position;
+}
+
+.animate-glow-drift-a {
+  animation: brandGlowDriftA 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-glow-drift-b {
+  animation: brandGlowDriftB 11s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-glow-drift-c {
+  animation: brandGlowDriftC 15s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .mobile-glow-opt {
+    filter: blur(44px);
+    opacity: 0.78;
+  }
+}
+
 /* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -213,5 +312,6 @@ img {
     scroll-behavior: auto !important;
   }
 }
+
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { businessConfig } from "../config/businessConfig";
 import { openWhatsAppChat } from "../utils/whatsapp";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -14,6 +14,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const isClickScrollingRef = useRef(false);
+  const clickLockTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     let isScrolled = false;
@@ -39,6 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
     const sectionIds = ["home", "services", "portfolio", "offers", "reviews", "about", "faq", "contact"];
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isClickScrollingRef.current) return;
         for (const entry of entries) {
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
@@ -60,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
       }
     };
     const handleResize = () => {
-      if (window.innerWidth >= 1024) {
+      if (window.innerWidth >= 1280) {
         setMobileMenuOpen(false);
       }
     };
@@ -72,6 +75,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("resize", handleResize);
       observer.disconnect();
+      if (clickLockTimeoutRef.current !== null) {
+        window.clearTimeout(clickLockTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -97,8 +103,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
     { name: t.nav.contact, href: "#contact", id: "contact" }
   ];
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (href: string, id?: string) => {
     setMobileMenuOpen(false);
+    if (id) {
+      setActiveSection(id);
+      isClickScrollingRef.current = true;
+      if (clickLockTimeoutRef.current !== null) {
+        window.clearTimeout(clickLockTimeoutRef.current);
+      }
+      clickLockTimeoutRef.current = window.setTimeout(() => {
+        isClickScrollingRef.current = false;
+      }, 950);
+    }
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
@@ -108,25 +124,25 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 w-full max-w-full overflow-hidden ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 w-full max-w-full box-border ${
           scrolled
             ? "bg-[#0B132B]/95 backdrop-blur-md border-b border-slate-800 shadow-lg shadow-black/20 py-1"
             : "bg-[#0B132B]/90 backdrop-blur-md border-b border-slate-800/70 py-2"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 sm:h-20 gap-2 sm:gap-4">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 box-border">
+          <div className="flex items-center justify-between h-14 sm:h-20 gap-2 sm:gap-3 xl:gap-4 min-w-0">
             {/* Zone 1: Brand Wordmark & Official Logo */}
             <a
               href="#home"
               onClick={(e) => {
                 e.preventDefault();
-                handleNavClick("#home");
+                handleNavClick("#home", "home");
               }}
-              className="flex items-center gap-2 sm:gap-3 group shrink-0 focus-visible:ring-2 focus-visible:ring-blue-400 rounded-xl p-0.5 sm:p-1"
+              className="flex items-center gap-2 sm:gap-2.5 group shrink-0 min-w-0 focus-visible:ring-2 focus-visible:ring-blue-400 rounded-xl p-0.5 sm:p-1"
               aria-label={`${businessConfig.businessName} Homepage`}
             >
-              <div className="w-8 h-8 sm:w-11 sm:h-11 rounded-xl overflow-hidden bg-[#070D1E] border border-blue-400/40 flex items-center justify-center p-0.5 sm:p-1 shadow-md shadow-blue-500/15 group-hover:scale-105 group-hover:border-blue-400 transition-all duration-300 shrink-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 2xl:w-11 2xl:h-11 rounded-xl overflow-hidden bg-[#070D1E] border border-blue-400/40 flex items-center justify-center p-0.5 sm:p-1 shadow-md shadow-blue-500/15 group-hover:scale-105 group-hover:border-blue-400 transition-all duration-300 shrink-0">
                 <img
                   src={businessConfig.logo}
                   alt={`${businessConfig.businessName} Official Logo`}
@@ -140,13 +156,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
                   }}
                 />
               </div>
-              <span className="text-sm sm:text-xl font-extrabold tracking-tight text-white group-hover:text-red-500 transition-colors duration-300 whitespace-nowrap">
+              <span className="text-sm sm:text-lg xl:text-lg 2xl:text-xl font-extrabold tracking-tight text-white group-hover:text-red-500 transition-colors duration-300 whitespace-nowrap">
                 DigWeb <span className="text-blue-400 font-bold group-hover:text-[#F59E0B] transition-colors duration-300">Expert</span>
               </span>
             </a>
 
-            {/* Zone 2: Navigation Links (Desktop lg+) */}
-            <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-sm font-medium">
+            {/* Zone 2: Navigation Links (Desktop xl+) */}
+            <nav
+              aria-label="Primary Navigation"
+              className="hidden xl:flex flex-1 items-center justify-center gap-2 2xl:gap-4 min-w-0 text-xs 2xl:text-[13px] font-medium"
+            >
               {navLinks.map((link) => {
                 const isActive = activeSection === link.id;
                 return (
@@ -155,35 +174,35 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
                     href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
-                      handleNavClick(link.href);
+                      handleNavClick(link.href, link.id);
                     }}
-                    className={`whitespace-nowrap transition-all duration-300 py-1 px-1 relative text-xs xl:text-sm font-semibold tracking-wide ${
+                    className={`whitespace-nowrap transition-all duration-300 py-1 px-0.5 2xl:px-1 relative text-xs 2xl:text-[13px] font-semibold tracking-wide shrink-0 ${
                       isActive
-                        ? "text-blue-400 font-bold"
-                        : "text-slate-300 hover:text-white"
+                        ? "text-[#D4AF37] font-bold"
+                        : "text-slate-300 hover:text-[#D4AF37] active:text-[#F59E0B] focus-visible:text-[#D4AF37]"
                     }`}
                   >
                     {link.name}
                     {isActive && (
-                      <span className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-400 rounded-full animate-in fade-in shadow-xs shadow-blue-400" />
+                      <span className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-gradient-to-r from-[#D4AF37] via-[#F59E0B] to-[#C9A227] rounded-full animate-in fade-in shadow-xs shadow-[#D4AF37]/50" />
                     )}
                   </a>
                 );
               })}
             </nav>
 
-            {/* Zone 3: Actions & Mobile Hamburger Menu Button */}
-            <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+            {/* Zone 3: Actions & Mobile/Tablet Hamburger Menu Button */}
+            <div className="flex items-center gap-1.5 sm:gap-2.5 xl:gap-2.5 2xl:gap-3 shrink-0 pr-0.5">
               {/* Top-bar Language Switcher (hidden on mobile < sm, available in mobile drawer) */}
-              <div className="hidden sm:block">
+              <div className="hidden sm:block shrink-0">
                 <LanguageSwitcher dropdownAlign="right" theme="dark" />
               </div>
 
-              {/* Owner Guide button: hidden below xl */}
+              {/* Owner Guide button: visible on wide desktops where all 8 links + actions have ample room (also in drawer & footer) */}
               <button
                 type="button"
                 onClick={onOpenOwnerGuide}
-                className="hidden xl:inline-flex text-xs text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/90 hover:border-slate-600 rounded-xl px-3 py-1.5 transition-all duration-300 whitespace-nowrap cursor-pointer shadow-xs"
+                className="hidden min-[1380px]:inline-flex text-xs text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/90 hover:border-slate-600 rounded-xl px-3 py-1.5 transition-all duration-300 whitespace-nowrap cursor-pointer shadow-xs shrink-0"
                 title="View Owner Configuration & Deployment Guide"
               >
                 {t.nav.ownerGuide}
@@ -205,14 +224,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
               <button
                 type="button"
                 onClick={() => openWhatsAppChat(businessConfig.contact.defaultWhatsappMessage)}
-                className="hidden sm:inline-flex items-center gap-2 bg-blue-600 hover:bg-[#C9A227] hover:text-[#0B132B] active:scale-[0.98] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all duration-300 shadow-md shadow-blue-500/25 hover:shadow-xl hover:shadow-amber-500/50 hover:-translate-y-0.5 whitespace-nowrap cursor-pointer animate-pulse-zoom shrink-0"
+                className="hidden sm:inline-flex items-center gap-2 bg-blue-600 hover:bg-[#C9A227] hover:text-[#0B132B] active:scale-[0.98] text-white text-xs font-bold px-3.5 2xl:px-4 py-2 rounded-xl transition-all duration-300 shadow-md shadow-blue-500/25 hover:shadow-xl hover:shadow-amber-500/50 hover:-translate-y-0.5 whitespace-nowrap cursor-pointer animate-pulse-zoom shrink-0"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="w-4 h-4 shrink-0" />
                 <span>{t.nav.chatWhatsApp}</span>
               </button>
 
-              {/* Professional Three-Line Hamburger Button (lg:hidden) */}
-              <div className="lg:hidden flex items-center">
+              {/* Professional Three-Line Hamburger Button (xl:hidden) */}
+              <div className="xl:hidden flex items-center shrink-0">
                 <button
                   type="button"
                   onClick={() => setMobileMenuOpen((prev) => !prev)}
@@ -236,16 +255,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
       {/* Backdrop overlay when mobile menu is open */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-30 lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-30 xl:hidden"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />
       )}
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile & Tablet Menu Drawer */}
       <div
         id="mobile-navigation-menu"
-        className={`lg:hidden fixed left-0 right-0 top-[56px] sm:top-[72px] bg-[#0B132B]/98 backdrop-blur-xl border-b border-slate-800 px-4 pt-3 pb-6 shadow-2xl transition-all duration-300 ease-in-out z-40 max-h-[calc(100vh-64px)] overflow-y-auto ${
+        className={`xl:hidden fixed left-0 right-0 top-[56px] sm:top-[72px] bg-[#0B132B]/98 backdrop-blur-xl border-b border-slate-800 px-4 pt-3 pb-6 shadow-2xl transition-all duration-300 ease-in-out z-40 max-h-[calc(100vh-64px)] overflow-y-auto ${
           mobileMenuOpen
             ? "opacity-100 translate-y-0 pointer-events-auto visible"
             : "opacity-0 -translate-y-4 pointer-events-none invisible"
@@ -271,17 +290,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOwnerGuide }) => {
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleNavClick(link.href);
+                  handleNavClick(link.href, link.id);
                 }}
                 className={`flex items-center justify-between px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-200 min-h-[44px] ${
                   isActive
-                    ? "bg-blue-600/25 text-blue-400 border border-blue-500/40 font-bold shadow-xs"
-                    : "text-slate-200 hover:bg-slate-800/80 hover:text-white"
+                    ? "bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/40 font-bold shadow-xs"
+                    : "text-slate-200 hover:bg-slate-800/80 hover:text-[#D4AF37]"
                 }`}
               >
                 <span>{link.name}</span>
                 {isActive && (
-                  <span className="w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_8px_#38BDF8]" />
+                  <span className="w-2 h-2 rounded-full bg-[#D4AF37] shadow-[0_0_8px_#D4AF37]" />
                 )}
               </a>
             );

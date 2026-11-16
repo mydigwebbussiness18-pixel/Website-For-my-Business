@@ -19,6 +19,8 @@ import {
   Rocket
 } from "lucide-react";
 import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
+import { AnimatedGradientBackground } from "../components/AnimatedGradientBackground";
+import { MagneticButton } from "../components/MagneticButton";
 
 export const HeroSection: React.FC = () => {
   const { t } = useLanguage();
@@ -89,6 +91,9 @@ export const HeroSection: React.FC = () => {
           className="w-full h-full object-cover object-[75%_center] lg:object-center opacity-95 transition-transform duration-700"
         />
 
+        {/* Subtle Animated Corporate Gradient Background (11s-15s cycles) */}
+        <AnimatedGradientBackground variant="hero" />
+
         {/* Cinematic Animated Blue Smoke Effect behind Hero Visual */}
         <CinematicSmokeBackground preset="hero" />
 
@@ -136,28 +141,30 @@ export const HeroSection: React.FC = () => {
               {t.hero.description}
             </motion.p>
 
-            {/* Action Buttons with futuristic micro-interactions */}
+            {/* Action Buttons with subtle magnetic proximity & micro-interactions */}
             <motion.div
               variants={fadeInUpVariant}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 sm:gap-4 pt-2 sm:pt-1 max-w-sm sm:max-w-none mx-auto lg:mx-0"
             >
-              <button
+              <MagneticButton
                 type="button"
+                wrapperClassName="w-full sm:w-auto"
                 onClick={() => scrollTo("services")}
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-[#C9A227] hover:to-[#D97706] text-white hover:text-[#0B132B] font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-blue-600/30 hover:shadow-2xl hover:shadow-amber-500/50 hover:-translate-y-1 active:scale-[0.98] whitespace-nowrap cursor-pointer"
               >
                 <span>{t.hero.exploreBtn}</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+              </MagneticButton>
 
-              <button
+              <MagneticButton
                 type="button"
+                wrapperClassName="w-full sm:w-auto"
                 onClick={() => scrollTo("contact")}
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm px-6 py-3.5 rounded-xl border border-emerald-400/40 hover:border-emerald-300 shadow-lg shadow-emerald-600/30 hover:shadow-2xl hover:shadow-emerald-500/50 hover:-translate-y-1 transition-all duration-300 active:scale-[0.98] whitespace-nowrap cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4 text-white transition-transform duration-300 group-hover:scale-110" />
                 <span>{t.hero.contactBtn}</span>
-              </button>
+              </MagneticButton>
             </motion.div>
 
             {/* Honest Service Highlights Strip */}

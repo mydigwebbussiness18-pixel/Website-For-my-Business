@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { ThreeDCard } from "../components/ThreeDCard";
 import { CinematicSmokeBackground } from "../components/CinematicSmokeBackground";
+import { AnimatedGradientBackground } from "../components/AnimatedGradientBackground";
 
 interface ServicesSectionProps {
   onSelectService: (service: ServiceItem) => void;
@@ -50,6 +51,9 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
       id="services"
       className="py-24 bg-white relative overflow-hidden"
     >
+      {/* Subtle Corporate Animated Gradient Background */}
+      <AnimatedGradientBackground variant="services" />
+
       {/* Subtle Cinematic Dark-Blue Smoke Atmosphere */}
       <CinematicSmokeBackground preset="services" />
 
